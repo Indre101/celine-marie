@@ -188,3 +188,10 @@ body {
 .d-block {
   display: block;
 }
+
+
+.sub-category-icon {
+  height: 55px;
+  width: 50px;
+  object-fit: contain;
+}

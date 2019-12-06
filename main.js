@@ -7,6 +7,7 @@ const folderPath = document.querySelector(".folder-path")
 const pathTemplate = document.querySelector(".path-template").content;
 // const openFolderContainers = document.querySelectorAll(".open-folder-container");
 const closeButtons = document.querySelectorAll(".closeBTn");
+const subCategoryTemplate = document.querySelector(".sub-category-template").content;
 
 
 fetch("http://indre101.lashboutique.dk/wordpress/wp-json/wp/v2/art_categories").then(res => {
@@ -29,14 +30,15 @@ function getCategories(category) {
 
 
   categoryFolder.onclick = function () {
+    artPieces.innerHTML = ""
     // Assign image to the folder to be inserted
     if (category.art_category_id.length > 0) {
       addImgaesToFolderIcon(category, imagesInsideFolderIcon)
       changeTheFilePath(category)
       category.art_category_id.forEach(showArtPieceList)
     } else if (category.subcategory_id.length > 0) {
-      console.log("false")
-
+      category.subcategory_id.forEach(showSubCategories);
+      changeTheFilePath(category)
     }
   }
   // console.log(category);
@@ -44,7 +46,12 @@ function getCategories(category) {
 
 
 
+function showSubCategories(subCategory) {
+  const clnSubCategory = subCategoryTemplate.cloneNode(true);
+  clnSubCategory.querySelector(".subCategoryName").textContent = subCategory.post_title;
+  artPieces.appendChild(clnSubCategory)
 
+}
 
 
 
