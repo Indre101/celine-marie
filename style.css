@@ -14,7 +14,6 @@
   height: 100vh;
   width: 100%;
   background-position: center;
-  margin-top: -10px;
   background-repeat: no-repeat;
   position: absolute;
   /* animation: water 2s linear alternate infinite; */
@@ -28,19 +27,43 @@
 }
 
 /* Class that contains all menu items */
-.menu-items {
+.categories {
   display: grid;
-  grid-template-columns: 1;
+  width: 150px;
+  display: grid;
+  grid-template-columns: 1fr;
   position: absolute;
-
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 
 }
 
+.category-folder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 /* Menu item */
-.menu-folder {}
+.folder-img {
+  height: 50px;
+  position: absolute;
+}
+
+.image-sample {
+  height: 40px;
+  position: absolute;
+
+}
 
 /* Menu item folder image */
 .folder {
   height: 10vh;
   z-index: 3;
+}
+
+.category-name {
+  font-size: 1rem;
 }
