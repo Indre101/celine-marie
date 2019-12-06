@@ -8,17 +8,27 @@
 
 
 /* Landing page banckground image */
-.background-landing-page {
+body {
   background-image: url("./images/water.png");
   background-size: cover;
   height: 100vh;
   width: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  position: absolute;
   /* animation: water 2s linear alternate infinite; */
 }
 
+.logo {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  margin: 3rem 0;
+}
+
+.white-logo {
+  color: white;
+}
 
 @keyframes water {
   100% {
