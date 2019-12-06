@@ -2,24 +2,33 @@
   margin: 0;
   padding: 0;
   font-family: Helvetica, Arial, sans-serif;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 
 
 /* Landing page banckground image */
-.background-landing-page {
+body {
   background-image: url("./images/water.png");
   background-size: cover;
   height: 100vh;
   width: 100%;
   background-position: center;
-  margin-top: -10px;
   background-repeat: no-repeat;
-  position: absolute;
   /* animation: water 2s linear alternate infinite; */
 }
 
+.logo {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  margin: 3rem 0;
+}
+
+.white-logo {
+  color: white;
+}
 
 @keyframes water {
   100% {
@@ -28,19 +37,67 @@
 }
 
 /* Class that contains all menu items */
-.menu-items {
+.categories {
   display: grid;
-  grid-template-columns: 1;
+  width: 150px;
+  display: grid;
+  grid-template-columns: 1fr;
   position: absolute;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 
+}
+
+.category-folder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.category-folder-structure {
+  width: fit-content;
+  margin-left: -30px;
 
 }
 
 /* Menu item */
-.menu-folder {}
+.folder-img {
+  height: 50px;
+  position: absolute;
+}
+
+.image-sample {
+  margin-top: 3px;
+  height: 40px;
+  /* width: 36px; */
+  position: absolute;
+  transform-origin: left center;
+
+
+  perspective-origin: left center;
+
+  transform: rotateY(79deg);
+  width: 175px;
+
+  -webkit-perspective: 1000px;
+  -moz-perspective: 1000px;
+  perspective: 1000px;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+
+}
 
 /* Menu item folder image */
 .folder {
   height: 10vh;
   z-index: 3;
+}
+
+.category-name {
+  font-size: 1rem;
+  margin-top: 15vh;
+  color: white;
 }
