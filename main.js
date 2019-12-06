@@ -8,13 +8,21 @@ const pathTemplate = document.querySelector(".path-template").content;
 // const openFolderContainers = document.querySelectorAll(".open-folder-container");
 const closeButtons = document.querySelectorAll(".closeBTn");
 const subCategoryTemplate = document.querySelector(".sub-category-template").content;
+const spinner = document.getElementById("spinner");
 
+window.addEventListener("DOMContentLoaded", init)
 
-fetch("http://indre101.lashboutique.dk/wordpress/wp-json/wp/v2/art_categories").then(res => {
-  return res.json()
-}).then(data => {
-  data.forEach(getCategories)
-})
+function init() {
+
+  spinner.removeAttribute('hidden');
+  fetch("http://indre101.lashboutique.dk/wordpress/wp-json/wp/v2/art_categories").then(res => {
+    return res.json()
+  }).then(data => {
+    spinner.setAttribute('hidden', '');
+    data.forEach(getCategories)
+  })
+
+}
 
 
 
