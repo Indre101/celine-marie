@@ -30,30 +30,45 @@ function init() {
 function getCategories(category) {
   console.log(category)
   let clnMenuFolder = categoryFolderTemplate.cloneNode(true);
-  clnMenuFolder.querySelector(".category-name").textContent = category.title.rendered;
+  clnMenuFolder.querySelector(".category-name").textContent = category.title.rendered.toLowerCase()
   let imagesInsideFolderIcon = clnMenuFolder.querySelector(".images-inside-folder-icon");
   let categoryFolder = clnMenuFolder.querySelector(".category-folder");
   artCategories.appendChild(clnMenuFolder);
-
-
-  categoryFolder.onclick = function () {
-    if (category.art_category_id.length > 0) {
-      addImgaesToFolderIcon(category, imagesInsideFolderIcon)
-      openFolder(category, category.art_category_id)
-    } else if (category.subcategory_id.length > 0) {
-      openFolderWithSubCategories(category)
-    }
+  if (category.art_category_id.length > 0) {
+    addImgaesToFolderIcon(category, imagesInsideFolderIcon)
+    openFolder(category, category.art_category_id)
+  } else if (category.subcategory_id.length > 0) {
+    openFolderWithSubCategories(category)
   }
+
+
+  const folders = document.querySelectorAll(".open-folder-container")
+  const categoryFolders = document.querySelectorAll(".category-folder");
+  const categoryFoldersArray = Array.from(categoryFolders)
+
+
+  categoryFoldersArray.forEach(categoryFold => {
+    categoryFold.onclick = function () {
+      const indexOfClickedFolder = categoryFoldersArray.indexOf(categoryFold);
+      folders[indexOfClickedFolder].classList.remove("d-none");
+
+    }
+
+  })
+
+
 }
 
 
+
+
 function openFolder(category, artArray) {
-  console.log("hjl")
   const clnOpenFolderContainer = openFolderContainerTemplate.cloneNode(true);
   const customPath = clnOpenFolderContainer.querySelector(".custom-path");
   const artPieces = clnOpenFolderContainer.querySelector(".art-pieces");
   const closeButton = clnOpenFolderContainer.querySelector(".closeBTn");
   const openFolderContainers = clnOpenFolderContainer.querySelector(".open-folder-container");
+
   changeTheFilePath(category, customPath)
   artArray.forEach(art => {
     showArtPieceList(art, artPieces)
@@ -95,10 +110,10 @@ function changeTheFilePath(pathName, customPath) {
   const clnPath = pathTemplate.cloneNode(true);
   const name = clnPath.querySelector(".path-name")
   if (pathName.post_title) {
-    name.textContent = pathName.post_title
+    name.textContent = pathName.post_title.toLowerCase();
 
   } else if (pathName.title.rendered) {
-    name.textContent = pathName.title.rendered;
+    name.textContent = pathName.title.rendered.toLowerCase();
   }
   customPath.appendChild(clnPath)
 }
@@ -108,11 +123,14 @@ function changeTheFilePath(pathName, customPath) {
 function showSubCategories(subCategory, placeToAppend) {
 
   const clnSubCategory = subCategoryTemplate.cloneNode(true);
-  clnSubCategory.querySelector(".subCategoryName").textContent = subCategory.post_title;
+  clnSubCategory.querySelector(".subCategoryName").textContent = subCategory.post_title.toLowerCase()
   const subcategory = clnSubCategory.querySelector(".subcategory");
+  const convertedArtArray = Object.keys(subCategory.art_piece_id).map(i => subCategory.art_piece_id[i])
+  openFolder(subCategory, convertedArtArray)
+
+
   subcategory.onclick = function () {
-    const convertedArtArray = Object.keys(subCategory.art_piece_id).map(i => subCategory.art_piece_id[i])
-    openFolder(subCategory, convertedArtArray)
+
   }
   placeToAppend.appendChild(clnSubCategory)
 }
@@ -133,7 +151,7 @@ function addImgaesToFolderIcon(imageURL, containerToAppendTo) {
 
 function showArtPieceList(piece, placeToAppendTo) {
   let artPieceCln = artPieceTemplate.cloneNode(true);
-  artPieceCln.querySelector(".art-piece-name").textContent = piece.post_title
+  artPieceCln.querySelector(".art-piece-name").textContent = piece.post_title.toLowerCase()
   artPieceCln.querySelector(".art-piece-large-icon").src = piece.featured_image.guid
   placeToAppendTo.appendChild(artPieceCln)
 }
