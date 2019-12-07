@@ -47,17 +47,19 @@ function getCategories(category) {
 
 }
 
+let zIndex = 0;
+
 function openTheRightFolder(folderToClick, nameToCompare) {
   const folders = document.querySelectorAll(".open-folder-container")
   const namesOfTheFolders = document.querySelectorAll(".name-of-the-folder");
-
   folderToClick.onclick = function () {
-
+    zIndex++;
     namesOfTheFolders.forEach(name => {
       if (name.textContent == nameToCompare) {
         console.log(name.textContent, nameToCompare)
         let folder = name.parentElement
         folder.classList.remove("d-none");
+        folder.style.zIndex = zIndex;
       }
     })
   }
@@ -85,6 +87,8 @@ function openFolder(category, artArray) {
     showArtPieceList(art, artPieces)
   })
   closeButton.onclick = function () {
+    zIndex = 0
+
     openFolderContainers.classList.add("d-none");
   }
   body.appendChild(clnOpenFolderContainer)
@@ -110,6 +114,8 @@ function openFolderWithSubCategories(category) {
   })
 
   closeButton.onclick = function () {
+    zIndex = 0
+
     openFolderContainers.classList.add("d-none");
   }
   body.appendChild(clnOpenFolderContainer)
