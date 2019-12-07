@@ -14,7 +14,7 @@ window.addEventListener("DOMContentLoaded", init)
 function init() {
 
   spinner.removeAttribute('hidden');
-  fetch("http://indre101.lashboutique.dk/wordpress/wp-json/wp/v2/art_categories").then(res => {
+  fetch("http://indre101.lashboutique.dk/wordpress/wp-json/wp/v2/art_categories?_embed").then(res => {
     return res.json()
   }).then(data => {
     spinner.setAttribute('hidden', '');
@@ -37,18 +37,37 @@ function getCategories(category) {
 
 
   categoryFolder.onclick = function () {
-    // Assign image to the folder to be inserted
-    openFolder(category)
-
+    if (category.art_category_id.length > 0) {
+      addImgaesToFolderIcon(category, imagesInsideFolderIcon)
+      openFolder(category, category.art_category_id)
+    } else if (category.subcategory_id.length > 0) {
+      openFolderWithSubCategories(category)
+    }
   }
-  // console.log(category);
 }
 
 
-function openFolder(category) {
+function openFolder(category, artArray) {
+  console.log("hjl")
+  const clnOpenFolderContainer = openFolderContainerTemplate.cloneNode(true);
+  const customPath = clnOpenFolderContainer.querySelector(".custom-path");
+  const artPieces = clnOpenFolderContainer.querySelector(".art-pieces");
+  const closeButton = clnOpenFolderContainer.querySelector(".closeBTn");
+  const openFolderContainers = clnOpenFolderContainer.querySelector(".open-folder-container");
+  changeTheFilePath(category, customPath)
+  artArray.forEach(art => {
+    showArtPieceList(art, artPieces)
+  })
+
+  closeButton.onclick = function () {
+    openFolderContainers.classList.add("d-none");
+  }
+  body.appendChild(clnOpenFolderContainer)
+}
 
 
-
+function openFolderWithSubCategories(category) {
+  console.log("hjl")
   const clnOpenFolderContainer = openFolderContainerTemplate.cloneNode(true);
   const customPath = clnOpenFolderContainer.querySelector(".custom-path");
   const artPieces = clnOpenFolderContainer.querySelector(".art-pieces");
@@ -57,22 +76,10 @@ function openFolder(category) {
   changeTheFilePath(category, customPath)
 
 
-  if (category.art_category_id.length > 0) {
-    // addImgaesToFolderIcon(category, imagesInsideFolderIcon)
+  category.subcategory_id.forEach(subCategory => {
+    showSubCategories(subCategory, artPieces)
 
-    category.art_category_id.forEach(art => {
-      showArtPieceList(art, artPieces)
-    })
-
-  } else if (category.subcategory_id.length > 0) {
-    category.subcategory_id.forEach(subCategory => {
-      showSubCategories(subCategory, artPieces)
-    });
-  }
-
-
-
-
+  })
 
   closeButton.onclick = function () {
     openFolderContainers.classList.add("d-none");
@@ -87,14 +94,13 @@ function changeTheFilePath(pathName, customPath) {
   // add a new path name, since the path has to have an image and text i thought the template would be best approach
   const clnPath = pathTemplate.cloneNode(true);
   const name = clnPath.querySelector(".path-name")
-  name.textContent = pathName.title.rendered;
-  customPath.appendChild(clnPath)
+  if (pathName.post_title) {
+    name.textContent = pathName.post_title
 
-  // // removes the display none class, from the parent element 
-  // let parentFolderName = customPath.parentElement
-  // let openFolderContainer = parentFolderName.parentElement
-  // console.log(openFolderContainer)
-  // openFolderContainer.classList.remove("d-none");
+  } else if (pathName.title.rendered) {
+    name.textContent = pathName.title.rendered;
+  }
+  customPath.appendChild(clnPath)
 }
 
 
@@ -103,31 +109,12 @@ function showSubCategories(subCategory, placeToAppend) {
 
   const clnSubCategory = subCategoryTemplate.cloneNode(true);
   clnSubCategory.querySelector(".subCategoryName").textContent = subCategory.post_title;
-
   const subcategory = clnSubCategory.querySelector(".subcategory");
   subcategory.onclick = function () {
-
-    const clnOpenFolderContainer = openFolderContainer.cloneNode(true);
-    const artPieces = clnOpenFolderContainer.querySelector(".art-pieces");
-
-
-    for (let key of Object.keys(subCategory.art_piece_id)) {
-      console.log(subCategory.art_piece_id[key])
-      showArtPieceList(subCategory.art_piece_id[key], artPieces)
-      // showArtPieceList(piece)
-      // if (subCategory.art_piece_id.hasOwnProperty(key)) {
-      //   console.log(`${key} : ${subCategory.art_piece_id[key]}`)
-      // }
-    }
-
-    body.appendChild(clnOpenFolderContainer);
-
+    const convertedArtArray = Object.keys(subCategory.art_piece_id).map(i => subCategory.art_piece_id[i])
+    openFolder(subCategory, convertedArtArray)
   }
-
-
   placeToAppend.appendChild(clnSubCategory)
-
-
 }
 
 
@@ -149,23 +136,4 @@ function showArtPieceList(piece, placeToAppendTo) {
   artPieceCln.querySelector(".art-piece-name").textContent = piece.post_title
   artPieceCln.querySelector(".art-piece-large-icon").src = piece.featured_image.guid
   placeToAppendTo.appendChild(artPieceCln)
-  // console.log(piece)
 }
-
-
-
-
-
-
-// // Closes the open folder window and resets the file path
-// closeButtons.forEach(closeWindow);
-
-// function closeWindow(btn) {
-//   btn.onclick = function () {
-//     customPath.innerHTML = ""
-//     let parentBtn = btn.parentElement;
-//     let openFolderContainer = parentBtn.parentElement
-//     openFolderContainer.classList.add("d-none");
-//     console.log(mainParent)
-//   }
-// }
