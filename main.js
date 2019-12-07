@@ -30,36 +30,39 @@ function init() {
 function getCategories(category) {
   console.log(category)
   let clnMenuFolder = categoryFolderTemplate.cloneNode(true);
-  clnMenuFolder.querySelector(".category-name").textContent = category.title.rendered.toLowerCase()
+  let categoryName = clnMenuFolder.querySelector(".category-name")
+  categoryName.textContent = category.title.rendered.toLowerCase()
   let imagesInsideFolderIcon = clnMenuFolder.querySelector(".images-inside-folder-icon");
   let categoryFolder = clnMenuFolder.querySelector(".category-folder");
   artCategories.appendChild(clnMenuFolder);
+
   if (category.art_category_id.length > 0) {
     addImgaesToFolderIcon(category, imagesInsideFolderIcon)
     openFolder(category, category.art_category_id)
   } else if (category.subcategory_id.length > 0) {
     openFolderWithSubCategories(category)
   }
-
-
-  const folders = document.querySelectorAll(".open-folder-container")
-  const categoryFolders = document.querySelectorAll(".category-folder");
-  const categoryFoldersArray = Array.from(categoryFolders)
-
-
-  categoryFoldersArray.forEach(categoryFold => {
-    categoryFold.onclick = function () {
-      const indexOfClickedFolder = categoryFoldersArray.indexOf(categoryFold);
-      folders[indexOfClickedFolder].classList.remove("d-none");
-
-    }
-
-  })
+  openTheRightFolder(categoryFolder, categoryName.textContent)
 
 
 }
 
+function openTheRightFolder(folderToClick, nameToCompare) {
+  const folders = document.querySelectorAll(".open-folder-container")
+  const namesOfTheFolders = document.querySelectorAll(".name-of-the-folder");
 
+  folderToClick.onclick = function () {
+
+    namesOfTheFolders.forEach(name => {
+      if (name.textContent == nameToCompare) {
+        console.log(name.textContent, nameToCompare)
+        let folder = name.parentElement
+        folder.classList.remove("d-none");
+      }
+    })
+  }
+
+}
 
 
 function openFolder(category, artArray) {
@@ -68,12 +71,19 @@ function openFolder(category, artArray) {
   const artPieces = clnOpenFolderContainer.querySelector(".art-pieces");
   const closeButton = clnOpenFolderContainer.querySelector(".closeBTn");
   const openFolderContainers = clnOpenFolderContainer.querySelector(".open-folder-container");
+  const nameOfTheFolder = clnOpenFolderContainer.querySelector(".name-of-the-folder");
+  if (category.post_title) {
+    nameOfTheFolder.textContent = category.post_title.toLowerCase();
+
+  } else if (category.title.rendered) {
+    nameOfTheFolder.textContent = category.title.rendered.toLowerCase();
+  }
+
 
   changeTheFilePath(category, customPath)
   artArray.forEach(art => {
     showArtPieceList(art, artPieces)
   })
-
   closeButton.onclick = function () {
     openFolderContainers.classList.add("d-none");
   }
@@ -88,18 +98,20 @@ function openFolderWithSubCategories(category) {
   const artPieces = clnOpenFolderContainer.querySelector(".art-pieces");
   const closeButton = clnOpenFolderContainer.querySelector(".closeBTn");
   const openFolderContainers = clnOpenFolderContainer.querySelector(".open-folder-container");
+  const nameOfTheFolder = clnOpenFolderContainer.querySelector(".name-of-the-folder");
+  if (category.post_title) {
+    nameOfTheFolder.textContent = category.post_title.toLowerCase();
+  } else if (category.title.rendered) {
+    nameOfTheFolder.textContent = category.title.rendered.toLowerCase();
+  }
   changeTheFilePath(category, customPath)
-
-
   category.subcategory_id.forEach(subCategory => {
     showSubCategories(subCategory, artPieces)
-
   })
 
   closeButton.onclick = function () {
     openFolderContainers.classList.add("d-none");
   }
-
   body.appendChild(clnOpenFolderContainer)
 }
 
@@ -123,17 +135,19 @@ function changeTheFilePath(pathName, customPath) {
 function showSubCategories(subCategory, placeToAppend) {
 
   const clnSubCategory = subCategoryTemplate.cloneNode(true);
-  clnSubCategory.querySelector(".subCategoryName").textContent = subCategory.post_title.toLowerCase()
+  const subCategoryName = clnSubCategory.querySelector(".subCategoryName")
+  subCategoryName.textContent = subCategory.post_title.toLowerCase()
   const subcategory = clnSubCategory.querySelector(".subcategory");
+
   const convertedArtArray = Object.keys(subCategory.art_piece_id).map(i => subCategory.art_piece_id[i])
   openFolder(subCategory, convertedArtArray)
 
 
-  subcategory.onclick = function () {
+  openTheRightFolder(subcategory, subCategoryName.textContent)
 
-  }
   placeToAppend.appendChild(clnSubCategory)
 }
+
 
 
 
