@@ -85,12 +85,15 @@ function showArtPieceList(piece) {
 }
 
 
+// Changes the file path and remove display none class from the open folder container
 function changeTheFilePath(pathName) {
+  // add a new path name, since the path has to have an image and text i thought the template would be best approach
   const clnPath = pathTemplate.cloneNode(true);
   const name = clnPath.querySelector(".path-name")
   name.textContent = pathName.title.rendered;
   customPath.appendChild(clnPath)
 
+  // removes the display none class, from the parent element 
   let parentFolderName = customPath.parentElement
   let openFolderContainer = parentFolderName.parentElement
   console.log(openFolderContainer)
@@ -100,19 +103,15 @@ function changeTheFilePath(pathName) {
 
 
 
+// Closes the open folder window and resets the file path
 closeButtons.forEach(closeWindow);
 
 function closeWindow(btn) {
   btn.onclick = function () {
     customPath.innerHTML = ""
-
     let parentBtn = btn.parentElement;
     let openFolderContainer = parentBtn.parentElement
-
     openFolderContainer.classList.add("d-none");
     console.log(mainParent)
   }
-
-
-
 }
