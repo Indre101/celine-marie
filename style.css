@@ -59,6 +59,8 @@ body {
 
 h1 {
   font-size: 4rem;
+  margin: 200px 0;
+
 }
 
 .logo {
@@ -66,7 +68,6 @@ h1 {
   transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
-  margin: 3rem 0;
 }
 
 .white-logo {
