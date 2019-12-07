@@ -9,6 +9,7 @@ const pathTemplate = document.querySelector(".path-template").content;
 const closeButtons = document.querySelectorAll(".closeBTn");
 const subCategoryTemplate = document.querySelector(".sub-category-template").content;
 const spinner = document.getElementById("spinner");
+const customPath = document.querySelector(".custom-path");
 
 window.addEventListener("DOMContentLoaded", init)
 
@@ -83,17 +84,18 @@ function showArtPieceList(piece) {
   // console.log(piece)
 }
 
+
 function changeTheFilePath(pathName) {
   const clnPath = pathTemplate.cloneNode(true);
   const name = clnPath.querySelector(".path-name")
   name.textContent = pathName.title.rendered;
-  folderPath.appendChild(clnPath)
+  customPath.appendChild(clnPath)
 
-  let openFolderContainer = name.parentElement
-  let parentFolderName = openFolderContainer.parentElement
-  parentFolderName.classList.remove("d-none");
+  let parentFolderName = customPath.parentElement
+  let openFolderContainer = parentFolderName.parentElement
+  console.log(openFolderContainer)
+  openFolderContainer.classList.remove("d-none");
 }
-
 
 
 
@@ -102,9 +104,15 @@ closeButtons.forEach(closeWindow);
 
 function closeWindow(btn) {
   btn.onclick = function () {
+    customPath.innerHTML = ""
+
     let parentBtn = btn.parentElement;
-    let mainParent = parentBtn.parentElement
-    mainParent.classList.add("d-none");
+    let openFolderContainer = parentBtn.parentElement
+
+    openFolderContainer.classList.add("d-none");
     console.log(mainParent)
   }
+
+
+
 }

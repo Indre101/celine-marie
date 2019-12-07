@@ -169,6 +169,10 @@ body {
 
 }
 
+.custom-path {
+  display: flex;
+}
+
 .folder-path-icon {
   width: 10px;
   object-fit: contain;
