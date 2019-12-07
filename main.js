@@ -23,68 +23,82 @@ function init() {
 
 }
 
-
-
-
 // <img class="image-sample" src="./images/water.png" alt="">
 function getCategories(category) {
   console.log(category)
   let clnMenuFolder = categoryFolderTemplate.cloneNode(true);
-  clnMenuFolder.querySelector(".category-name").textContent = category.title.rendered;
+  let categoryName = clnMenuFolder.querySelector(".category-name")
+  categoryName.textContent = category.title.rendered.toLowerCase()
   let imagesInsideFolderIcon = clnMenuFolder.querySelector(".images-inside-folder-icon");
   let categoryFolder = clnMenuFolder.querySelector(".category-folder");
   artCategories.appendChild(clnMenuFolder);
 
+  if (category.art_category_id.length > 0) {
+    addImgaesToFolderIcon(category, imagesInsideFolderIcon)
+    openFolder(category, category.art_category_id)
+  } else if (category.subcategory_id.length > 0) {
+    openFolder(category, category.art_category_id)
+    // openFolderWithSubCategories(category)
+  }
+  openTheRightFolder(categoryFolder, categoryName.textContent)
 
-  categoryFolder.onclick = function () {
-    if (category.art_category_id.length > 0) {
-      addImgaesToFolderIcon(category, imagesInsideFolderIcon)
-      openFolder(category, category.art_category_id)
-    } else if (category.subcategory_id.length > 0) {
-      openFolderWithSubCategories(category)
-    }
+
+}
+
+let zIndex = 0;
+
+function openTheRightFolder(folderToClick, nameToCompare) {
+  const folders = document.querySelectorAll(".open-folder-container")
+  const namesOfTheFolders = document.querySelectorAll(".name-of-the-folder");
+  folderToClick.onclick = function () {
+    zIndex++;
+    namesOfTheFolders.forEach(name => {
+      if (name.textContent == nameToCompare) {
+        console.log(name.textContent, nameToCompare)
+        let folder = name.parentElement
+        folder.classList.remove("d-none");
+        folder.style.zIndex = zIndex;
+      }
+    })
   }
 }
 
 
 function openFolder(category, artArray) {
-  console.log("hjl")
   const clnOpenFolderContainer = openFolderContainerTemplate.cloneNode(true);
   const customPath = clnOpenFolderContainer.querySelector(".custom-path");
   const artPieces = clnOpenFolderContainer.querySelector(".art-pieces");
   const closeButton = clnOpenFolderContainer.querySelector(".closeBTn");
   const openFolderContainers = clnOpenFolderContainer.querySelector(".open-folder-container");
-  changeTheFilePath(category, customPath)
-  artArray.forEach(art => {
-    showArtPieceList(art, artPieces)
-  })
+  const nameOfTheFolder = clnOpenFolderContainer.querySelector(".name-of-the-folder");
+  if (category.post_title) {
+    nameOfTheFolder.textContent = category.post_title.toLowerCase();
 
-  closeButton.onclick = function () {
-    openFolderContainers.classList.add("d-none");
-  }
-  body.appendChild(clnOpenFolderContainer)
-}
-
-
-function openFolderWithSubCategories(category) {
-  console.log("hjl")
-  const clnOpenFolderContainer = openFolderContainerTemplate.cloneNode(true);
-  const customPath = clnOpenFolderContainer.querySelector(".custom-path");
-  const artPieces = clnOpenFolderContainer.querySelector(".art-pieces");
-  const closeButton = clnOpenFolderContainer.querySelector(".closeBTn");
-  const openFolderContainers = clnOpenFolderContainer.querySelector(".open-folder-container");
-  changeTheFilePath(category, customPath)
-
-
-  category.subcategory_id.forEach(subCategory => {
-    showSubCategories(subCategory, artPieces)
-
-  })
-
-  closeButton.onclick = function () {
-    openFolderContainers.classList.add("d-none");
+  } else if (category.title.rendered) {
+    nameOfTheFolder.textContent = category.title.rendered.toLowerCase();
   }
 
+
+  changeTheFilePath(category, customPath)
+  if (artArray) {
+    artArray.forEach(art => {
+      showArtPieceList(art, artPieces)
+    })
+  }
+
+
+  if (category.subcategory_id) {
+    category.subcategory_id.forEach(subCategory => {
+      showSubCategories(subCategory, artPieces)
+    })
+
+  }
+
+  closeButton.onclick = function () {
+    // zIndex = 0
+
+    openFolderContainers.classList.add("d-none");
+  }
   body.appendChild(clnOpenFolderContainer)
 }
 
@@ -95,10 +109,10 @@ function changeTheFilePath(pathName, customPath) {
   const clnPath = pathTemplate.cloneNode(true);
   const name = clnPath.querySelector(".path-name")
   if (pathName.post_title) {
-    name.textContent = pathName.post_title
+    name.textContent = pathName.post_title.toLowerCase();
 
   } else if (pathName.title.rendered) {
-    name.textContent = pathName.title.rendered;
+    name.textContent = pathName.title.rendered.toLowerCase();
   }
   customPath.appendChild(clnPath)
 }
@@ -106,16 +120,16 @@ function changeTheFilePath(pathName, customPath) {
 
 
 function showSubCategories(subCategory, placeToAppend) {
-
   const clnSubCategory = subCategoryTemplate.cloneNode(true);
-  clnSubCategory.querySelector(".subCategoryName").textContent = subCategory.post_title;
+  const subCategoryName = clnSubCategory.querySelector(".subCategoryName")
+  subCategoryName.textContent = subCategory.post_title.toLowerCase()
   const subcategory = clnSubCategory.querySelector(".subcategory");
-  subcategory.onclick = function () {
-    const convertedArtArray = Object.keys(subCategory.art_piece_id).map(i => subCategory.art_piece_id[i])
-    openFolder(subCategory, convertedArtArray)
-  }
+  const convertedArtArray = Object.keys(subCategory.art_piece_id).map(i => subCategory.art_piece_id[i])
+  openFolder(subCategory, convertedArtArray)
+  openTheRightFolder(subcategory, subCategoryName.textContent)
   placeToAppend.appendChild(clnSubCategory)
 }
+
 
 
 
@@ -133,7 +147,7 @@ function addImgaesToFolderIcon(imageURL, containerToAppendTo) {
 
 function showArtPieceList(piece, placeToAppendTo) {
   let artPieceCln = artPieceTemplate.cloneNode(true);
-  artPieceCln.querySelector(".art-piece-name").textContent = piece.post_title
+  artPieceCln.querySelector(".art-piece-name").textContent = piece.post_title.toLowerCase()
   artPieceCln.querySelector(".art-piece-large-icon").src = piece.featured_image.guid
   placeToAppendTo.appendChild(artPieceCln)
 }
