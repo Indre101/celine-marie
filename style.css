@@ -113,20 +113,21 @@ h1 {
 }
 
 .image-sample {
-  margin-top: 3px;
-  height: 120px;
+  margin-top: 8px;
+  height: 94px;
   /* width: 36px; */
   position: absolute;
   transform-origin: left center;
   perspective-origin: left center;
   transform: rotateY(79deg);
-  width: 175px;
+  width: 430px;
   -webkit-perspective: 1000px;
   -moz-perspective: 1000px;
   perspective: 1000px;
   -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
   transform-style: preserve-3d;
+
 
 }
 
