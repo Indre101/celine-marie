@@ -57,6 +57,10 @@ body {
   /* animation: water 2s linear alternate infinite; */
 }
 
+h1 {
+  font-size: 4rem;
+}
+
 .logo {
   position: absolute;
   transform: translate(-50%, -50%);
@@ -78,7 +82,7 @@ body {
 /* Class that contains all menu items */
 .categories {
   display: grid;
-  width: 150px;
+  width: 250px;
   display: grid;
   grid-template-columns: 1fr;
   position: absolute;
@@ -103,23 +107,19 @@ body {
 
 /* Menu item */
 .folder-img {
-  height: 50px;
+  height: 120px;
   position: absolute;
 }
 
 .image-sample {
   margin-top: 3px;
-  height: 40px;
+  height: 120px;
   /* width: 36px; */
   position: absolute;
   transform-origin: left center;
-
-
   perspective-origin: left center;
-
   transform: rotateY(79deg);
   width: 175px;
-
   -webkit-perspective: 1000px;
   -moz-perspective: 1000px;
   perspective: 1000px;
@@ -136,7 +136,7 @@ body {
 }
 
 .category-name {
-  font-size: 1rem;
+  font-size: 2rem;
   margin-top: 15vh;
   color: white;
 }
@@ -157,25 +157,36 @@ body {
 
 .open-folder-icons {
   display: grid;
-  margin: 8px 0;
+  margin: 30px 30px;
   grid-template-columns: 65% 1fr 1fr 1fr;
+}
+
+.justify-self {
+  justify-self: flex-end;
 }
 
 /* Folder path */
 .folder-path {
   display: flex;
   border: 0.2px solid grey;
-  margin: 0 10px;
+  margin: 30px 30px;
+  align-items: center;
 
+}
+
+.custom-path {
+  display: flex;
+  align-items: center;
 }
 
 .folder-path-icon {
-  width: 10px;
+  width: 40px;
   object-fit: contain;
+  padding: 6px;
 }
 
 .back-arrow {
-  width: 12px;
+  width: 25px;
   margin: 0 10px;
 
 }
@@ -184,30 +195,30 @@ body {
 
 
 .folder-path h3 {
-  font-size: 0.5rem;
+  font-size: 1.2rem;
   font-weight: normal;
 }
 
 
 .art-piece-large-icon {
-  height: 55px;
-  width: 50px;
+  height: 130px;
+  width: 120px;
   object-fit: contain;
 }
 
 .art-pieces {
   display: grid;
-  margin: 5px 10px 0 10px;
-  grid-template-columns: repeat(auto-fill, minmax(55px, auto));
+  margin: 30px 30px;
+  grid-template-columns: repeat(auto-fill, minmax(150px, auto));
   overflow: scroll;
   border: 0.3px solid grey;
   height: 81%;
-  grid-gap: 10px;
+  grid-gap: 30px;
 }
 
 .art-pieces h4 {
   font-weight: normal;
-  font-size: 0.4rem;
+  font-size: 1rem;
   text-align: center;
 }
 
@@ -229,7 +240,13 @@ body {
 
 
 .sub-category-icon {
-  height: 55px;
-  width: 50px;
+  height: 130px;
+  width: 120px;
   object-fit: contain;
+}
+
+.subcategory {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

@@ -27,7 +27,7 @@
         <div class="category-folder-structure">
           <img class="folder-img folder-back" src="./icons/desktop-icons/folder-back.png" alt="">
           <!-- <img class="image-sample" src="./images/water.png" alt=""> -->
-          <div class="images-inside-folder-icon"></div>
+          <div class="images-inside-folder-icon "></div>
           <img class="folder-img folder-front" src="./icons/desktop-icons/folder-front.png" alt="">
         </div>
         <h2 class="category-name">Paintings</h2>
@@ -36,23 +36,25 @@
   </div>
 
 
-  <div id="open-folder-container" class="open-folder-container d-none ">
+  <div id="open-folder-container" class="open-folder-container d-none">
 
     <div class="open-folder-icons">
       <img class="back-arrow" src="./icons/109618.svg" alt="">
-      <img class="back-arrow" src="./icons/minimize.svg" alt="">
-      <img class="back-arrow" src="./icons/maximize.svg" alt="">
-      <img class="back-arrow closeBTn" src="./icons/cancel.svg" alt="">
+      <img class="back-arrow justify-self" src="./icons/minimize.svg" alt="">
+      <img class="back-arrow justify-self" src="./icons/maximize.svg" alt="">
+      <img class="back-arrow closeBTn justify-self" src="./icons/cancel.svg" alt="">
     </div>
 
     <article class="folder-path">
       <img class="folder-path-icon" src="./icons/desktop-icons/file2.png" alt="">
       <img class="folder-path-icon" src="./icons/next.svg" alt="">
       <h3>This PC</h3>
-      <template class="path-template">
-        <img class="folder-path-icon" src="./icons/next.svg" alt="">
-        <h3 class="path-name">This PC</h3>
-      </template>
+      <div class="custom-path">
+        <template class="path-template">
+          <img class="folder-path-icon" src="./icons/next.svg" alt="">
+          <h3 class="path-name">This PC</h3>
+        </template>
+      </div>
     </article>
 
 
@@ -65,7 +67,7 @@
       </template>
 
       <template class="sub-category-template">
-        <article>
+        <article class="subcategory">
           <img class="sub-category-icon" src="./icons/desktop-icons/file2.png" alt="">
           <h4 class="subCategoryName">Name</h4>
         </article>

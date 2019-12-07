@@ -5,10 +5,11 @@ const artPieceTemplate = document.querySelector(".art-piece-template").content;
 const artPieces = document.querySelector(".art-pieces");
 const folderPath = document.querySelector(".folder-path")
 const pathTemplate = document.querySelector(".path-template").content;
-// const openFolderContainers = document.querySelectorAll(".open-folder-container");
+const openFolderContainers = document.querySelectorAll(".open-folder-container");
 const closeButtons = document.querySelectorAll(".closeBTn");
 const subCategoryTemplate = document.querySelector(".sub-category-template").content;
 const spinner = document.getElementById("spinner");
+const customPath = document.querySelector(".custom-path");
 
 window.addEventListener("DOMContentLoaded", init)
 
@@ -83,28 +84,34 @@ function showArtPieceList(piece) {
   // console.log(piece)
 }
 
+
+// Changes the file path and remove display none class from the open folder container
 function changeTheFilePath(pathName) {
+  // add a new path name, since the path has to have an image and text i thought the template would be best approach
   const clnPath = pathTemplate.cloneNode(true);
   const name = clnPath.querySelector(".path-name")
   name.textContent = pathName.title.rendered;
-  folderPath.appendChild(clnPath)
+  customPath.appendChild(clnPath)
 
-  let openFolderContainer = name.parentElement
-  let parentFolderName = openFolderContainer.parentElement
-  parentFolderName.classList.remove("d-none");
+  // removes the display none class, from the parent element 
+  let parentFolderName = customPath.parentElement
+  let openFolderContainer = parentFolderName.parentElement
+  console.log(openFolderContainer)
+  openFolderContainer.classList.remove("d-none");
 }
 
 
 
 
-
+// Closes the open folder window and resets the file path
 closeButtons.forEach(closeWindow);
 
 function closeWindow(btn) {
   btn.onclick = function () {
+    customPath.innerHTML = ""
     let parentBtn = btn.parentElement;
-    let mainParent = parentBtn.parentElement
-    mainParent.classList.add("d-none");
+    let openFolderContainer = parentBtn.parentElement
+    openFolderContainer.classList.add("d-none");
     console.log(mainParent)
   }
 }
