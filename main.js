@@ -120,18 +120,13 @@ function changeTheFilePath(pathName, customPath) {
 
 
 function showSubCategories(subCategory, placeToAppend) {
-
   const clnSubCategory = subCategoryTemplate.cloneNode(true);
   const subCategoryName = clnSubCategory.querySelector(".subCategoryName")
   subCategoryName.textContent = subCategory.post_title.toLowerCase()
   const subcategory = clnSubCategory.querySelector(".subcategory");
-
   const convertedArtArray = Object.keys(subCategory.art_piece_id).map(i => subCategory.art_piece_id[i])
   openFolder(subCategory, convertedArtArray)
-
-
   openTheRightFolder(subcategory, subCategoryName.textContent)
-
   placeToAppend.appendChild(clnSubCategory)
 }
 
