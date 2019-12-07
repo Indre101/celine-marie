@@ -23,9 +23,6 @@ function init() {
 
 }
 
-
-
-
 // <img class="image-sample" src="./images/water.png" alt="">
 function getCategories(category) {
   console.log(category)
@@ -40,7 +37,8 @@ function getCategories(category) {
     addImgaesToFolderIcon(category, imagesInsideFolderIcon)
     openFolder(category, category.art_category_id)
   } else if (category.subcategory_id.length > 0) {
-    openFolderWithSubCategories(category)
+    openFolder(category, category.art_category_id)
+    // openFolderWithSubCategories(category)
   }
   openTheRightFolder(categoryFolder, categoryName.textContent)
 
@@ -63,7 +61,6 @@ function openTheRightFolder(folderToClick, nameToCompare) {
       }
     })
   }
-
 }
 
 
@@ -83,38 +80,22 @@ function openFolder(category, artArray) {
 
 
   changeTheFilePath(category, customPath)
-  artArray.forEach(art => {
-    showArtPieceList(art, artPieces)
-  })
-  closeButton.onclick = function () {
-    zIndex = 0
-
-    openFolderContainers.classList.add("d-none");
+  if (artArray) {
+    artArray.forEach(art => {
+      showArtPieceList(art, artPieces)
+    })
   }
-  body.appendChild(clnOpenFolderContainer)
-}
 
 
-function openFolderWithSubCategories(category) {
-  console.log("hjl")
-  const clnOpenFolderContainer = openFolderContainerTemplate.cloneNode(true);
-  const customPath = clnOpenFolderContainer.querySelector(".custom-path");
-  const artPieces = clnOpenFolderContainer.querySelector(".art-pieces");
-  const closeButton = clnOpenFolderContainer.querySelector(".closeBTn");
-  const openFolderContainers = clnOpenFolderContainer.querySelector(".open-folder-container");
-  const nameOfTheFolder = clnOpenFolderContainer.querySelector(".name-of-the-folder");
-  if (category.post_title) {
-    nameOfTheFolder.textContent = category.post_title.toLowerCase();
-  } else if (category.title.rendered) {
-    nameOfTheFolder.textContent = category.title.rendered.toLowerCase();
+  if (category.subcategory_id) {
+    category.subcategory_id.forEach(subCategory => {
+      showSubCategories(subCategory, artPieces)
+    })
+
   }
-  changeTheFilePath(category, customPath)
-  category.subcategory_id.forEach(subCategory => {
-    showSubCategories(subCategory, artPieces)
-  })
 
   closeButton.onclick = function () {
-    zIndex = 0
+    // zIndex = 0
 
     openFolderContainers.classList.add("d-none");
   }
