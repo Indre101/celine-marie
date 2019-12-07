@@ -2,15 +2,13 @@
 const categoryFolderTemplate = document.querySelector(".category-folder-template").content;
 const artCategories = document.querySelector(".categories");
 const artPieceTemplate = document.querySelector(".art-piece-template").content;
-const artPieces = document.querySelector(".art-pieces");
 const folderPath = document.querySelector(".folder-path")
 const pathTemplate = document.querySelector(".path-template").content;
-const openFolderContainers = document.querySelectorAll(".open-folder-container");
-const closeButtons = document.querySelectorAll(".closeBTn");
 const subCategoryTemplate = document.querySelector(".sub-category-template").content;
 const spinner = document.getElementById("spinner");
-const customPath = document.querySelector(".custom-path");
-
+const openFolderContainer = document.querySelector(".open-folder-container");
+const openFolderContainerTemplate = document.querySelector(".open-folder-container-template").content
+const body = document.querySelector("BODY");
 window.addEventListener("DOMContentLoaded", init)
 
 function init() {
@@ -39,26 +37,96 @@ function getCategories(category) {
 
 
   categoryFolder.onclick = function () {
-    artPieces.innerHTML = ""
     // Assign image to the folder to be inserted
-    if (category.art_category_id.length > 0) {
-      addImgaesToFolderIcon(category, imagesInsideFolderIcon)
-      changeTheFilePath(category)
-      category.art_category_id.forEach(showArtPieceList)
-    } else if (category.subcategory_id.length > 0) {
-      category.subcategory_id.forEach(showSubCategories);
-      changeTheFilePath(category)
-    }
+    openFolder(category)
+
   }
   // console.log(category);
 }
 
 
+function openFolder(category) {
 
-function showSubCategories(subCategory) {
+
+
+  const clnOpenFolderContainer = openFolderContainerTemplate.cloneNode(true);
+  const customPath = clnOpenFolderContainer.querySelector(".custom-path");
+  const artPieces = clnOpenFolderContainer.querySelector(".art-pieces");
+  const closeButton = clnOpenFolderContainer.querySelector(".closeBTn");
+  const openFolderContainers = clnOpenFolderContainer.querySelector(".open-folder-container");
+  changeTheFilePath(category, customPath)
+
+
+  if (category.art_category_id.length > 0) {
+    // addImgaesToFolderIcon(category, imagesInsideFolderIcon)
+
+    category.art_category_id.forEach(art => {
+      showArtPieceList(art, artPieces)
+    })
+
+  } else if (category.subcategory_id.length > 0) {
+    category.subcategory_id.forEach(subCategory => {
+      showSubCategories(subCategory, artPieces)
+    });
+  }
+
+
+
+
+
+  closeButton.onclick = function () {
+    openFolderContainers.classList.add("d-none");
+  }
+
+  body.appendChild(clnOpenFolderContainer)
+}
+
+
+// Changes the file path and remove display none class from the open folder container
+function changeTheFilePath(pathName, customPath) {
+  // add a new path name, since the path has to have an image and text i thought the template would be best approach
+  const clnPath = pathTemplate.cloneNode(true);
+  const name = clnPath.querySelector(".path-name")
+  name.textContent = pathName.title.rendered;
+  customPath.appendChild(clnPath)
+
+  // // removes the display none class, from the parent element 
+  // let parentFolderName = customPath.parentElement
+  // let openFolderContainer = parentFolderName.parentElement
+  // console.log(openFolderContainer)
+  // openFolderContainer.classList.remove("d-none");
+}
+
+
+
+function showSubCategories(subCategory, placeToAppend) {
+
   const clnSubCategory = subCategoryTemplate.cloneNode(true);
   clnSubCategory.querySelector(".subCategoryName").textContent = subCategory.post_title;
-  artPieces.appendChild(clnSubCategory)
+
+  const subcategory = clnSubCategory.querySelector(".subcategory");
+  subcategory.onclick = function () {
+
+    const clnOpenFolderContainer = openFolderContainer.cloneNode(true);
+    const artPieces = clnOpenFolderContainer.querySelector(".art-pieces");
+
+
+    for (let key of Object.keys(subCategory.art_piece_id)) {
+      console.log(subCategory.art_piece_id[key])
+      showArtPieceList(subCategory.art_piece_id[key], artPieces)
+      // showArtPieceList(piece)
+      // if (subCategory.art_piece_id.hasOwnProperty(key)) {
+      //   console.log(`${key} : ${subCategory.art_piece_id[key]}`)
+      // }
+    }
+
+    body.appendChild(clnOpenFolderContainer);
+
+  }
+
+
+  placeToAppend.appendChild(clnSubCategory)
+
 
 }
 
@@ -76,42 +144,28 @@ function addImgaesToFolderIcon(imageURL, containerToAppendTo) {
 
 
 
-function showArtPieceList(piece) {
+function showArtPieceList(piece, placeToAppendTo) {
   let artPieceCln = artPieceTemplate.cloneNode(true);
   artPieceCln.querySelector(".art-piece-name").textContent = piece.post_title
   artPieceCln.querySelector(".art-piece-large-icon").src = piece.featured_image.guid
-  artPieces.appendChild(artPieceCln)
+  placeToAppendTo.appendChild(artPieceCln)
   // console.log(piece)
 }
 
 
-// Changes the file path and remove display none class from the open folder container
-function changeTheFilePath(pathName) {
-  // add a new path name, since the path has to have an image and text i thought the template would be best approach
-  const clnPath = pathTemplate.cloneNode(true);
-  const name = clnPath.querySelector(".path-name")
-  name.textContent = pathName.title.rendered;
-  customPath.appendChild(clnPath)
-
-  // removes the display none class, from the parent element 
-  let parentFolderName = customPath.parentElement
-  let openFolderContainer = parentFolderName.parentElement
-  console.log(openFolderContainer)
-  openFolderContainer.classList.remove("d-none");
-}
 
 
 
 
-// Closes the open folder window and resets the file path
-closeButtons.forEach(closeWindow);
+// // Closes the open folder window and resets the file path
+// closeButtons.forEach(closeWindow);
 
-function closeWindow(btn) {
-  btn.onclick = function () {
-    customPath.innerHTML = ""
-    let parentBtn = btn.parentElement;
-    let openFolderContainer = parentBtn.parentElement
-    openFolderContainer.classList.add("d-none");
-    console.log(mainParent)
-  }
-}
+// function closeWindow(btn) {
+//   btn.onclick = function () {
+//     customPath.innerHTML = ""
+//     let parentBtn = btn.parentElement;
+//     let openFolderContainer = parentBtn.parentElement
+//     openFolderContainer.classList.add("d-none");
+//     console.log(mainParent)
+//   }
+// }

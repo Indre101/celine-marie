@@ -36,49 +36,47 @@
   </div>
 
 
-  <div id="open-folder-container" class="open-folder-container d-none">
-
-    <div class="open-folder-icons">
-      <img class="back-arrow" src="./icons/109618.svg" alt="">
-      <img class="back-arrow justify-self" src="./icons/minimize.svg" alt="">
-      <img class="back-arrow justify-self" src="./icons/maximize.svg" alt="">
-      <img class="back-arrow closeBTn justify-self" src="./icons/cancel.svg" alt="">
-    </div>
-
-    <article class="folder-path">
-      <img class="folder-path-icon" src="./icons/desktop-icons/file2.png" alt="">
-      <img class="folder-path-icon" src="./icons/next.svg" alt="">
-      <h3>This PC</h3>
-      <div class="custom-path">
-        <template class="path-template">
-          <img class="folder-path-icon" src="./icons/next.svg" alt="">
-          <h3 class="path-name">This PC</h3>
-        </template>
+  <template class="open-folder-container-template">
+    <div class="open-folder-container">
+      <div class="open-folder-icons">
+        <img class="back-arrow" src="./icons/109618.svg" alt="">
+        <img class="back-arrow justify-self" src="./icons/minimize.svg" alt="">
+        <img class="back-arrow justify-self" src="./icons/maximize.svg" alt="">
+        <img class="back-arrow closeBTn justify-self" src="./icons/cancel.svg" alt="">
       </div>
-    </article>
+      <article class="folder-path">
+        <img class="folder-path-icon" src="./icons/desktop-icons/file2.png" alt="">
+        <img class="folder-path-icon" src="./icons/next.svg" alt="">
+        <h3>This PC</h3>
+        <div class="custom-path">
 
-
-    <div class="art-pieces">
-      <template class="art-piece-template">
-        <div class="art-piece">
-          <img class="art-piece-large-icon" src="./images/water.png" alt="">
-          <h4 class="art-piece-name">Name</h4>
         </div>
-      </template>
-
-      <template class="sub-category-template">
-        <article class="subcategory">
-          <img class="sub-category-icon" src="./icons/desktop-icons/file2.png" alt="">
-          <h4 class="subCategoryName">Name</h4>
-        </article>
-      </template>
+      </article>
+      <div class="art-pieces">
 
 
+      </div>
     </div>
+  </template>
 
+  <template class="sub-category-template">
+    <article class="subcategory">
+      <img class="sub-category-icon" src="./icons/desktop-icons/file2.png" alt="">
+      <h4 class="subCategoryName">Name</h4>
+    </article>
+  </template>
 
-  </div>
+  <template class="art-piece-template">
+    <div class="art-piece">
+      <img class="art-piece-large-icon" src="./images/water.png" alt="">
+      <h4 class="art-piece-name">Name</h4>
+    </div>
+  </template>
 
+  <template class="path-template">
+    <img class="folder-path-icon" src="./icons/next.svg" alt="">
+    <h3 class="path-name">This PC</h3>
+  </template>
   <script src="main.js"></script>
 </body>
 
