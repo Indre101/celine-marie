@@ -203,24 +203,24 @@ h1 {
 
 
 .art-piece-large-icon {
-  height: 130px;
-  width: 120px;
+  height: 200px;
   object-fit: contain;
 }
 
 .art-pieces {
   display: grid;
   margin: 30px 30px;
-  grid-template-columns: repeat(auto-fill, minmax(150px, auto));
+  grid-template-columns: repeat(auto-fill, minmax(220px, auto));
   overflow: scroll;
   border: 0.3px solid grey;
-  height: 81%;
+  height: 76%;
   grid-gap: 30px;
 }
 
 .art-pieces h4 {
   font-weight: normal;
-  font-size: 1rem;
+  font-size: 1.3rem;
+  margin-top: 10px;
   text-align: center;
 }
 
@@ -228,7 +228,7 @@ h1 {
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin: 2px;
+  margin: 15px 0;
 }
 
 .d-none {
