@@ -1,12 +1,13 @@
-// Template for menu folders
+// When the window is loaded all the dynamic content is created and appended to the right places
+//When the folders are clicked the class of d-none is being removed and when an close icon in the folder is 
+//clicked the d-none class is being added
+
 const categoryFolderTemplate = document.querySelector(".category-folder-template").content;
-const artCategories = document.querySelector(".categories");
+const artCategories = document.querySelector(".categories"); //Place to append the main menu categories/folders
 const artPieceTemplate = document.querySelector(".art-piece-template").content;
-const folderPath = document.querySelector(".folder-path")
 const pathTemplate = document.querySelector(".path-template").content;
 const subCategoryTemplate = document.querySelector(".sub-category-template").content;
-const spinner = document.getElementById("spinner");
-const openFolderContainer = document.querySelector(".open-folder-container");
+const spinner = document.getElementById("spinner"); //preloader temporary
 const openFolderContainerTemplate = document.querySelector(".open-folder-container-template").content
 const body = document.querySelector("BODY");
 window.addEventListener("DOMContentLoaded", init)
@@ -68,6 +69,7 @@ function openTheRightFolder(folderToClick, nameToCompare) {
 
 
 //Shows either an opened folder with subcategory folders or a folder with displayed art 
+//Category = art, illustrations or as well subcategories paintings, sculptures. Artarray = the array in the json, that categories have(art_category_id)
 function openFolder(category, artArray) {
   const clnOpenFolderContainer = openFolderContainerTemplate.cloneNode(true);
   const customPath = clnOpenFolderContainer.querySelector(".custom-path");
@@ -112,11 +114,14 @@ function openFolder(category, artArray) {
 }
 
 
-// Changes the file path and remove display none class from the open folder container
+// Changes the file path(it's not working perfectly, yet :D)
+//Path name = name of the clicked folder, customPath = is an element with custom-path class inside open-folder-container template 
 function changeTheFilePath(pathName, customPath) {
   // add a new path name, since the path has to have an image and text i thought the template would be best approach
   const clnPath = pathTemplate.cloneNode(true);
   const name = clnPath.querySelector(".path-name")
+
+  //because some elements in json had either a post_title or title.rendered it checks which one it has and then inserts it
   if (pathName.post_title) {
     name.textContent = pathName.post_title.toLowerCase();
 
@@ -127,15 +132,18 @@ function changeTheFilePath(pathName, customPath) {
 }
 
 
-
+// IF the category has subcategories this function will be called to show them
 function showSubCategories(subCategory, placeToAppend) {
-  const clnSubCategory = subCategoryTemplate.cloneNode(true);
+  const clnSubCategory = subCategoryTemplate.cloneNode(true); //Template of subcategory
   const subCategoryName = clnSubCategory.querySelector(".subCategoryName")
   subCategoryName.textContent = subCategory.post_title.toLowerCase()
+
   const subcategory = clnSubCategory.querySelector(".subcategory");
+  //subCategory.art_piece_id is and object with objects inside, so i converted it to array
   const convertedArtArray = Object.keys(subCategory.art_piece_id).map(i => subCategory.art_piece_id[i])
-  openFolder(subCategory, convertedArtArray)
-  openTheRightFolder(subcategory, subCategoryName.textContent)
+  openFolder(subCategory, convertedArtArray) //Function that will create and append open-folder container with art, but will not be displayed
+  openTheRightFolder(subcategory, subCategoryName.textContent) //Function that will display the correct open folder according on the subcategory clicked
+
   placeToAppend.appendChild(clnSubCategory)
 }
 
@@ -153,10 +161,10 @@ function addImgaesToFolderIcon(imageURL, containerToAppendTo) {
 }
 
 
-
+// Appends all the art pieces to the art-pieces container in the open-folder-container;
 function showArtPieceList(piece, placeToAppendTo) {
   let artPieceCln = artPieceTemplate.cloneNode(true);
   artPieceCln.querySelector(".art-piece-name").textContent = piece.post_title.toLowerCase()
   artPieceCln.querySelector(".art-piece-large-icon").src = piece.featured_image.guid
-  placeToAppendTo.appendChild(artPieceCln)
+  placeToAppendTo.appendChild(artPieceCln) // Place to append is element with art-pieces class in the open-folder-container template;
 }
