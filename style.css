@@ -209,7 +209,7 @@ h1 {
   object-fit: contain;
 }
 
-.art-pieces {
+.artPieces {
   display: grid;
   margin: 30px 30px;
   grid-template-columns: repeat(auto-fill, minmax(220px, auto));
@@ -280,28 +280,29 @@ h1 {
 }
 
 .info-pop-up-content {
-    padding: 0.5em;
+  padding: 0.5em;
 }
 
-.art-piece-info, .art-piece-year {
-    display: inline;
+.art-piece-info,
+.art-piece-year {
+  display: inline;
 }
 
 .info-pop-up-closeBtn {
-    width: 1em;
-    background-color: #D4D0C8;
-    padding: 0.2em;
-    margin-top: 0.2em;
+  width: 1em;
+  background-color: #D4D0C8;
+  padding: 0.2em;
+  margin-top: 0.2em;
 }
 
 .info-pop-up-ok {
-    background-color: #D4D0C8;
-    border: 1px solid black;
-    width: 20%;
-    box-shadow: 5px 5px 5px -3px #777;
-    display: block;
-    margin: 0 auto;
-    margin-top: 1em;
+  background-color: #D4D0C8;
+  border: 1px solid black;
+  width: 20%;
+  box-shadow: 5px 5px 5px -3px #777;
+  display: block;
+  margin: 0 auto;
+  margin-top: 1em;
 }
 
 .this-pc {
