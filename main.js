@@ -38,6 +38,45 @@ function init() {
 
 //Shows either an opened folder with subcategory folders or a folder with displayed art 
 //Category = art, illustrations or as well subcategories paintings, sculptures. Artarray = the array in the json, that categories have(art_category_id)
+function appendFolders(category, artArray) {
+  const clnOpenFolderContainer = openFolderContainerTemplate.cloneNode(true);
+  const customPath = clnOpenFolderContainer.querySelector(".custom-path");
+  const artPieces = clnOpenFolderContainer.querySelector(".art-pieces");
+  const closeButton = clnOpenFolderContainer.querySelector(".closeBTn");
+  const openFolderContainers = clnOpenFolderContainer.querySelector(".open-folder-container");
+  const nameOfTheFolder = clnOpenFolderContainer.querySelector(".name-of-the-folder");
+  //Checks if the category has post_title OR category.title.rendered and assigns the name of the folder
+  if (category.post_title) {
+    nameOfTheFolder.textContent = category.post_title.toLowerCase();
+  } else if (category.title.rendered) {
+    nameOfTheFolder.textContent = category.title.rendered.toLowerCase();
+  }
+
+  changeTheFilePath(category, customPath) //calls a function that will change the path of folder
+  if (artArray) { //Checks if category has art_category_id array and then calls a function that would display the art pieces
+    artArray.forEach(art => {
+      showArtPieceList(art, artPieces)
+    })
+  }
+
+  if (category.subcategory_id) { //Checks if category has subcategories and then calls a function that would display subcategories
+    category.subcategory_id.forEach(subCategory => {
+      showSubCategories(subCategory, artPieces)
+    })
+
+  }
+
+  closeButton.onclick = function () { //closes the folder
+    // zIndex = 0
+
+    openFolderContainers.classList.add("d-none");
+  }
+  body.appendChild(clnOpenFolderContainer)
+}
+
+
+//Shows either an opened folder with subcategory folders or a folder with displayed art 
+//Category = art, illustrations or as well subcategories paintings, sculptures. Artarray = the array in the json, that categories have(art_category_id)
 function appendMyComputerFolder(data) {
   const clnOpenFolderContainer = openFolderContainerTemplate.cloneNode(true);
   const customPath = clnOpenFolderContainer.querySelector(".custom-path");
@@ -106,44 +145,6 @@ function openTheRightFolder(folderToClick, nameToCompare) {
   }
 }
 
-
-//Shows either an opened folder with subcategory folders or a folder with displayed art 
-//Category = art, illustrations or as well subcategories paintings, sculptures. Artarray = the array in the json, that categories have(art_category_id)
-function appendFolders(category, artArray) {
-  const clnOpenFolderContainer = openFolderContainerTemplate.cloneNode(true);
-  const customPath = clnOpenFolderContainer.querySelector(".custom-path");
-  const artPieces = clnOpenFolderContainer.querySelector(".art-pieces");
-  const closeButton = clnOpenFolderContainer.querySelector(".closeBTn");
-  const openFolderContainers = clnOpenFolderContainer.querySelector(".open-folder-container");
-  const nameOfTheFolder = clnOpenFolderContainer.querySelector(".name-of-the-folder");
-  //Checks if the category has post_title OR category.title.rendered and assigns the name of the folder
-  if (category.post_title) {
-    nameOfTheFolder.textContent = category.post_title.toLowerCase();
-  } else if (category.title.rendered) {
-    nameOfTheFolder.textContent = category.title.rendered.toLowerCase();
-  }
-
-  changeTheFilePath(category, customPath) //calls a function that will change the path of folder
-  if (artArray) { //Checks if category has art_category_id array and then calls a function that would display the art pieces
-    artArray.forEach(art => {
-      showArtPieceList(art, artPieces)
-    })
-  }
-
-  if (category.subcategory_id) { //Checks if category has subcategories and then calls a function that would display subcategories
-    category.subcategory_id.forEach(subCategory => {
-      showSubCategories(subCategory, artPieces)
-    })
-
-  }
-
-  closeButton.onclick = function () { //closes the folder
-    // zIndex = 0
-
-    openFolderContainers.classList.add("d-none");
-  }
-  body.appendChild(clnOpenFolderContainer)
-}
 
 
 // Changes the file path(it's not working perfectly, yet :D)
