@@ -42,6 +42,8 @@ function getCategories(category) {
     openFolder(category, category.art_category_id) //Calls a function to show the art list
   } else if (category.subcategory_id.length > 0) { //If the category HAS subcategories
     openFolder(category, category.art_category_id) //Calls a function that will show open folder with subcategories as folders
+  } else {
+    // openFolder(category, category)
   }
 
   openTheRightFolder(categoryFolder, categoryName.textContent) //When a folder is clicked it would remove display none property from the right element
@@ -84,7 +86,21 @@ function openFolder(category, artArray) {
 
   } else if (category.title.rendered) {
     nameOfTheFolder.textContent = category.title.rendered.toLowerCase();
+  } else {
+    artPieces.appendChild(document.querySelector("subcategory-1"))
+    artPieces.appendChild(document.querySelector("subcategory-2"))
+
   }
+
+  const thisPcButton = openFolderContainers.querySelector(".this-pc");
+
+
+
+  thisPcButton.onclick = function () {
+    console.log(thisPcButton)
+    openFolder(category, artArray)
+  }
+
 
 
   changeTheFilePath(category, customPath)
@@ -168,3 +184,5 @@ function showArtPieceList(piece, placeToAppendTo) {
   artPieceCln.querySelector(".art-piece-large-icon").src = piece.featured_image.guid
   placeToAppendTo.appendChild(artPieceCln) // Place to append is element with art-pieces class in the open-folder-container template;
 }
+
+// Navigation in the folder
