@@ -20,6 +20,7 @@ function init() {
   }).then(data => {
     spinner.setAttribute('hidden', ''); //preloader hides
     data.forEach((category) => {
+      appendFolders(category, category.art_category_id)
       getCategories(category, artCategories)
     }) //gets the categories and the rest of the folders
 
@@ -68,8 +69,6 @@ function getCategories(category, placeToAppend, namefontSize, namefontWeight, na
   categoryName.style.fontSize = namefontSize;
   categoryName.style.fontWeight = namefontWeight;
   categoryName.style.color = namefontColor;
-
-
   let imagesInsideFolderIcon = clnMenuFolder.querySelector(".images-inside-folder-icon");
   let categoryFolder = clnMenuFolder.querySelector(".category-folder");
   // artCategories.appendChild(clnMenuFolder);
@@ -77,7 +76,7 @@ function getCategories(category, placeToAppend, namefontSize, namefontWeight, na
 
   if (category.art_category_id.length > 0) { //If the category does NOT have subcategories
     addImgaesToFolderIcon(category, imagesInsideFolderIcon) //Add image to the folder icon
-  } 
+  }
 
 
 
@@ -85,18 +84,6 @@ function getCategories(category, placeToAppend, namefontSize, namefontWeight, na
   // openTheRightFolder(this, this.textContent)
 
 }
-
-
-function showOpenFolder(params) {
-  if (category.art_category_id.length > 0) { //If the category does NOT have subcategories
-    openFolder(category, category.art_category_id) //Calls a function to show the art list
-  } else if (category.subcategory_id.length > 0) { //If the category HAS subcategories
-    // openMyComputerFolder(category, category.art_category_id)
-    openFolder(category, category.art_category_id) //Calls a function that will show open folder with subcategories as folders
-
-  }
-}
-
 
 
 let zIndex = 0; //This will get increased once the folder icon is clicked 
@@ -122,7 +109,7 @@ function openTheRightFolder(folderToClick, nameToCompare) {
 
 //Shows either an opened folder with subcategory folders or a folder with displayed art 
 //Category = art, illustrations or as well subcategories paintings, sculptures. Artarray = the array in the json, that categories have(art_category_id)
-function openFolder(category, artArray) {
+function appendFolders(category, artArray) {
   const clnOpenFolderContainer = openFolderContainerTemplate.cloneNode(true);
   const customPath = clnOpenFolderContainer.querySelector(".custom-path");
   const artPieces = clnOpenFolderContainer.querySelector(".art-pieces");
@@ -186,7 +173,7 @@ function showSubCategories(subCategory, placeToAppend) {
   const subcategory = clnSubCategory.querySelector(".subcategory");
   //subCategory.art_piece_id is and object with objects inside, so i converted it to array
   const convertedArtArray = Object.keys(subCategory.art_piece_id).map(i => subCategory.art_piece_id[i])
-  openFolder(subCategory, convertedArtArray) //Function that will create and append open-folder container with art, but will not be displayed
+  appendFolders(subCategory, convertedArtArray) //Function that will create and append open-folder container with art, but will not be displayed
   openTheRightFolder(subcategory, subCategoryName.textContent) //Function that will display the correct open folder according on the subcategory clicked
 
   placeToAppend.appendChild(clnSubCategory)
