@@ -39,8 +39,6 @@ function init() {
   }).then(() => {
     const subcategories = document.querySelectorAll(".subcategory")
     const childernElements = document.querySelectorAll(".artPieces")
-
-
     subcategories.forEach(sub => {
       sub.classList.add("d-none")
       childernElements.forEach(child => {
@@ -48,17 +46,9 @@ function init() {
           sub.appendChild(child)
         }
       })
-
       sub.onclick = function () {
-
-
-
-
         showThisFolder(sub, subcategories)
       }
-
-
-
     })
 
   })
@@ -180,6 +170,8 @@ function showSubCategories(subCategory, placeToAppend) {
   placeToAppend.appendChild(clnSubCategory)
 }
 
+
+
 // Appends all the art pieces to the art-pieces container in the open-folder-container;
 function showArtPieceList(piece, placeToAppendTo) {
   let artPieceCln = artPieceTemplate.cloneNode(true);
@@ -215,11 +207,10 @@ let zIndex = 0; //This will get increased once the folder icon is clicked
 // the parameters are The category/folder that is clicked and the Html markup for the folder when it is opened h2, which is not displayed but is in the mark up
 function openTheRightFolder(folderToClick) {
   const openFolderContainer = document.querySelector(".open-folder-container")
-  const folders = document.querySelectorAll(".artPieces") //selects all the open-folder-container that are already appended to the body but are not displayed
   // const namesOfTheFolders = document.querySelectorAll(".name-of-the-folder"); // the open-folder-container has a h2, that is not displayed but is selected in order to compare the names
   folderToClick.onclick = function () { //Once a folder is clicked
+    const folders = document.querySelectorAll(".artPieces") //selects all the open-folder-container that are already appended to the body but are not displayed
     const subcategories = document.querySelectorAll(".subcategory")
-
     subcategories.forEach(sub => {
       sub.classList.remove("d-none")
     })
@@ -227,6 +218,7 @@ function openTheRightFolder(folderToClick) {
     zIndex++; //this will increase so the folder would be on top
     folders.forEach(folder => { //goes through all open-folder-container h2
       folder.classList.add("d-none")
+      console.log(folder);
       if (folder.classList.contains(`${folderName}`)) { //checks if the name of the h2, is the same as the name of the clicked folder
 
         openFolderContainer.classList.remove("d-none");
