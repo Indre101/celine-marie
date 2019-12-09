@@ -20,6 +20,7 @@ function init() {
   }).then(data => {
     spinner.setAttribute('hidden', ''); //preloader hides
     data.forEach((category) => {
+      appendFolders(category, category.art_category_id)
       getCategories(category, artCategories)
     }) //gets the categories and the rest of the folders
 
@@ -37,86 +38,7 @@ function init() {
 
 //Shows either an opened folder with subcategory folders or a folder with displayed art 
 //Category = art, illustrations or as well subcategories paintings, sculptures. Artarray = the array in the json, that categories have(art_category_id)
-function appendMyComputerFolder(data) {
-  const clnOpenFolderContainer = openFolderContainerTemplate.cloneNode(true);
-  const customPath = clnOpenFolderContainer.querySelector(".custom-path");
-  const artPieces = clnOpenFolderContainer.querySelector(".art-pieces");
-  const closeButton = clnOpenFolderContainer.querySelector(".closeBTn");
-  const openFolderContainers = clnOpenFolderContainer.querySelector(".open-folder-container");
-  const nameOfTheFolder = clnOpenFolderContainer.querySelector(".name-of-the-folder")
-  //Checks if the category has post_title OR category.title.rendered and assigns the name of the folder
-  nameOfTheFolder.textContent = "thispc";
-  console.log("nameOfTheFolder");
-  data.forEach((category) => {
-
-    getCategories(category, artPieces, "1.3rem", "normal","black")
-  })
-  closeButton.onclick = function () { //closes the folder
-    // zIndex = 0
-
-    openFolderContainers.classList.add("d-none");
-  }
-  body.appendChild(clnOpenFolderContainer)
-}
-
-//adds categories/folders t
-function getCategories(category, placeToAppend, namefontSize, namefontWeight, namefontColor) {
-  console.log(category)
-  let clnMenuFolder = categoryFolderTemplate.cloneNode(true);
-  let categoryName = clnMenuFolder.querySelector(".category-name")
-  categoryName.textContent = category.title.rendered.toLowerCase()
-  categoryName.style.fontSize = namefontSize;
-  categoryName.style.fontWeight = namefontWeight;
-  categoryName.style.color = namefontColor;
-
-
-  let imagesInsideFolderIcon = clnMenuFolder.querySelector(".images-inside-folder-icon");
-  let categoryFolder = clnMenuFolder.querySelector(".category-folder");
-  // artCategories.appendChild(clnMenuFolder);
-  placeToAppend.appendChild(clnMenuFolder);
-
-
-  if (category.art_category_id.length > 0) { //If the category does NOT have subcategories
-
-    addImgaesToFolderIcon(category, imagesInsideFolderIcon) //Add image to the folder icon
-    openFolder(category, category.art_category_id) //Calls a function to show the art list
-  } else if (category.subcategory_id.length > 0) { //If the category HAS subcategories
-    // openMyComputerFolder(category, category.art_category_id)
-    openFolder(category, category.art_category_id) //Calls a function that will show open folder with subcategories as folders
-
-  }
-  openTheRightFolder(categoryFolder, categoryName.textContent) //When a folder is clicked it would remove display none property from the right element
-  // openTheRightFolder(this, this.textContent)
-
-
-}
-
-
-
-let zIndex = 0; //This will get increased once the folder icon is clicked 
-
-// the parameters are The category/folder that is clicked and the Html markup for the folder when it is opened h2, which is not displayed but is in the mark up
-function openTheRightFolder(folderToClick, nameToCompare) {
-  console.log("hjkæl")
-  const folders = document.querySelectorAll(".open-folder-container") //selects all the open-folder-container that are already appended to the body but are not displayed
-  const namesOfTheFolders = document.querySelectorAll(".name-of-the-folder"); // the open-folder-container has a h2, that is not displayed but is selected in order to compare the names
-  folderToClick.onclick = function () { //Once a folder is clicked
-    zIndex++; //this will increase so the folder would be on top
-    namesOfTheFolders.forEach(name => { //goes through all open-folder-container h2
-      if (name.textContent == nameToCompare) { //checks if the name of the h2, is the same as the name of the clicked folder
-        console.log(name.textContent, nameToCompare)
-        let folder = name.parentElement //Selects the h2 parent element, so the correct open-folder-container
-        folder.classList.remove("d-none");
-        folder.style.zIndex = zIndex;
-      }
-    })
-  }
-}
-
-
-//Shows either an opened folder with subcategory folders or a folder with displayed art 
-//Category = art, illustrations or as well subcategories paintings, sculptures. Artarray = the array in the json, that categories have(art_category_id)
-function openFolder(category, artArray) {
+function appendFolders(category, artArray) {
   const clnOpenFolderContainer = openFolderContainerTemplate.cloneNode(true);
   const customPath = clnOpenFolderContainer.querySelector(".custom-path");
   const artPieces = clnOpenFolderContainer.querySelector(".art-pieces");
@@ -153,6 +75,78 @@ function openFolder(category, artArray) {
 }
 
 
+//Shows either an opened folder with subcategory folders or a folder with displayed art 
+//Category = art, illustrations or as well subcategories paintings, sculptures. Artarray = the array in the json, that categories have(art_category_id)
+function appendMyComputerFolder(data) {
+  const clnOpenFolderContainer = openFolderContainerTemplate.cloneNode(true);
+  const customPath = clnOpenFolderContainer.querySelector(".custom-path");
+  const artPieces = clnOpenFolderContainer.querySelector(".art-pieces");
+  const closeButton = clnOpenFolderContainer.querySelector(".closeBTn");
+  const openFolderContainers = clnOpenFolderContainer.querySelector(".open-folder-container");
+  const nameOfTheFolder = clnOpenFolderContainer.querySelector(".name-of-the-folder")
+  //Checks if the category has post_title OR category.title.rendered and assigns the name of the folder
+  nameOfTheFolder.textContent = "thispc";
+  console.log("nameOfTheFolder");
+  data.forEach((category) => {
+
+    getCategories(category, artPieces, "1.3rem", "normal", "black")
+  })
+  closeButton.onclick = function () { //closes the folder
+    // zIndex = 0
+
+    openFolderContainers.classList.add("d-none");
+  }
+  body.appendChild(clnOpenFolderContainer)
+}
+
+//adds categories/folders t
+function getCategories(category, placeToAppend, namefontSize, namefontWeight, namefontColor) {
+  console.log(category)
+  let clnMenuFolder = categoryFolderTemplate.cloneNode(true);
+  let categoryName = clnMenuFolder.querySelector(".category-name")
+  categoryName.textContent = category.title.rendered.toLowerCase()
+  categoryName.style.fontSize = namefontSize;
+  categoryName.style.fontWeight = namefontWeight;
+  categoryName.style.color = namefontColor;
+  let imagesInsideFolderIcon = clnMenuFolder.querySelector(".images-inside-folder-icon");
+  let categoryFolder = clnMenuFolder.querySelector(".category-folder");
+  // artCategories.appendChild(clnMenuFolder);
+  placeToAppend.appendChild(clnMenuFolder);
+
+  if (category.art_category_id.length > 0) { //If the category does NOT have subcategories
+    addImgaesToFolderIcon(category, imagesInsideFolderIcon) //Add image to the folder icon
+  }
+
+
+
+  openTheRightFolder(categoryFolder, categoryName.textContent) //When a folder is clicked it would remove display none property from the right element
+  // openTheRightFolder(this, this.textContent)
+
+}
+
+
+let zIndex = 0; //This will get increased once the folder icon is clicked 
+
+// the parameters are The category/folder that is clicked and the Html markup for the folder when it is opened h2, which is not displayed but is in the mark up
+function openTheRightFolder(folderToClick, nameToCompare) {
+  console.log("hjkæl")
+  const folders = document.querySelectorAll(".open-folder-container") //selects all the open-folder-container that are already appended to the body but are not displayed
+  const namesOfTheFolders = document.querySelectorAll(".name-of-the-folder"); // the open-folder-container has a h2, that is not displayed but is selected in order to compare the names
+  folderToClick.onclick = function () { //Once a folder is clicked
+    zIndex++; //this will increase so the folder would be on top
+    namesOfTheFolders.forEach(name => { //goes through all open-folder-container h2
+      if (name.textContent == nameToCompare) { //checks if the name of the h2, is the same as the name of the clicked folder
+        console.log(name.textContent, nameToCompare)
+        let folder = name.parentElement //Selects the h2 parent element, so the correct open-folder-container
+        folder.classList.remove("d-none");
+        folder.style.zIndex = zIndex;
+      }
+    })
+  }
+}
+
+
+
 // Changes the file path(it's not working perfectly, yet :D)
 //Path name = name of the clicked folder, customPath = is an element with custom-path class inside open-folder-container template 
 function changeTheFilePath(pathName, customPath) {
@@ -180,7 +174,7 @@ function showSubCategories(subCategory, placeToAppend) {
   const subcategory = clnSubCategory.querySelector(".subcategory");
   //subCategory.art_piece_id is and object with objects inside, so i converted it to array
   const convertedArtArray = Object.keys(subCategory.art_piece_id).map(i => subCategory.art_piece_id[i])
-  openFolder(subCategory, convertedArtArray) //Function that will create and append open-folder container with art, but will not be displayed
+  appendFolders(subCategory, convertedArtArray) //Function that will create and append open-folder container with art, but will not be displayed
   openTheRightFolder(subcategory, subCategoryName.textContent) //Function that will display the correct open folder according on the subcategory clicked
 
   placeToAppend.appendChild(clnSubCategory)
