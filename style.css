@@ -215,7 +215,7 @@ h1 {
   grid-template-columns: repeat(auto-fill, minmax(220px, auto));
   overflow: scroll;
   border: 0.3px solid grey;
-  height: 76%;
+  height: 61vh;
   grid-gap: 30px;
 }
 
@@ -249,12 +249,12 @@ h1 {
 }
 
 .subcategory {
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   align-items: center;
 }
 
-
+.d-flex {}
 
 /* art info pop-up window */
 

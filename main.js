@@ -25,8 +25,8 @@ function init() {
     data.forEach((category) => {
       appendArtPiecesOrSubcategories(category)
       getCategories(category, artCategories)
-    }) 
-    
+    })
+
     //gets the categories and the rest of the folders
 
     // appendMyComputerFolder(data) //Function that will append and create the Mycomputer open folder
@@ -36,25 +36,50 @@ function init() {
     //   thisPcBTns.forEach(btn => {
     //     openTheRightFolder(btn, btn.textContent.toLowerCase().split(' ').join('')) //Calls a function that will find the open folder with the name thispc and will display it
     //   })
-  }).then(()=>{
-    const subcategories=document.querySelectorAll(".subcategory")
-    const childernElements= document.querySelectorAll(".artPieces")
-    console.log(subcategories);
-    subcategories.forEach(e=>{
-      childernElements.forEach(c=>{
+  }).then(() => {
+    const subcategories = document.querySelectorAll(".subcategory")
+    const childernElements = document.querySelectorAll(".artPieces")
 
-        if (c.classList.contains(e.querySelector(".name").textContent)) {
-            e.appendChild(c)
-  
-          console.log("object");
+
+    subcategories.forEach(sub => {
+      sub.classList.add("d-none")
+      childernElements.forEach(child => {
+        if (child.classList.contains(sub.querySelector(".name").textContent)) {
+          sub.appendChild(child)
         }
       })
-  
+
+      sub.onclick = function () {
+
+
+
+
+        showThisFolder(sub, subcategories)
+      }
+
+
+
     })
+
   })
 
 }
 
+function showThisFolder(sub, subcategories) {
+
+  for (let index = 0; index < subcategories.length; index++) {
+    console.log(subcategories[index]);
+    subcategories[index].classList.add("d-none");
+
+  }
+  // sub.classList.add("d-none")
+  sub.classList.remove("d-none");
+  sub.querySelector(".subcategory-icon-and-name").classList.add("d-none");
+  sub.querySelector(".artPieces").classList.remove("d-none");
+  sub.parentElement.classList.remove("d-none")
+  console.log(sub);
+
+}
 
 //Shows either an opened folder with subcategory folders or a folder with displayed art 
 //Category = art, illustrations or as well subcategories paintings, sculptures. Artarray = the array in the json, that categories have(art_category_id)
@@ -85,11 +110,11 @@ function appendFolders(category, artArray) {
 
 
 function appendArtPiecesOrSubcategories(category, artArray) {
-const parentFolder= document.querySelector(".thisPc")
+  const parentFolder = document.querySelector(".thisPc")
 
 
   // parentFolder.appendChild(parentFolder);
-  
+
   let newClassName;
   if (category.post_title) {
     newClassName = category.post_title.toLowerCase();
@@ -103,18 +128,19 @@ const parentFolder= document.querySelector(".thisPc")
   if (category.art_category_id) { //Checks if category has art_category_id array and then calls a function that would display the art pieces
     const artPieces = document.createElement("div");
     artPieces.classList.add("artPieces")
+    // artPieces.classList.add("d-none")
+
     artPieces.classList.add(newClassName);
     parentFolder.appendChild(artPieces);
-
-
     category.art_category_id.forEach(art => {
       showArtPieceList(art, artPieces)
     })
   }
-
   if (category.art_piece_id) {
     const artPieces = document.createElement("div");
     artPieces.classList.add("artPieces")
+    // artPieces.classList.add("d-none")
+
     artPieces.classList.add(newClassName);
     parentFolder.appendChild(artPieces);
     artArray.forEach(art => {
@@ -122,17 +148,13 @@ const parentFolder= document.querySelector(".thisPc")
     })
   }
 
-  
-
   if (category.subcategory_id) { //Checks if category has subcategories and then calls a function that would display subcategories
     const artPieces = document.createElement("div");
     artPieces.classList.add("artPieces")
+    // artPieces.classList.add("d-none")
+
     artPieces.classList.add(category.title.rendered.toLowerCase());
-
-  
-  
     parentFolder.appendChild(artPieces);
-
     category.subcategory_id.forEach(subCategory => {
       showSubCategories(subCategory, artPieces)
     })
@@ -144,9 +166,6 @@ const parentFolder= document.querySelector(".thisPc")
 
 // IF the category has subcategories this function will be called to show them
 function showSubCategories(subCategory, placeToAppend) {
-      
-
-
   const clnSubCategory = subCategoryTemplate.cloneNode(true); //Template of subcategory
   const subCategoryName = clnSubCategory.querySelector(".subCategoryName")
   subCategoryName.textContent = subCategory.post_title.toLowerCase()
@@ -169,31 +188,7 @@ function showArtPieceList(piece, placeToAppendTo) {
   placeToAppendTo.appendChild(artPieceCln) // Place to append is element with art-pieces class in the open-folder-container template;
 }
 
-// Navigation in the folder
 
-// //Shows either an opened folder with subcategory folders or a folder with displayed art
-// //Category = art, illustrations or as well subcategories paintings, sculptures. Artarray = the array in the json, that categories have(art_category_id)
-// function appendMyComputerFolder(data) {
-//   const clnOpenFolderContainer = openFolderContainerTemplate.cloneNode(true);
-//   const customPath = clnOpenFolderContainer.querySelector(".custom-path");
-//   const artPieces = clnOpenFolderContainer.querySelector(".art-pieces");
-//   const closeButton = clnOpenFolderContainer.querySelector(".closeBTn");
-//   const openFolderContainers = clnOpenFolderContainer.querySelector(".open-folder-container");
-//   const nameOfTheFolder = clnOpenFolderContainer.querySelector(".name-of-the-folder")
-//   //Checks if the category has post_title OR category.title.rendered and assigns the name of the folder
-//   nameOfTheFolder.textContent = "thispc";
-//   console.log("nameOfTheFolder");
-//   data.forEach((category) => {
-
-//     getCategories(category, artPieces, "1.3rem", "normal", "black")
-//   })
-//   closeButton.onclick = function () { //closes the folder
-//     // zIndex = 0
-
-//     openFolderContainers.classList.add("d-none");
-//   }
-//   body.appendChild(clnOpenFolderContainer)
-// }
 
 //adds categories/folders t
 function getCategories(category, placeToAppend, namefontSize, namefontWeight, namefontColor) {
@@ -219,18 +214,24 @@ let zIndex = 0; //This will get increased once the folder icon is clicked
 
 // the parameters are The category/folder that is clicked and the Html markup for the folder when it is opened h2, which is not displayed but is in the mark up
 function openTheRightFolder(folderToClick) {
+  const openFolderContainer = document.querySelector(".open-folder-container")
   const folders = document.querySelectorAll(".artPieces") //selects all the open-folder-container that are already appended to the body but are not displayed
   // const namesOfTheFolders = document.querySelectorAll(".name-of-the-folder"); // the open-folder-container has a h2, that is not displayed but is selected in order to compare the names
   folderToClick.onclick = function () { //Once a folder is clicked
+    const subcategories = document.querySelectorAll(".subcategory")
+
+    subcategories.forEach(sub => {
+      sub.classList.remove("d-none")
+    })
     const folderName = folderToClick.querySelector(".name").textContent.toLowerCase().split(' ').join('')
     zIndex++; //this will increase so the folder would be on top
     folders.forEach(folder => { //goes through all open-folder-container h2
       folder.classList.add("d-none")
       if (folder.classList.contains(`${folderName}`)) { //checks if the name of the h2, is the same as the name of the clicked folder
-        let folderParent = folder.parentElement //Selects the h2 parent element, so the correct open-folder-container
-        folderParent.classList.remove("d-none");
+
+        openFolderContainer.classList.remove("d-none");
         folder.classList.remove("d-none")
-        folderParent.style.zIndex = zIndex;
+        folder.style.zIndex = zIndex;
       }
     })
   }
