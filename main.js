@@ -23,7 +23,7 @@ function init() {
       getCategories(category, artCategories)
     }) //gets the categories and the rest of the folders
 
-    openMyComputerFolder(data) //Function that will append and create the Mycomputer open folder
+    appendMyComputerFolder(data) //Function that will append and create the Mycomputer open folder
 
 
     const thisPcBTns = document.querySelectorAll(".this-pc"); //All the this pc buttons in the folder path
@@ -37,7 +37,7 @@ function init() {
 
 //Shows either an opened folder with subcategory folders or a folder with displayed art 
 //Category = art, illustrations or as well subcategories paintings, sculptures. Artarray = the array in the json, that categories have(art_category_id)
-function openMyComputerFolder(data) {
+function appendMyComputerFolder(data) {
   const clnOpenFolderContainer = openFolderContainerTemplate.cloneNode(true);
   const customPath = clnOpenFolderContainer.querySelector(".custom-path");
   const artPieces = clnOpenFolderContainer.querySelector(".art-pieces");
@@ -49,7 +49,7 @@ function openMyComputerFolder(data) {
   console.log("nameOfTheFolder");
   data.forEach((category) => {
 
-    getCategories(category, artPieces)
+    getCategories(category, artPieces, "1.3rem", "normal","black")
   })
   closeButton.onclick = function () { //closes the folder
     // zIndex = 0
@@ -60,11 +60,16 @@ function openMyComputerFolder(data) {
 }
 
 //adds categories/folders t
-function getCategories(category, placeToAppend) {
+function getCategories(category, placeToAppend, namefontSize, namefontWeight, namefontColor) {
   console.log(category)
   let clnMenuFolder = categoryFolderTemplate.cloneNode(true);
   let categoryName = clnMenuFolder.querySelector(".category-name")
   categoryName.textContent = category.title.rendered.toLowerCase()
+  categoryName.style.fontSize = namefontSize;
+  categoryName.style.fontWeight = namefontWeight;
+  categoryName.style.color = namefontColor;
+
+
   let imagesInsideFolderIcon = clnMenuFolder.querySelector(".images-inside-folder-icon");
   let categoryFolder = clnMenuFolder.querySelector(".category-folder");
   // artCategories.appendChild(clnMenuFolder);
