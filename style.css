@@ -30,7 +30,7 @@
   width: 80px;
   height: 80px;
   border: 6px solid #f3f3f3;
-  border-top: 6px solid #f25a41;
+  border-top: 6px solid #369AD9;
   border-radius: 100%;
   will-change: transform;
   animation: spin 1s infinite linear
@@ -154,6 +154,7 @@ h1 {
   left: 50%;
   transform: translate(-50%, -50%);
   border: 0.2px solid grey;
+  box-shadow: 15px 15px 15px -6px #777;
 
 }
 
