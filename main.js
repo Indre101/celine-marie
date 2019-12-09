@@ -49,7 +49,7 @@ function appendMyComputerFolder(data) {
   console.log("nameOfTheFolder");
   data.forEach((category) => {
 
-    getCategories(category, artPieces, "1.3rem", "normal","black")
+    getCategories(category, artPieces, "1.3rem", "normal", "black")
   })
   closeButton.onclick = function () { //closes the folder
     // zIndex = 0
@@ -75,20 +75,26 @@ function getCategories(category, placeToAppend, namefontSize, namefontWeight, na
   // artCategories.appendChild(clnMenuFolder);
   placeToAppend.appendChild(clnMenuFolder);
 
-
   if (category.art_category_id.length > 0) { //If the category does NOT have subcategories
-
     addImgaesToFolderIcon(category, imagesInsideFolderIcon) //Add image to the folder icon
+  } 
+
+
+
+  openTheRightFolder(categoryFolder, categoryName.textContent) //When a folder is clicked it would remove display none property from the right element
+  // openTheRightFolder(this, this.textContent)
+
+}
+
+
+function showOpenFolder(params) {
+  if (category.art_category_id.length > 0) { //If the category does NOT have subcategories
     openFolder(category, category.art_category_id) //Calls a function to show the art list
   } else if (category.subcategory_id.length > 0) { //If the category HAS subcategories
     // openMyComputerFolder(category, category.art_category_id)
     openFolder(category, category.art_category_id) //Calls a function that will show open folder with subcategories as folders
 
   }
-  openTheRightFolder(categoryFolder, categoryName.textContent) //When a folder is clicked it would remove display none property from the right element
-  // openTheRightFolder(this, this.textContent)
-
-
 }
 
 
