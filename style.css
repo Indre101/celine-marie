@@ -254,6 +254,57 @@ h1 {
   align-items: center;
 }
 
+<<<<<<< HEAD
+
+/* art info pop-up window */
+
+.info-pop-up {
+  width: 25%;
+  background-color: #D4D0C8;
+  position: absolute;
+  margin-right: auto;
+  top: 40%;
+  left: 70%;
+  border: 1px solid black;
+  box-shadow: 15px 15px 15px -6px #777;
+  z-index: 100;
+}
+
+.info-pop-up-icons {
+  display: grid;
+  grid-template-columns: 95% 1fr;
+  height: 25%;
+  background-color: #000080;
+  color: white;
+  padding: 0.2em;
+}
+
+.info-pop-up-content {
+    padding: 0.5em;
+}
+
+.art-piece-info, .art-piece-year {
+    display: inline;
+}
+
+.info-pop-up-closeBtn {
+    width: 1em;
+    background-color: #D4D0C8;
+    padding: 0.2em;
+    margin-top: 0.2em;
+}
+
+.info-pop-up-ok {
+    background-color: #D4D0C8;
+    border: 1px solid black;
+    width: 20%;
+    box-shadow: 5px 5px 5px -3px #777;
+    display: block;
+    margin: 0 auto;
+    margin-top: 1em;
+}
+=======
 .this-pc {
   cursor: pointer;
 }
+>>>>>>> origin/master

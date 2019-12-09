@@ -75,7 +75,7 @@ function appendFolders(category, artArray) {
 }
 
 
-//Shows either an opened folder with subcategory folders or a folder with displayed art 
+//Shows either an opened folder with subcategory folders or a folder with displayed art
 //Category = art, illustrations or as well subcategories paintings, sculptures. Artarray = the array in the json, that categories have(art_category_id)
 function appendMyComputerFolder(data) {
   const clnOpenFolderContainer = openFolderContainerTemplate.cloneNode(true);
@@ -125,7 +125,7 @@ function getCategories(category, placeToAppend, namefontSize, namefontWeight, na
 }
 
 
-let zIndex = 0; //This will get increased once the folder icon is clicked 
+let zIndex = 0; //This will get increased once the folder icon is clicked
 
 // the parameters are The category/folder that is clicked and the Html markup for the folder when it is opened h2, which is not displayed but is in the mark up
 function openTheRightFolder(folderToClick, nameToCompare) {
