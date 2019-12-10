@@ -36,26 +36,24 @@
   </div>
 
 
-  <template class="open-folder-container-template">
-    <div class="open-folder-container d-none">
-      <h2 class="name-of-the-folder d-none"></h2>
-      <div class="open-folder-icons">
-        <img class="back-arrow" src="./icons/109618.svg" alt="">
-        <img class="back-arrow justify-self" src="./icons/minimize.svg" alt="">
-        <img class="back-arrow justify-self" src="./icons/maximize.svg" alt="">
-        <img class="back-arrow closeBTn justify-self" src="./icons/cancel.svg" alt="">
-      </div>
-      <article class="folder-path">
-        <img class="folder-path-icon" src="./icons/desktop-icons/file2.png" alt="">
-        <img class="folder-path-icon" src="./icons/next.svg" alt="">
-        <h3 class="this-pc "><span class="name">This PC</span></h3>
-        <div class="custom-path">
-        </div>
-      </article>
-      <!-- <div class="art-pieces">
-      </div> -->
+  <div class="open-folder-container">
+    <h2 class="name-of-the-folder d-none">Name</h2>
+    <div class="open-folder-icons">
+      <img class="back-arrow" src="./icons/109618.svg" alt="">
+      <img class="back-arrow justify-self" src="./icons/minimize.svg" alt="">
+      <img class="back-arrow justify-self" src="./icons/maximize.svg" alt="">
+      <img class="back-arrow closeBTn justify-self" src="./icons/cancel.svg" alt="">
     </div>
-  </template>
+    <article class="folder-path">
+      <img class="folder-path-icon" src="./icons/desktop-icons/file2.png" alt="">
+      <img class="folder-path-icon" src="./icons/next.svg" alt="">
+      <h3 class="this-pc "><span class="name">This PC</span></h3>
+      <div class="custom-path">
+      </div>
+    </article>
+    <div class="art-pieces-categories">
+    </div>
+  </div>
 
 
   <!-- pop up window template -->
@@ -79,7 +77,11 @@
         <img class="sub-category-icon" src="./icons/desktop-icons/file2.png" alt="">
         <h4 class="subCategoryName name">Name</h4>
       </div>
-      <div class="artSubcategory"></div>
+      <div class="artSubcategory">
+        <div class="artPieces">
+          <!-- <div class="artPieces"></div> -->
+        </div>
+      </div>
     </article>
   </template>
 
