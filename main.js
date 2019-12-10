@@ -11,11 +11,24 @@ const artPiecesCategories = document.querySelector(".art-pieces-categories");
 const spinner = document.getElementById("spinner"); //preloader temporary
 const body = document.querySelector("BODY");
 const openFolderContainer = document.querySelector(".open-folder-container")
+const folderPath = document.querySelector(".path-to-the-folder");
+// const customPath = folderPath.querySelector(".custom-path")
+
 window.addEventListener("DOMContentLoaded", init)
 
 document.querySelector(".closeBTn").onclick = function () {
   openFolderContainer.classList.add("d-none");
+  while (folderPath.firstChild) {
+    folderPath.removeChild(folderPath.firstChild);
+  }
 }
+
+// document.querySelector(".this-pc").onclick = function () {
+//   clickedFolder(document.querySelector(".this-pc"))
+//   artPiecesCategories.style.display="block";
+//   path(document.querySelector(".this-pc"))
+
+// }
 
 function init() {
   spinner.removeAttribute('hidden'); //preloader shows up
@@ -32,40 +45,49 @@ function init() {
     const subCategoryBtns = document.querySelectorAll(".subcategory-icon-and-name")
     subCategoryBtns.forEach(btn => {
       btn.onclick = function () {
-        clickedFolder(btn)
-        path()
+        clickedFolder(btn) //function that will display the correct folder and calls a function to change the path name
+        path() //function that one a path btn is clicked the path will be cleared out untill the clicked button it's called here cause only here you can access all the added btns
       }
     })
-
     document.querySelectorAll(".category-folder").forEach(btn => btn.onclick = function () {
+
+
+
+      while (folderPath.firstChild) {
+        folderPath.removeChild(folderPath.firstChild);
+      }
+      const clnpathTemplate = pathTemplate.cloneNode(true);
+      clnpathTemplate.querySelector(".path-name").textContent = "This PC"
+      folderPath.appendChild(clnpathTemplate)
       clickedFolder(btn)
+
       path()
-
     })
-
-
-
   })
 }
 
 function path() {
-  const pathNameBtns = document.querySelectorAll(".path-name")
-  pathNameBtns.forEach(w => {
-    w.onclick = function () {
-      console.log(w.querySelector(".name"));
-      clickedFolder(w)
+  const pathNameBtns = document.querySelectorAll(".pathNameAndIcon")
+  pathNameBtns.forEach(pathName => {
+    pathName.onclick = function () {
+      let siblingNode = pathName.nextSibling;
+      clickedFolder(pathName) ///function that will display the correct folder and calls a function to change the path name
+      while (siblingNode) {
+        siblingNode = pathName.nextSibling;
+        folderPath.removeChild(siblingNode);
+      }
     }
   })
 }
 
 function clickedFolder(folder) {
-  // console.log("object");
+  console.log("object");
   const artPiecePlaces = document.querySelectorAll(".artPieces")
   const subcategoryIconAndName = document.querySelectorAll(".subcategory-icon-and-name")
   subcategoryIconAndName.forEach(s => s.style.display = "none")
   openFolderContainer.classList.remove("d-none");
   const folderName = folder.querySelector(".name").textContent.toLowerCase().split(' ').join('');
-  customPath(folderName)
+  getCustomPath(folderName) //Changes the file path by addind the name of the clicked folder
   artPiecePlaces.forEach(artPlace => {
     if (artPlace.classList.contains(folderName)) {
       const parent = artPlace.parentElement
@@ -85,13 +107,10 @@ function clickedFolder(folder) {
 
 
 
-function customPath(folder) {
-  const folderPath = document.querySelector(".folder-path");
-  const customPath = folderPath.querySelector(".custom-path")
+function getCustomPath(folder) {
   const clnpathTemplate = pathTemplate.cloneNode(true);
-  clnpathTemplate.querySelector(".path-name").querySelector(".name").textContent = folder
-  customPath.appendChild(clnpathTemplate)
-  console.log(customPath);
+  clnpathTemplate.querySelector(".path-name").textContent = folder
+  folderPath.appendChild(clnpathTemplate)
 }
 
 

@@ -325,3 +325,13 @@ h1 {
 .this-pc {
   cursor: pointer;
 }
+
+.pathNameAndIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.path-to-the-folder {
+  display: flex;
+}

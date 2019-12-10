@@ -44,12 +44,12 @@
       <img class="back-arrow justify-self" src="./icons/maximize.svg" alt="">
       <img class="back-arrow closeBTn justify-self" src="./icons/cancel.svg" alt="">
     </div>
+
     <article class="folder-path">
-      <img class="folder-path-icon" src="./icons/desktop-icons/file2.png" alt="">
-      <img class="folder-path-icon" src="./icons/next.svg" alt="">
-      <h3 class="this-pc "><span class="name">This PC</span></h3>
       <div class="custom-path">
+        <img class="folder-path-icon" src="./icons/desktop-icons/file2.png" alt="">
       </div>
+      <div class="path-to-the-folder"></div>
     </article>
     <div class="art-pieces-categories">
     </div>
@@ -93,8 +93,10 @@
   </template>
 
   <template class="path-template">
-    <img class="folder-path-icon" src="./icons/next.svg" alt="">
-    <h3 class="path-name"><span class="name">This PC</span></h3>
+    <div class="pathNameAndIcon">
+      <img class="folder-path-icon" src="./icons/next.svg" alt="">
+      <h3 class="path-name name">This PC</h3>
+    </div>
   </template>
   <script src="main.js"></script>
 </body>
