@@ -67,10 +67,10 @@ function clickedFolder(folder) {
       const parent = artPlace.parentElement
       const parentParent = parent.parentElement
       const parentParentParent = parentParent.parentElement;
-      parentParent.style.display = "block"
-      parent.style.display = "block"
-      artPlace.style.display = "block"
-      parentParentParent.style.display = "block"
+      artPlace.style.display = "flex"
+      parent.style.display = "flex"
+      parentParent.style.display = "flex"
+      parentParentParent.style.display = "flex"
 
       artPlace.querySelectorAll(".subcategory-icon-and-name").forEach(subSth => subSth.style.display = "block");
     } else {

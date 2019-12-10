@@ -203,6 +203,15 @@ h1 {
   font-weight: normal;
 }
 
+.art-pieces-categories {
+  display: flex;
+  margin: 30px 30px;
+  /* grid-template-columns: repeat(auto-fill, minmax(220px, auto)); */
+  border: 0.3px solid grey;
+  height: 61vh;
+  grid-gap: 30px;
+  overflow-Y: scroll;
+}
 
 .art-piece-large-icon {
   height: 200px;
@@ -210,13 +219,13 @@ h1 {
 }
 
 .artPieces {
-  display: grid;
-  margin: 30px 30px;
-  grid-template-columns: repeat(auto-fill, minmax(220px, auto));
-  overflow: scroll;
-  border: 0.3px solid grey;
+  /* display: grid; */
+  /* margin: 30px 30px; */
+  /* grid-template-columns: repeat(auto-fill, minmax(220px, auto)); */
   height: 61vh;
   grid-gap: 30px;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .art-pieces h4 {
@@ -230,7 +239,11 @@ h1 {
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin: 15px 0;
+  margin: 20px;
+}
+
+.art-piece-name {
+  margin: 20px 0;
 }
 
 .d-none {
@@ -246,6 +259,10 @@ h1 {
   height: 130px;
   width: 120px;
   object-fit: contain;
+}
+
+.subcategory-icon-and-name {
+  margin: 20px;
 }
 
 .subcategory {
