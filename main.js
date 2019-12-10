@@ -29,41 +29,45 @@ function init() {
     })
 
   }).then(() => {
-
-
-
-
-    //  document.querySelectorAll(".artSubcategory").forEach(c=>console.log(c))
     const subCategoryBtns = document.querySelectorAll(".subcategory-icon-and-name")
-
     subCategoryBtns.forEach(btn => {
-      console.log(btn);
       btn.onclick = function () {
         clickedFolder(btn)
+        path()
       }
     })
 
-
-
     document.querySelectorAll(".category-folder").forEach(btn => btn.onclick = function () {
       clickedFolder(btn)
+      path()
+
     })
+
+
 
   })
 }
 
+function path() {
+  const pathNameBtns = document.querySelectorAll(".path-name")
+  pathNameBtns.forEach(w => {
+    w.onclick = function () {
+      console.log(w.querySelector(".name"));
+      clickedFolder(w)
+    }
+  })
+}
+
 function clickedFolder(folder) {
-  console.log(folder);
+  // console.log("object");
   const artPiecePlaces = document.querySelectorAll(".artPieces")
   const subcategoryIconAndName = document.querySelectorAll(".subcategory-icon-and-name")
   subcategoryIconAndName.forEach(s => s.style.display = "none")
-
   openFolderContainer.classList.remove("d-none");
   const folderName = folder.querySelector(".name").textContent.toLowerCase().split(' ').join('');
+  customPath(folderName)
   artPiecePlaces.forEach(artPlace => {
     if (artPlace.classList.contains(folderName)) {
-      console.log(artPlace);
-
       const parent = artPlace.parentElement
       const parentParent = parent.parentElement
       const parentParentParent = parentParent.parentElement;
@@ -71,18 +75,24 @@ function clickedFolder(folder) {
       parent.style.display = "flex"
       parentParent.style.display = "flex"
       parentParentParent.style.display = "flex"
-
       artPlace.querySelectorAll(".subcategory-icon-and-name").forEach(subSth => subSth.style.display = "block");
     } else {
       artPlace.style.display = "none";
-
     }
   })
-
-
-
 }
 
+
+
+
+function customPath(folder) {
+  const folderPath = document.querySelector(".folder-path");
+  const customPath = folderPath.querySelector(".custom-path")
+  const clnpathTemplate = pathTemplate.cloneNode(true);
+  clnpathTemplate.querySelector(".path-name").querySelector(".name").textContent = folder
+  customPath.appendChild(clnpathTemplate)
+  console.log(customPath);
+}
 
 
 
@@ -95,10 +105,8 @@ function getCategories(category, placeToAppend) {
   if (category.art_category_id.length > 0) { //If the category does NOT have subcategories
     addImgaesToFolderIcon(category, imagesInsideFolderIcon) //Add image to the folder icon
   }
-
   categoryFolder.onclick = function () {
     openFolderContainer.classList.remove("d-none");
-
   }
   placeToAppend.appendChild(clnMenuFolder);
 }
@@ -113,8 +121,6 @@ function addImgaesToFolderIcon(imageURL, containerToAppendTo) {
     containerToAppendTo.appendChild(imageOfArt);
   }
 }
-
-
 
 
 function createSubcategories(category, placeToAppend) {
@@ -169,17 +175,6 @@ function showArtPieceList(piece, placeToAppendTo) {
   artPieceCln.querySelector(".art-piece-large-icon").src = piece.featured_image.guid
   placeToAppendTo.appendChild(artPieceCln) // Place to append is element with art-pieces class in the open-folder-container template;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 const getThename = (category) => {
