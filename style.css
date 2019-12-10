@@ -203,20 +203,29 @@ h1 {
   font-weight: normal;
 }
 
+.art-pieces-categories {
+  display: flex;
+  margin: 30px 30px;
+  /* grid-template-columns: repeat(auto-fill, minmax(220px, auto)); */
+  border: 0.3px solid grey;
+  height: 61vh;
+  grid-gap: 30px;
+  overflow-Y: scroll;
+}
 
 .art-piece-large-icon {
   height: 200px;
   object-fit: contain;
 }
 
-.art-pieces {
-  display: grid;
-  margin: 30px 30px;
-  grid-template-columns: repeat(auto-fill, minmax(220px, auto));
-  overflow: scroll;
-  border: 0.3px solid grey;
-  height: 76%;
+.artPieces {
+  /* display: grid; */
+  /* margin: 30px 30px; */
+  /* grid-template-columns: repeat(auto-fill, minmax(220px, auto)); */
+  height: 61vh;
   grid-gap: 30px;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .art-pieces h4 {
@@ -230,7 +239,11 @@ h1 {
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin: 15px 0;
+  margin: 20px;
+}
+
+.art-piece-name {
+  margin: 20px 0;
 }
 
 .d-none {
@@ -248,13 +261,17 @@ h1 {
   object-fit: contain;
 }
 
+.subcategory-icon-and-name {
+  margin: 20px;
+}
+
 .subcategory {
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   align-items: center;
 }
 
-
+.d-flex {}
 
 /* art info pop-up window */
 
@@ -280,30 +297,41 @@ h1 {
 }
 
 .info-pop-up-content {
-    padding: 0.5em;
+  padding: 0.5em;
 }
 
-.art-piece-info, .art-piece-year {
-    display: inline;
+.art-piece-info,
+.art-piece-year {
+  display: inline;
 }
 
 .info-pop-up-closeBtn {
-    width: 1em;
-    background-color: #D4D0C8;
-    padding: 0.2em;
-    margin-top: 0.2em;
+  width: 1em;
+  background-color: #D4D0C8;
+  padding: 0.2em;
+  margin-top: 0.2em;
 }
 
 .info-pop-up-ok {
-    background-color: #D4D0C8;
-    border: 1px solid black;
-    width: 20%;
-    box-shadow: 5px 5px 5px -3px #777;
-    display: block;
-    margin: 0 auto;
-    margin-top: 1em;
+  background-color: #D4D0C8;
+  border: 1px solid black;
+  width: 20%;
+  box-shadow: 5px 5px 5px -3px #777;
+  display: block;
+  margin: 0 auto;
+  margin-top: 1em;
 }
 
 .this-pc {
   cursor: pointer;
+}
+
+.pathNameAndIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.path-to-the-folder {
+  display: flex;
 }

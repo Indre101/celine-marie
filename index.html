@@ -30,67 +30,73 @@
           <div class="images-inside-folder-icon "></div>
           <img class="folder-img folder-front" src="./icons/desktop-icons/folder-front.png" alt="">
         </div>
-        <h2 class="category-name">Paintings</h2>
+        <h2 class="category-name name">Paintings</h2>
       </div>
     </template>
   </div>
 
 
-  <template class="open-folder-container-template">
-    <div class="open-folder-container d-none">
-      <h2 class="name-of-the-folder d-none"></h2>
-      <div class="open-folder-icons">
-        <img class="back-arrow" src="./icons/109618.svg" alt="">
-        <img class="back-arrow justify-self" src="./icons/minimize.svg" alt="">
-        <img class="back-arrow justify-self" src="./icons/maximize.svg" alt="">
-        <img class="back-arrow closeBTn justify-self" src="./icons/cancel.svg" alt="">
-      </div>
-      <article class="folder-path">
-        <img class="folder-path-icon" src="./icons/desktop-icons/file2.png" alt="">
-        <img class="folder-path-icon" src="./icons/next.svg" alt="">
-        <h3 class="this-pc">This PC</h3>
-        <div class="custom-path">
-
-        </div>
-      </article>
-      <div class="art-pieces">
-      </div>
+  <div class="open-folder-container d-none">
+    <h2 class="name-of-the-folder d-none">Name</h2>
+    <div class="open-folder-icons">
+      <img class="back-arrow" src="./icons/109618.svg" alt="">
+      <img class="back-arrow justify-self" src="./icons/minimize.svg" alt="">
+      <img class="back-arrow justify-self" src="./icons/maximize.svg" alt="">
+      <img class="back-arrow closeBTn justify-self" src="./icons/cancel.svg" alt="">
     </div>
-  </template>
+
+    <article class="folder-path">
+      <div class="custom-path">
+        <img class="folder-path-icon" src="./icons/desktop-icons/file2.png" alt="">
+      </div>
+      <div class="path-to-the-folder"></div>
+    </article>
+    <div class="art-pieces-categories">
+    </div>
+  </div>
 
 
-    <!-- pop up window template -->
-    <!-- <template class="info-pop-up-template"> -->
-        <div class="info-pop-up">
-            <div class="info-pop-up-icons">
-            <p class="info-pop-up-title">Windows Information</p>
-                <img class="info-pop-up-closeBtn" src="./icons/cancel.svg" alt="">
-            </div>
-            <div class="info-pop-up-content">
-    <h4 class="art-piece-name">Name</h4>
-    <h4 class="art-piece-info">Info</h4>,<h4 class="art-piece-year">Year</h4>
-            <button class="info-pop-up-ok">OK</button>
-            </div>
-             </div>
-    <!-- </template> -->
+  <!-- pop up window template -->
+  <!-- <template class="info-pop-up-template"> -->
+  <div class="info-pop-up">
+    <div class="info-pop-up-icons">
+      <p class="info-pop-up-title">Windows Information</p>
+      <img class="info-pop-up-closeBtn" src="./icons/cancel.svg" alt="">
+    </div>
+    <div class="info-pop-up-content">
+      <h4 class="art-piece-name">Name</h4>
+      <h4 class="art-piece-info">Info</h4>,<h4 class="art-piece-year">Year</h4>
+      <button class="info-pop-up-ok">OK</button>
+    </div>
+  </div>
+  <!-- </template> -->
 
   <template class="sub-category-template">
     <article class="subcategory">
-      <img class="sub-category-icon" src="./icons/desktop-icons/file2.png" alt="">
-      <h4 class="subCategoryName">Name</h4>
+      <div class="subcategory-icon-and-name">
+        <img class="sub-category-icon" src="./icons/desktop-icons/file2.png" alt="">
+        <h4 class="subCategoryName name">Name</h4>
+      </div>
+      <div class="artSubcategory">
+        <div class="artPieces">
+          <!-- <div class="artPieces"></div> -->
+        </div>
+      </div>
     </article>
   </template>
 
   <template class="art-piece-template">
-    <div class="art-piece">
+    <div class="art-piece ">
       <img class="art-piece-large-icon" src="./images/water.png" alt="">
       <h4 class="art-piece-name">Name</h4>
     </div>
   </template>
 
   <template class="path-template">
-    <img class="folder-path-icon" src="./icons/next.svg" alt="">
-    <h3 class="path-name">This PC</h3>
+    <div class="pathNameAndIcon">
+      <img class="folder-path-icon" src="./icons/next.svg" alt="">
+      <h3 class="path-name name">This PC</h3>
+    </div>
   </template>
   <script src="main.js"></script>
 </body>
