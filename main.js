@@ -10,10 +10,14 @@ const subCategoryTemplate = document.querySelector(".sub-category-template").con
 const artPiecesCategories = document.querySelector(".art-pieces-categories");
 const spinner = document.getElementById("spinner"); //preloader temporary
 const body = document.querySelector("BODY");
+const openFolderContainer = document.querySelector(".open-folder-container")
 window.addEventListener("DOMContentLoaded", init)
 
-function init() {
+document.querySelector(".closeBTn").onclick = function () {
+  openFolderContainer.classList.add("d-none");
+}
 
+function init() {
   spinner.removeAttribute('hidden'); //preloader shows up
   fetch("http://indre101.lashboutique.dk/wordpress/wp-json/wp/v2/art_categories?_embed").then(res => {
     return res.json()
@@ -24,20 +28,77 @@ function init() {
       createSubcategories(category, artPiecesCategories)
     })
 
+  }).then(() => {
+
+
+
+
+    //  document.querySelectorAll(".artSubcategory").forEach(c=>console.log(c))
+    const subCategoryBtns = document.querySelectorAll(".subcategory-icon-and-name")
+
+    subCategoryBtns.forEach(btn => {
+      console.log(btn);
+      btn.onclick = function () {
+        clickedFolder(btn)
+      }
+    })
+
+
+
+    document.querySelectorAll(".category-folder").forEach(btn => btn.onclick = function () {
+      clickedFolder(btn)
+    })
+
   })
 }
+
+function clickedFolder(folder) {
+  console.log(folder);
+  const artPiecePlaces = document.querySelectorAll(".artPieces")
+  const subcategoryIconAndName = document.querySelectorAll(".subcategory-icon-and-name")
+  subcategoryIconAndName.forEach(s => s.style.display = "none")
+
+  openFolderContainer.classList.remove("d-none");
+  const folderName = folder.querySelector(".name").textContent.toLowerCase().split(' ').join('');
+  artPiecePlaces.forEach(artPlace => {
+    if (artPlace.classList.contains(folderName)) {
+      console.log(artPlace);
+
+      const parent = artPlace.parentElement
+      const parentParent = parent.parentElement
+      const parentParentParent = parentParent.parentElement;
+      parentParent.style.display = "block"
+      parent.style.display = "block"
+      artPlace.style.display = "block"
+      parentParentParent.style.display = "block"
+
+      artPlace.querySelectorAll(".subcategory-icon-and-name").forEach(subSth => subSth.style.display = "block");
+    } else {
+      artPlace.style.display = "none";
+
+    }
+  })
+
+
+
+}
+
+
+
 
 function getCategories(category, placeToAppend) {
   let clnMenuFolder = categoryFolderTemplate.cloneNode(true);
   let categoryName = clnMenuFolder.querySelector(".category-name")
   categoryName.textContent = category.title.rendered.toLowerCase()
-  // categoryName.style.fontSize = namefontSize;
-  // categoryName.style.fontWeight = namefontWeight;
-  // categoryName.style.color = namefontColor;
   let imagesInsideFolderIcon = clnMenuFolder.querySelector(".images-inside-folder-icon");
   let categoryFolder = clnMenuFolder.querySelector(".category-folder");
   if (category.art_category_id.length > 0) { //If the category does NOT have subcategories
     addImgaesToFolderIcon(category, imagesInsideFolderIcon) //Add image to the folder icon
+  }
+
+  categoryFolder.onclick = function () {
+    openFolderContainer.classList.remove("d-none");
+
   }
   placeToAppend.appendChild(clnMenuFolder);
 }
@@ -65,19 +126,17 @@ function createSubcategories(category, placeToAppend) {
   const artPiecesLists = artSubcategory.querySelector(".artPieces")
   artPiecesLists.classList.add(getThename(category))
 
-
-
   if (category.subcategory_id) {
     category.subcategory_id.forEach(sub => {
-      const clnsubCategoryTemplateInner = subCategoryTemplate.cloneNode(true);
-      clnsubCategoryTemplateInner.querySelector(".subCategoryName").textContent = getThename(sub);
-      clnsubCategoryTemplateInner.querySelector(".subcategory").classList.add(getThename(sub));
-      const artSubcategoryInner = clnsubCategoryTemplateInner.querySelector(".artSubcategory")
-      artSubcategoryInner.classList.add(getThename(category))
+      const clnsubCategoryTemplate = subCategoryTemplate.cloneNode(true);
+      clnsubCategoryTemplate.querySelector(".subCategoryName").textContent = getThename(sub);
+      clnsubCategoryTemplate.querySelector(".subcategory").classList.add(getThename(sub));
+      const artSubcategoryInner = clnsubCategoryTemplate.querySelector(".artSubcategory")
+      artSubcategoryInner.classList.add(getThename(sub))
       const artPiecesListsInner = artSubcategoryInner.querySelector(".artPieces")
-      artPiecesListsInner.classList.add(getThename(category))
+      artPiecesListsInner.classList.add(getThename(sub))
       getTheArtPieces(sub, artPiecesListsInner)
-      artPiecesLists.appendChild(clnsubCategoryTemplateInner)
+      artPiecesLists.appendChild(clnsubCategoryTemplate)
     })
   } else if (category.art_category_id) {
     getTheArtPieces(category, artPiecesLists)
@@ -86,15 +145,15 @@ function createSubcategories(category, placeToAppend) {
   placeToAppend.appendChild(clnsubCategoryTemplate);
 }
 
+
+
 function getTheArtPieces(category, placeToAppendTo) {
   if (category.art_category_id) {
-
     category.art_category_id.forEach(artPiece => {
       showArtPieceList(artPiece, placeToAppendTo)
 
     })
   } else if (category.art_piece_id) {
-
     const convertedArtArray = Object.keys(category.art_piece_id).map(i => category.art_piece_id[i])
     convertedArtArray.forEach(artPiece => {
       showArtPieceList(artPiece, placeToAppendTo)
