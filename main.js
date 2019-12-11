@@ -15,6 +15,8 @@ const folderPath = document.querySelector(".path-to-the-folder");
 const backArrow = document.querySelector(".back-arrow");
 const thisPCBtn = document.querySelector(".thispc")
 const infoPopUp = document.querySelector(".info-pop-up");
+const photoContainer = document.querySelector(".photo-container")
+
 
 window.addEventListener("DOMContentLoaded", init)
 
@@ -226,7 +228,23 @@ function getTheArtPieces(category, placeToAppendTo) {
   }
 }
 
-
+/* <div class="photo-container d-none">
+<article class="photoHeader"><h4>Name</h4></article>
+<div class="photo-bg">
+  <img class="photo" src="./images/water.png" alt="photo of art piece" />
+</div>
+<div class="arrows-container">
+  <div>
+    <img class="iconPhoto arrow" src="./icons/109618.svg" alt="" />
+  </div>
+  <div>
+    <img class="iconPhoto enlarge" src="./icons/maximize.svg" alt="" />
+  </div>
+  <div>
+    <img class="iconPhoto arrow" src="./icons/109618.svg" alt="" />
+  </div>
+</div>
+</div> */
 
 function showArtPieceList(piece, placeToAppendTo) {
   let artPieceCln = artPieceTemplate.cloneNode(true);
@@ -234,11 +252,13 @@ function showArtPieceList(piece, placeToAppendTo) {
   artPieceCln.querySelector(".art-piece-large-icon").src = piece.featured_image.guid
 
   artPieceCln.querySelector(".art-piece").onclick = function () {
-
     infoPopUp.querySelector(".art-piece-name").textContent = piece.post_title.toLowerCase();
     infoPopUp.querySelector(".art-piece-info").textContent = piece.post_excerpt;
     infoPopUp.querySelector(".art-piece-year").textContent = piece.year;
     infoPopUp.classList.remove("d-none");
+    photoContainer.classList.remove("d-none");
+    photoContainer.querySelector(".photo").src = piece.featured_image.guid;
+    photoContainer.querySelector(".photoHeader h4").textContent = piece.post_title.toLowerCase();
   }
 
   placeToAppendTo.appendChild(artPieceCln) // Place to append is element with art-pieces class in the open-folder-container template;
