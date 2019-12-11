@@ -22,19 +22,14 @@ document.querySelector(".closeBTn").onclick = function () {
   }
 }
 
-// document.querySelector(".this-pc").onclick = function () {
-//   clickedFolder(document.querySelector(".this-pc"))
-//   artPiecesCategories.style.display="block";
-//   path(document.querySelector(".this-pc"))
-
-// }
-
 function init() {
   spinner.removeAttribute('hidden'); //preloader shows up
   fetch("http://indre101.lashboutique.dk/wordpress/wp-json/wp/v2/art_categories?_embed").then(res => {
     return res.json()
   }).then(data => {
     spinner.setAttribute('hidden', '')
+    cloneIconsFromDesktop();
+
     data.forEach(category => {
       getCategories(category, artCategories);
       createSubcategories(category, artPiecesCategories)
@@ -68,6 +63,15 @@ function init() {
   })
 }
 
+
+function cloneIconsFromDesktop() {
+  const clnContact = document.querySelector(".contact-page").cloneNode(true);
+  clnContact.classList.add("subcategory-file")
+  clnContact.addEventListener("click", openContact);
+  artPiecesCategories.appendChild(clnContact);
+
+}
+
 function path() {
   const pathNameBtns = document.querySelectorAll(".pathNameAndIcon")
   pathNameBtns.forEach(pathName => {
@@ -89,37 +93,34 @@ function clickedFolder(folder) {
   // const subcategoryIconAndName = document.querySelectorAll(".subcategory-icon-and-name")
   openFolderContainer.classList.remove("d-none");
   const folderName = folder.querySelector(".name").textContent.toLowerCase().split(' ').join('');
-  getCustomPath(folderName) //Changes the file path by addind the name of the clicked folder
 
+  // if (!folder.querySelector(".name").textContent.toLowerCase().split(' ').join('')) {
+  //   console.log("nothing");
+  // } else{
+
+  // }
+  getCustomPath(folderName) //Changes the file path by addind the name of the clicked folder
   artPiecePlaces.forEach(artPlace => {
     if (artPlace.classList.contains(folderName)) {
-
       artPlace.querySelectorAll(".subcategory-icon-and-name").forEach(p => p.style.display = "flex")
       if (artPlace.classList.contains("art-pieces-categories")) {
         artPlace.style.display = "block";
-
+        artPlace.querySelectorAll(".subcategory-file").forEach(b => b.style.display = "flex");
       } else {
 
         artPlace.style.display = "flex";
         artPiecesCategories.style.display = "block";
         while ((artPlace = artPlace.parentElement) && !artPlace.classList.contains("art-pieces-categories"))
           artPlace.style.display = "flex";
-
       }
-
     } else {
       artPlace.style.display = "none";
       artPlace.querySelectorAll(".subcategory-icon-and-name").forEach(p => p.style.display = "none")
-
+      artPlace.querySelectorAll(".subcategory-file").forEach(b => b.style.display = "none");
 
     }
   })
 }
-
-
-
-
-
 
 function getCustomPath(folder) {
   const clnpathTemplate = pathTemplate.cloneNode(true);
@@ -127,7 +128,6 @@ function getCustomPath(folder) {
   folderPath.appendChild(clnpathTemplate)
 
 }
-
 
 
 function getCategories(category, placeToAppend) {
