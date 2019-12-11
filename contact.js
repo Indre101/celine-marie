@@ -52,5 +52,5 @@ maximizeNotepad.onclick = function () {
     changeWindowheightAndWith(contactPage, 100, 100)
 }
 minimizeNotepad.onclick = function () {
-    changeWindowheightAndWith(contactPage, 100, 100)
+    resetheightandWidth(contactPage)
 }

@@ -36,7 +36,7 @@ function init() {
     return res.json()
   }).then(data => {
     spinner.setAttribute('hidden', '')
-    cloneIconsFromDesktop();
+    cloneNotepad(); //Function that will copy notepadIcon and assign functionality for contact
 
     data.forEach(category => {
       getCategories(category, artCategories);
@@ -93,12 +93,11 @@ function init() {
 }
 
 
-function cloneIconsFromDesktop() {
+function cloneNotepad() {
   const clnContact = document.querySelector(".contact-page").cloneNode(true);
   clnContact.classList.add("subcategory-file")
   clnContact.addEventListener("click", openContact);
   artPiecesCategories.appendChild(clnContact);
-
 }
 
 function path() {
