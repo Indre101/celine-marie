@@ -103,7 +103,6 @@ h1 {
 
 .category-folder-structure {
   width: fit-content;
-  margin-left: -30px;
   display: flex;
   justify-content: center;
 
@@ -234,7 +233,7 @@ h1 {
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin: 20px auto;
+  margin: 20px;
 }
 
 .art-piece-name {
@@ -388,5 +387,6 @@ h1 {
 .uniClass {
   flex-wrap: wrap;
   flex-direction: row;
+  justify-content: center;
   margin: 0 30px;
 }
