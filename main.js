@@ -70,17 +70,25 @@ function init() {
     const lastChildOfFolderPath = folderPath.querySelector(".pathNameAndIcon:last-child") //selects the last pathName
     folderPath.removeChild(lastChildOfFolderPath); //removes the last folder name
 
-
     artPieces.forEach(child => {
-      const elementDisplay = child.style.display
-      if (elementDisplay == "none") {
+      const childDisplayValue = child.style.display
+
+      if (childDisplayValue == "none") {
         // console.log(child);
-      } else if (elementDisplay != "none" && !child.classList.contains("art-pieces-categories")) {
-        const parentelement = child.parentElement
+      } else if (childDisplayValue != "none" && !child.classList.contains("art-pieces-categories")) {
         // parent.querySelectorAll(".artPieces").forEach(p => p.style.display = "flex")
-        parent.querySelectorAll(".subcategory-icon-and-name").forEach(p => p.style.display = "flex")
-        parentelement.style.display = "flex";
+        // parent.querySelectorAll(".subcategory-icon-and-name").forEach(p => p.style.display = "flex")
+        const parentelement = child.parentElement
         child.style.display = "none";
+        parentelement.style.display = "none";
+
+        const parentOfParent = parentelement.parentElement
+        const parentOfParentChildre = parentelement.children
+        let arr = Array.prototype.slice.call(parentOfParentChildre);
+        console.log(arr);
+        arr.forEach(d => d.style.display = "block")
+
+        // childrens.style.display = "none";
       }
     })
   }
@@ -125,21 +133,21 @@ function clickedFolder(folder) {
   // }
   getCustomPath(folderName) //Changes the file path by addind the name of the clicked folder
   artPiecePlaces.forEach(artPlace => {
-    if (artPlace.classList.contains(folderName)) {
-      artPlace.querySelectorAll(".subcategory-icon-and-name").forEach(p => p.style.display = "flex")
-      if (artPlace.classList.contains("art-pieces-categories")) {
-        artPlace.style.display = "block";
-        artPlace.querySelectorAll(".subcategory-file").forEach(b => b.style.display = "flex");
-      } else {
+    if (artPlace.classList.contains(folderName)) { //First checks for the arPlace if it has the class name as the clicked button name
+      artPlace.querySelectorAll(".subcategory-icon-and-name").forEach(p => p.style.display = "flex") //returns display to all the subcategory folders
 
-        artPlace.style.display = "flex";
-        artPiecesCategories.style.display = "block";
-        while ((artPlace = artPlace.parentElement) && !artPlace.classList.contains("art-pieces-categories"))
-          artPlace.style.display = "flex";
+      if (artPlace.classList.contains("art-pieces-categories")) { //If the art place has the main class/Checks basically if it's the top hierarchy level
+        artPlace.style.display = "block"; //display the container
+        artPlace.querySelectorAll(".subcategory-file").forEach(sub => b.style.display = "flex"); //Display all the files(notepad, video)
+      } else { //If it is not the top hierarchy folder
+        artPlace.style.display = "flex"; //Change display property to flex from none
+        artPiecesCategories.style.display = "block"; //Make sure that the top folder is displayed
+        while ((artPlace = artPlace.parentElement) && !artPlace.classList.contains("art-pieces-categories")) //While it is not the top layer
+          artPlace.style.display = "flex"; //Make sure that every top layer is being displayed, otherwise if any of artPlace parent element has display none property the elements won't be displayed
       }
-    } else {
-      artPlace.style.display = "none";
-      artPlace.querySelectorAll(".subcategory-icon-and-name").forEach(p => p.style.display = "none")
+    } else { //if the artPlace does not have the class as the clicked button name 
+      artPlace.style.display = "none"; // do not display it
+      artPlace.querySelectorAll(".subcategory-icon-and-name").forEach(p => p.style.display = "none") //and do not display anything inside the container
       artPlace.querySelectorAll(".subcategory-file").forEach(b => b.style.display = "none");
 
     }
