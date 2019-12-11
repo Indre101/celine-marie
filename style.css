@@ -273,6 +273,8 @@ h1 {
   width: fit-content;
 }
 
+<<<<<<< HEAD
+=======
 .subcategory {
   /* display: flex; */
   /* flex-direction: column;
@@ -281,6 +283,7 @@ h1 {
 }
 
 .d-flex {}
+>>>>>>> origin/master
 
 /* art info pop-up window */
 
@@ -322,6 +325,15 @@ h1 {
 }
 
 .info-pop-up-ok {
+<<<<<<< HEAD
+    background-color: #D4D0C8;
+    border: 1px solid black;
+    width: 20%;
+    box-shadow: 5px 5px 5px -3px #777;
+    display: block;
+    margin: 0 auto;
+    margin-top: 1em;
+=======
   background-color: #D4D0C8;
   border: 1px solid black;
   width: 20%;
@@ -329,12 +341,15 @@ h1 {
   display: block;
   margin: 0 auto;
   margin-top: 1em;
+>>>>>>> origin/master
 }
 
 .this-pc {
   cursor: pointer;
 }
 
+<<<<<<< HEAD
+=======
 .pathNameAndIcon {
   display: flex;
   justify-content: center;
@@ -354,3 +369,4 @@ h1 {
   flex-direction: row;
   margin: 0 30px;
 }
+>>>>>>> origin/master
