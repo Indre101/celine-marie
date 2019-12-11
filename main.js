@@ -74,7 +74,6 @@ function init() {
   })
 
   backArrow.onclick = function () {
-    // console.log(document.querySelectorAll(".artPieces"));
     const parent = document.querySelector(".art-pieces-categories");
     const artPieces = document.querySelectorAll(".artPieces");
     const lastChildOfFolderPath = folderPath.querySelector(".pathNameAndIcon:last-child") //selects the last pathName
@@ -232,7 +231,6 @@ function getTheArtPieces(category, placeToAppendTo) {
 
 function showArtPieceList(piece, placeToAppendTo) {
   let artPieceCln = artPieceTemplate.cloneNode(true);
-  console.log(piece);
   artPieceCln.querySelector(".art-piece-name").textContent = piece.post_title.toLowerCase()
   artPieceCln.querySelector(".art-piece-large-icon").src = piece.featured_image.guid
 
