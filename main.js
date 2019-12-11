@@ -82,8 +82,6 @@ function init() {
     } else {
       folder = allFolderPathWords[allFolderPathWords.length - 2];
     }
-
-    console.log(allFolderPathWords.length);
     clickedFolder(folder);
   }
 
@@ -117,7 +115,6 @@ function path() {
 
 
 function clickedFolder(folder, canBeAddedTothePath) {
-  console.log(folder);
   const artPiecePlaces = document.querySelectorAll(".artPieces")
   openFolderContainer.classList.remove("d-none");
   const folderName = folder.querySelector(".name").textContent.toLowerCase().split(' ').join('');
