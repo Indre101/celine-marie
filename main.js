@@ -74,8 +74,6 @@ function init() {
     const lastChildOfFolderPath = folderPath.querySelector(".pathNameAndIcon:last-child") //selects the last pathName
 
     const allFolderPathWords = folderPath.querySelectorAll(".pathNameAndIcon") //selects the last pathName
-    console.log(allFolderPathWords.length);
-    console.log(allFolderPathWords);
     folderPath.removeChild(lastChildOfFolderPath); //removes the last folder name
 
     let folder;
@@ -84,8 +82,6 @@ function init() {
     } else {
       folder = allFolderPathWords[allFolderPathWords.length - 2];
     }
-
-    console.log(allFolderPathWords.length);
     clickedFolder(folder);
   }
 
