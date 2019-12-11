@@ -25,10 +25,10 @@
     <template class="category-folder-template">
       <div class="category-folder">
         <div class="category-folder-structure">
-          <img class="folder-img folder-back" src="./icons/desktop-icons/folder-back.png" alt="">
+          <!-- <img class="folder-img folder-back" src="./icons/desktop-icons/folder-back.png" alt=""> -->
           <!-- <img class="image-sample" src="./images/water.png" alt=""> -->
-          <div class="images-inside-folder-icon "></div>
-          <img class="folder-img folder-front" src="./icons/desktop-icons/folder-front.png" alt="">
+          <!-- <div class="images-inside-folder-icon "></div> -->
+          <img class="folder-img folder-front" src="./icons/desktop-icons/file2.png" alt="">
         </div>
         <h2 class="category-name name">Paintings</h2>
       </div>
@@ -48,17 +48,19 @@
     <div class="folder-path">
       <div class="custom-path">
         <img class="folder-path-icon" src="./icons/desktop-icons/file2.png" alt="">
+        <img class="folder-path-icon" src="./icons/next.svg" alt="">
+        <h3 class="path-name thispc"><span class="name">This PC</span></h3>
       </div>
       <div class="path-to-the-folder"></div>
     </div>
-    <div class="art-pieces-categories">
+    <div class="art-pieces-categories artPieces thispc uniClass">
     </div>
   </div>
 
 
   <!-- pop up window template -->
   <!-- <template class="info-pop-up-template"> -->
-  <div class="info-pop-up">
+  <!-- <div class="info-pop-up">
     <div class="info-pop-up-icons">
       <p class="info-pop-up-title">Windows Information</p>
       <img class="info-pop-up-closeBtn" src="./icons/cancel.svg" alt="">
@@ -68,7 +70,7 @@
       <h4 class="art-piece-info">Info</h4>,<h4 class="art-piece-year">Year</h4>
       <button class="info-pop-up-ok">OK</button>
     </div>
-  </div>
+  </div> -->
   <!-- </template> -->
 
   <template class="sub-category-template">
@@ -77,8 +79,9 @@
         <img class="sub-category-icon" src="./icons/desktop-icons/file2.png" alt="">
         <h4 class="subCategoryName name">Name</h4>
       </div>
-      <div class="artSubcategory">
-        <div class="artPieces">
+
+      <div class="artSubcategory uniClass">
+        <div class="artPieces uniClass">
           <!-- <div class="artPieces"></div> -->
         </div>
       </div>
@@ -97,6 +100,7 @@
       <img class="folder-path-icon" src="./icons/next.svg" alt="">
       <h3 class="path-name name">This PC</h3>
     </div>
+
   </template>
   <script src="main.js"></script>
 </body>

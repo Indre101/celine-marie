@@ -12,7 +12,6 @@ const spinner = document.getElementById("spinner"); //preloader temporary
 const body = document.querySelector("BODY");
 const openFolderContainer = document.querySelector(".open-folder-container")
 const folderPath = document.querySelector(".path-to-the-folder");
-// const customPath = folderPath.querySelector(".custom-path")
 
 window.addEventListener("DOMContentLoaded", init)
 
@@ -49,20 +48,23 @@ function init() {
         path() //function that one a path btn is clicked the path will be cleared out untill the clicked button it's called here cause only here you can access all the added btns
       }
     })
+
+
     document.querySelectorAll(".category-folder").forEach(btn => btn.onclick = function () {
-
-
-
       while (folderPath.firstChild) {
         folderPath.removeChild(folderPath.firstChild);
       }
-      const clnpathTemplate = pathTemplate.cloneNode(true);
-      clnpathTemplate.querySelector(".path-name").textContent = "This PC"
-      folderPath.appendChild(clnpathTemplate)
       clickedFolder(btn)
-
       path()
     })
+
+    const thisPCBtn = document.querySelector(".thispc")
+    thisPCBtn.onclick = function () {
+      clickedFolder(thisPCBtn)
+      while (folderPath.firstChild) {
+        folderPath.removeChild(folderPath.firstChild);
+      }
+    }
   })
 }
 
@@ -80,26 +82,36 @@ function path() {
   })
 }
 
+
+
 function clickedFolder(folder) {
-  console.log("object");
   const artPiecePlaces = document.querySelectorAll(".artPieces")
-  const subcategoryIconAndName = document.querySelectorAll(".subcategory-icon-and-name")
-  subcategoryIconAndName.forEach(s => s.style.display = "none")
+  // const subcategoryIconAndName = document.querySelectorAll(".subcategory-icon-and-name")
   openFolderContainer.classList.remove("d-none");
   const folderName = folder.querySelector(".name").textContent.toLowerCase().split(' ').join('');
   getCustomPath(folderName) //Changes the file path by addind the name of the clicked folder
+
   artPiecePlaces.forEach(artPlace => {
     if (artPlace.classList.contains(folderName)) {
-      const parent = artPlace.parentElement
-      const parentParent = parent.parentElement
-      const parentParentParent = parentParent.parentElement;
-      artPlace.style.display = "flex"
-      parent.style.display = "flex"
-      parentParent.style.display = "flex"
-      parentParentParent.style.display = "flex"
-      artPlace.querySelectorAll(".subcategory-icon-and-name").forEach(subSth => subSth.style.display = "block");
+
+      artPlace.querySelectorAll(".subcategory-icon-and-name").forEach(p => p.style.display = "flex")
+      if (artPlace.classList.contains("art-pieces-categories")) {
+        artPlace.style.display = "block";
+
+      } else {
+
+        artPlace.style.display = "flex";
+        artPiecesCategories.style.display = "block";
+        while ((artPlace = artPlace.parentElement) && !artPlace.classList.contains("art-pieces-categories"))
+          artPlace.style.display = "flex";
+
+      }
+
     } else {
       artPlace.style.display = "none";
+      artPlace.querySelectorAll(".subcategory-icon-and-name").forEach(p => p.style.display = "none")
+
+
     }
   })
 }
@@ -107,10 +119,13 @@ function clickedFolder(folder) {
 
 
 
+
+
 function getCustomPath(folder) {
   const clnpathTemplate = pathTemplate.cloneNode(true);
-  clnpathTemplate.querySelector(".path-name").textContent = folder
+  clnpathTemplate.querySelector(".path-name").textContent = folder;
   folderPath.appendChild(clnpathTemplate)
+
 }
 
 
@@ -121,9 +136,9 @@ function getCategories(category, placeToAppend) {
   categoryName.textContent = category.title.rendered.toLowerCase()
   let imagesInsideFolderIcon = clnMenuFolder.querySelector(".images-inside-folder-icon");
   let categoryFolder = clnMenuFolder.querySelector(".category-folder");
-  if (category.art_category_id.length > 0) { //If the category does NOT have subcategories
-    addImgaesToFolderIcon(category, imagesInsideFolderIcon) //Add image to the folder icon
-  }
+  // if (category.art_category_id.length > 0) { //If the category does NOT have subcategories
+  //   addImgaesToFolderIcon(category, imagesInsideFolderIcon) //Add image to the folder icon
+  // }
   categoryFolder.onclick = function () {
     openFolderContainer.classList.remove("d-none");
   }
