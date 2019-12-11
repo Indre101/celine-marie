@@ -47,12 +47,12 @@
           alt=""
         />
         <img
-          class="folder-menu-btn justify-self"
+          class="folder-menu-btn  minimize justify-self"
           src="./icons/minimize.svg"
           alt=""
         />
         <img
-          class="folder-menu-btn justify-self"
+          class="folder-menu-btn  maximize justify-self"
           src="./icons/maximize.svg"
           alt=""
         />
@@ -97,12 +97,12 @@
         />
         <h2 class="notepad-name">contact - Notepad</h2>
         <img
-          class="folder-menu-btn justify-self"
+          class="folder-menu-btn  minimizeNotepad justify-self"
           src="./icons/minimize.svg"
           alt=""
         />
         <img
-          class="folder-menu-btn justify-self"
+          class="folder-menu-btn maximizeNotepad justify-self"
           src="./icons/maximize.svg"
           alt=""
         />
@@ -160,6 +160,8 @@
       <div class="art-piece ">
         <img class="art-piece-large-icon" src="./images/water.png" alt="" />
         <h4 class="art-piece-name">Name</h4>
+        <h4 class="descirption d-none">descirption</h4>
+        <h4 class="year d-none">year</h4>
       </div>
     </template>
 
@@ -169,6 +171,32 @@
         <h3 class="path-name name">This PC</h3>
       </div>
     </template>
+
+    <div class="photo-container d-none">
+      <article class="photoHeader"><h4>Name</h4></article>
+      <div class="photo-bg">
+        <img class="photo" src="./images/water.png" alt="photo of art piece" />
+      </div>
+      <div class="arrows-container">
+        <div>
+          <img
+            class="iconPhoto arrowPreviousPhoto"
+            src="./icons/109618.svg"
+            alt=""
+          />
+        </div>
+        <div>
+          <img class="iconPhoto enlarge" src="./icons/maximize.svg" alt="" />
+        </div>
+        <div>
+          <img
+            class="iconPhoto arrowNextPhoto"
+            src="./icons/109618.svg"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
     <script src="main.js"></script>
     <script src="contact.js"></script>
   </body>

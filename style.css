@@ -414,3 +414,50 @@ h1 {
 .subcategory {
   color: black;
 }
+
+/* Photo */
+.photo-container {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  background-color: white;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  border: 1px solid grey;
+  z-index: 10;
+}
+
+.photo-container h4 {
+
+  text-align: center;
+  padding: 1rem;
+  font-weight: normal;
+}
+
+.photoHeader {
+  background-color: #cccc;
+
+}
+
+.photo-bg,
+.arrows-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.photo {
+  height: 65vh;
+  padding: 2rem;
+  object-fit: contain;
+}
+
+.iconPhoto {
+  width: 3rem;
+  margin: 0 2rem;
+}
+
+.arrowNextPhoto {
+  transform: rotate(180deg);
+}

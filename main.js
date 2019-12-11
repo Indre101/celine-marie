@@ -14,6 +14,9 @@ const openFolderContainer = document.querySelector(".open-folder-container")
 const folderPath = document.querySelector(".path-to-the-folder");
 const backArrow = document.querySelector(".back-arrow");
 const thisPCBtn = document.querySelector(".thispc")
+const infoPopUp = document.querySelector(".info-pop-up");
+const photoContainer = document.querySelector(".photo-container")
+
 
 window.addEventListener("DOMContentLoaded", init)
 
@@ -24,13 +27,19 @@ document.querySelector(".closeBTn").onclick = function () {
   }
 }
 
+document.querySelector(".info-pop-up-ok").onclick = function () {
+  infoPopUp.classList.add("d-none");
+  photoContainer.classList.add("d-none");
+}
+
+
 function init() {
   spinner.removeAttribute('hidden'); //preloader shows up
   fetch("http://indre101.lashboutique.dk/wordpress/wp-json/wp/v2/art_categories?_embed").then(res => {
     return res.json()
   }).then(data => {
     spinner.setAttribute('hidden', '')
-    cloneIconsFromDesktop();
+    cloneNotepad(); //Function that will copy notepadIcon and assign functionality for contact
 
     data.forEach(category => {
       getCategories(category, artCategories);
@@ -68,7 +77,6 @@ function init() {
   })
 
   backArrow.onclick = function () {
-    // console.log(document.querySelectorAll(".artPieces"));
     const parent = document.querySelector(".art-pieces-categories");
     const artPieces = document.querySelectorAll(".artPieces");
     const lastChildOfFolderPath = folderPath.querySelector(".pathNameAndIcon:last-child") //selects the last pathName
@@ -84,16 +92,15 @@ function init() {
     }
     clickedFolder(folder);
   }
-
 }
 
 
-function cloneIconsFromDesktop() {
+
+function cloneNotepad() {
   const clnContact = document.querySelector(".contact-page").cloneNode(true);
   clnContact.classList.add("subcategory-file")
   clnContact.addEventListener("click", openContact);
   artPiecesCategories.appendChild(clnContact);
-
 }
 
 function path() {
@@ -228,8 +235,97 @@ function showArtPieceList(piece, placeToAppendTo) {
   let artPieceCln = artPieceTemplate.cloneNode(true);
   artPieceCln.querySelector(".art-piece-name").textContent = piece.post_title.toLowerCase()
   artPieceCln.querySelector(".art-piece-large-icon").src = piece.featured_image.guid
+  artPieceCln.querySelector(".descirption").textContent = piece.post_excerpt;
+  artPieceCln.querySelector(".year").textContent = piece.year;
+
+
+  const artPiecePhotoandName = artPieceCln.querySelector(".art-piece")
+  artPiecePhotoandName.onclick = function () {
+    artPiecePhotoandName.classList.add("active");
+    infoPopUp.classList.remove("d-none");
+    photoContainer.classList.remove("d-none");
+    popUpIwndows(artPiecePhotoandName)
+
+  }
+
   placeToAppendTo.appendChild(artPieceCln) // Place to append is element with art-pieces class in the open-folder-container template;
 }
+
+function popUpIwndows(artPiecePhotoandName) {
+  infoPopUp.querySelector(".art-piece-name").textContent = artPiecePhotoandName.querySelector(".art-piece-name").textContent
+  infoPopUp.querySelector(".art-piece-info").textContent = artPiecePhotoandName.querySelector(".descirption").textContent
+  infoPopUp.querySelector(".art-piece-year").textContent = artPiecePhotoandName.querySelector(".year").textContent
+  photoContainer.querySelector(".photo").src = artPiecePhotoandName.querySelector(".art-piece-large-icon").src
+  photoContainer.querySelector(".photoHeader h4").textContent = artPiecePhotoandName.querySelector(".art-piece-name").textContent;
+
+}
+
+const previousPhoto = document.querySelector(".arrowPreviousPhoto");
+const nextFoto = document.querySelector(".arrowNextPhoto")
+previousPhoto.onclick = function () {
+  switchBetweenImages()
+}
+
+// nextFoto.onclick = function () {
+//   switchBetweenImagesForwards()
+// }
+
+function switchBetweenImages() {
+  const images = document.querySelectorAll(".art-piece")
+  images.forEach(img => {
+    // img.classList.remove("d-none");
+    if (img.classList.contains("active")) {
+      img.classList.remove("active");
+      const parent = img.parentElement
+      const parentArtPieces = parent.querySelectorAll(".art-piece")
+      const parentArtPiecesAray = Array.from(parentArtPieces)
+      const newImg = parentArtPiecesAray[parentArtPiecesAray.indexOf(img) - 1]
+      newImg.classList.add("active");
+      if (parentArtPiecesAray.indexOf(newImg) == 0) {
+        previousPhoto.style.display = "none";
+      } else if (parentArtPiecesAray.indexOf(newImg) == parentArtPiecesAray.length - 1) {
+        nextFoto.style.display = "none";
+      } else {
+        nextFoto.style.display = "block";
+        previousPhoto.style.display = "block";
+
+      }
+      popUpIwndows(newImg)
+
+    }
+  })
+}
+
+
+// function switchBetweenImagesForwards() {
+//   const images = document.querySelectorAll(".art-piece")
+//   images.forEach(img => {
+//     // img.classList.remove("d-none");
+//     if (img.classList.contains("active")) {
+//       console.log(img);
+//       img.classList.remove("active");
+//       const parent = img.parentElement
+//       const parentArtPieces = parent.querySelectorAll(".art-piece")
+//       const parentArtPiecesAray = Array.from(parentArtPieces)
+//       const newImg = parentArtPiecesAray[parentArtPiecesAray.indexOf(img) + 1]
+//       newImg.classList.add("active");
+//       console.log(parentArtPiecesAray.indexOf(newImg));
+//       if (parentArtPiecesAray.indexOf(newImg) == 0) {
+//         previousPhoto.style.display = "none";
+//       } else if (parentArtPiecesAray.indexOf(newImg) == parentArtPiecesAray.length - 1) {
+//         nextFoto.style.display = "none";
+//       } else {
+//         nextFoto.style.display = "block";
+//         previousPhoto.style.display = "block";
+
+//       }
+//       popUpIwndows(newImg)
+
+//     }
+//   })
+// }
+
+
 
 
 const getThename = (category) => {
