@@ -93,22 +93,19 @@ function clickedFolder(folder) {
 
   artPiecePlaces.forEach(artPlace => {
     if (artPlace.classList.contains(folderName)) {
-      artPlace.querySelectorAll(".subcategory-icon-and-name").forEach(p => p.style.display = "block")
-      artPiecesCategories.style.display = "block";
+
+      artPlace.querySelectorAll(".subcategory-icon-and-name").forEach(p => p.style.display = "flex")
       if (artPlace.classList.contains("art-pieces-categories")) {
-        console.log("parent");
         artPlace.style.display = "block";
 
       } else {
+
         artPlace.style.display = "flex";
+        artPiecesCategories.style.display = "block";
         while ((artPlace = artPlace.parentElement) && !artPlace.classList.contains("art-pieces-categories"))
           artPlace.style.display = "flex";
 
       }
-
-
-
-
 
     } else {
       artPlace.style.display = "none";
@@ -139,9 +136,9 @@ function getCategories(category, placeToAppend) {
   categoryName.textContent = category.title.rendered.toLowerCase()
   let imagesInsideFolderIcon = clnMenuFolder.querySelector(".images-inside-folder-icon");
   let categoryFolder = clnMenuFolder.querySelector(".category-folder");
-  if (category.art_category_id.length > 0) { //If the category does NOT have subcategories
-    addImgaesToFolderIcon(category, imagesInsideFolderIcon) //Add image to the folder icon
-  }
+  // if (category.art_category_id.length > 0) { //If the category does NOT have subcategories
+  //   addImgaesToFolderIcon(category, imagesInsideFolderIcon) //Add image to the folder icon
+  // }
   categoryFolder.onclick = function () {
     openFolderContainer.classList.remove("d-none");
   }
