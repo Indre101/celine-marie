@@ -148,6 +148,7 @@ h1 {
 
 /* open folder */
 .open-folder-container {
+  z-index: 1;
   width: 80%;
   height: 80vh;
   background-color: white;
