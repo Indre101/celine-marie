@@ -7,180 +7,143 @@ const artCategories = document.querySelector(".categories"); //Place to append t
 const artPieceTemplate = document.querySelector(".art-piece-template").content;
 const pathTemplate = document.querySelector(".path-template").content;
 const subCategoryTemplate = document.querySelector(".sub-category-template").content;
+const artPiecesCategories = document.querySelector(".art-pieces-categories");
 const spinner = document.getElementById("spinner"); //preloader temporary
-const openFolderContainerTemplate = document.querySelector(".open-folder-container-template").content
 const body = document.querySelector("BODY");
+const openFolderContainer = document.querySelector(".open-folder-container")
+const folderPath = document.querySelector(".path-to-the-folder");
+
 window.addEventListener("DOMContentLoaded", init)
 
-function init() {
+document.querySelector(".closeBTn").onclick = function () {
+  openFolderContainer.classList.add("d-none");
+  while (folderPath.firstChild) {
+    folderPath.removeChild(folderPath.firstChild);
+  }
+}
 
+// document.querySelector(".this-pc").onclick = function () {
+//   clickedFolder(document.querySelector(".this-pc"))
+//   artPiecesCategories.style.display="block";
+//   path(document.querySelector(".this-pc"))
+
+// }
+
+function init() {
   spinner.removeAttribute('hidden'); //preloader shows up
   fetch("http://indre101.lashboutique.dk/wordpress/wp-json/wp/v2/art_categories?_embed").then(res => {
     return res.json()
   }).then(data => {
-    spinner.setAttribute('hidden', ''); //preloader hides
-    data.forEach((category) => {
-      appendFolders(category, category.art_category_id)
-      getCategories(category, artCategories)
-    }) //gets the categories and the rest of the folders
-
-    appendMyComputerFolder(data) //Function that will append and create the Mycomputer open folder
-
-
-    const thisPcBTns = document.querySelectorAll(".this-pc"); //All the this pc buttons in the folder path
-    thisPcBTns.forEach(btn => {
-      openTheRightFolder(btn, btn.textContent.toLowerCase().split(' ').join('')) //Calls a function that will find the open folder with the name thispc and will display it
+    spinner.setAttribute('hidden', '')
+    data.forEach(category => {
+      getCategories(category, artCategories);
+      createSubcategories(category, artPiecesCategories)
     })
+
+  }).then(() => {
+    const subCategoryBtns = document.querySelectorAll(".subcategory-icon-and-name")
+    subCategoryBtns.forEach(btn => {
+      btn.onclick = function () {
+        clickedFolder(btn) //function that will display the correct folder and calls a function to change the path name
+        path() //function that one a path btn is clicked the path will be cleared out untill the clicked button it's called here cause only here you can access all the added btns
+      }
+    })
+
+
+    document.querySelectorAll(".category-folder").forEach(btn => btn.onclick = function () {
+      while (folderPath.firstChild) {
+        folderPath.removeChild(folderPath.firstChild);
+      }
+      clickedFolder(btn)
+      path()
+    })
+
+    const thisPCBtn = document.querySelector(".thispc")
+    thisPCBtn.onclick = function () {
+      clickedFolder(thisPCBtn)
+      while (folderPath.firstChild) {
+        folderPath.removeChild(folderPath.firstChild);
+      }
+    }
   })
-
 }
 
-
-//Shows either an opened folder with subcategory folders or a folder with displayed art 
-//Category = art, illustrations or as well subcategories paintings, sculptures. Artarray = the array in the json, that categories have(art_category_id)
-function appendFolders(category, artArray) {
-  const clnOpenFolderContainer = openFolderContainerTemplate.cloneNode(true);
-  const customPath = clnOpenFolderContainer.querySelector(".custom-path");
-  const artPieces = clnOpenFolderContainer.querySelector(".art-pieces");
-  const closeButton = clnOpenFolderContainer.querySelector(".closeBTn");
-  const openFolderContainers = clnOpenFolderContainer.querySelector(".open-folder-container");
-  const nameOfTheFolder = clnOpenFolderContainer.querySelector(".name-of-the-folder");
-  //Checks if the category has post_title OR category.title.rendered and assigns the name of the folder
-  if (category.post_title) {
-    nameOfTheFolder.textContent = category.post_title.toLowerCase();
-  } else if (category.title.rendered) {
-    nameOfTheFolder.textContent = category.title.rendered.toLowerCase();
-  }
-
-  changeTheFilePath(category, customPath) //calls a function that will change the path of folder
-  if (artArray) { //Checks if category has art_category_id array and then calls a function that would display the art pieces
-    artArray.forEach(art => {
-      showArtPieceList(art, artPieces)
-    })
-  }
-
-  if (category.subcategory_id) { //Checks if category has subcategories and then calls a function that would display subcategories
-    category.subcategory_id.forEach(subCategory => {
-      showSubCategories(subCategory, artPieces)
-    })
-
-  }
-
-  closeButton.onclick = function () { //closes the folder
-    // zIndex = 0
-
-    openFolderContainers.classList.add("d-none");
-  }
-  body.appendChild(clnOpenFolderContainer)
-}
-
-
-//Shows either an opened folder with subcategory folders or a folder with displayed art
-//Category = art, illustrations or as well subcategories paintings, sculptures. Artarray = the array in the json, that categories have(art_category_id)
-function appendMyComputerFolder(data) {
-  const clnOpenFolderContainer = openFolderContainerTemplate.cloneNode(true);
-  const customPath = clnOpenFolderContainer.querySelector(".custom-path");
-  const artPieces = clnOpenFolderContainer.querySelector(".art-pieces");
-  const closeButton = clnOpenFolderContainer.querySelector(".closeBTn");
-  const openFolderContainers = clnOpenFolderContainer.querySelector(".open-folder-container");
-  const nameOfTheFolder = clnOpenFolderContainer.querySelector(".name-of-the-folder")
-  //Checks if the category has post_title OR category.title.rendered and assigns the name of the folder
-  nameOfTheFolder.textContent = "thispc";
-  console.log("nameOfTheFolder");
-  data.forEach((category) => {
-
-    getCategories(category, artPieces, "1.3rem", "normal", "black")
+function path() {
+  const pathNameBtns = document.querySelectorAll(".pathNameAndIcon")
+  pathNameBtns.forEach(pathName => {
+    pathName.onclick = function () {
+      let siblingNode = pathName.nextSibling;
+      clickedFolder(pathName) ///function that will display the correct folder and calls a function to change the path name
+      while (siblingNode) {
+        siblingNode = pathName.nextSibling;
+        folderPath.removeChild(siblingNode);
+      }
+    }
   })
-  closeButton.onclick = function () { //closes the folder
-    // zIndex = 0
-
-    openFolderContainers.classList.add("d-none");
-  }
-  body.appendChild(clnOpenFolderContainer)
 }
 
-//adds categories/folders t
-function getCategories(category, placeToAppend, namefontSize, namefontWeight, namefontColor) {
-  console.log(category)
+
+
+function clickedFolder(folder) {
+  const artPiecePlaces = document.querySelectorAll(".artPieces")
+  // const subcategoryIconAndName = document.querySelectorAll(".subcategory-icon-and-name")
+  openFolderContainer.classList.remove("d-none");
+  const folderName = folder.querySelector(".name").textContent.toLowerCase().split(' ').join('');
+  getCustomPath(folderName) //Changes the file path by addind the name of the clicked folder
+
+  artPiecePlaces.forEach(artPlace => {
+    if (artPlace.classList.contains(folderName)) {
+
+      artPlace.querySelectorAll(".subcategory-icon-and-name").forEach(p => p.style.display = "flex")
+      if (artPlace.classList.contains("art-pieces-categories")) {
+        artPlace.style.display = "block";
+
+      } else {
+
+        artPlace.style.display = "flex";
+        artPiecesCategories.style.display = "block";
+        while ((artPlace = artPlace.parentElement) && !artPlace.classList.contains("art-pieces-categories"))
+          artPlace.style.display = "flex";
+
+      }
+
+    } else {
+      artPlace.style.display = "none";
+      artPlace.querySelectorAll(".subcategory-icon-and-name").forEach(p => p.style.display = "none")
+
+
+    }
+  })
+}
+
+
+
+
+
+
+function getCustomPath(folder) {
+  const clnpathTemplate = pathTemplate.cloneNode(true);
+  clnpathTemplate.querySelector(".path-name").textContent = folder;
+  folderPath.appendChild(clnpathTemplate)
+
+}
+
+
+
+function getCategories(category, placeToAppend) {
   let clnMenuFolder = categoryFolderTemplate.cloneNode(true);
   let categoryName = clnMenuFolder.querySelector(".category-name")
   categoryName.textContent = category.title.rendered.toLowerCase()
-  categoryName.style.fontSize = namefontSize;
-  categoryName.style.fontWeight = namefontWeight;
-  categoryName.style.color = namefontColor;
   let imagesInsideFolderIcon = clnMenuFolder.querySelector(".images-inside-folder-icon");
   let categoryFolder = clnMenuFolder.querySelector(".category-folder");
-  // artCategories.appendChild(clnMenuFolder);
+  // if (category.art_category_id.length > 0) { //If the category does NOT have subcategories
+  //   addImgaesToFolderIcon(category, imagesInsideFolderIcon) //Add image to the folder icon
+  // }
+  categoryFolder.onclick = function () {
+    openFolderContainer.classList.remove("d-none");
+  }
   placeToAppend.appendChild(clnMenuFolder);
-
-  if (category.art_category_id.length > 0) { //If the category does NOT have subcategories
-    addImgaesToFolderIcon(category, imagesInsideFolderIcon) //Add image to the folder icon
-  }
-
-
-
-  openTheRightFolder(categoryFolder, categoryName.textContent) //When a folder is clicked it would remove display none property from the right element
-  // openTheRightFolder(this, this.textContent)
-
 }
-
-
-let zIndex = 0; //This will get increased once the folder icon is clicked
-
-// the parameters are The category/folder that is clicked and the Html markup for the folder when it is opened h2, which is not displayed but is in the mark up
-function openTheRightFolder(folderToClick, nameToCompare) {
-  console.log("hjkæl")
-  const folders = document.querySelectorAll(".open-folder-container") //selects all the open-folder-container that are already appended to the body but are not displayed
-  const namesOfTheFolders = document.querySelectorAll(".name-of-the-folder"); // the open-folder-container has a h2, that is not displayed but is selected in order to compare the names
-  folderToClick.onclick = function () { //Once a folder is clicked
-    zIndex++; //this will increase so the folder would be on top
-    namesOfTheFolders.forEach(name => { //goes through all open-folder-container h2
-      if (name.textContent == nameToCompare) { //checks if the name of the h2, is the same as the name of the clicked folder
-        console.log(name.textContent, nameToCompare)
-        let folder = name.parentElement //Selects the h2 parent element, so the correct open-folder-container
-        folder.classList.remove("d-none");
-        folder.style.zIndex = zIndex;
-      }
-    })
-  }
-}
-
-
-
-// Changes the file path(it's not working perfectly, yet :D)
-//Path name = name of the clicked folder, customPath = is an element with custom-path class inside open-folder-container template 
-function changeTheFilePath(pathName, customPath) {
-  // add a new path name, since the path has to have an image and text i thought the template would be best approach
-  const clnPath = pathTemplate.cloneNode(true);
-  const name = clnPath.querySelector(".path-name")
-
-  //because some elements in json had either a post_title or title.rendered it checks which one it has and then inserts it
-  if (pathName.post_title) {
-    name.textContent = pathName.post_title.toLowerCase();
-
-  } else if (pathName.title.rendered) {
-    name.textContent = pathName.title.rendered.toLowerCase();
-  }
-  customPath.appendChild(clnPath)
-}
-
-
-// IF the category has subcategories this function will be called to show them
-function showSubCategories(subCategory, placeToAppend) {
-  const clnSubCategory = subCategoryTemplate.cloneNode(true); //Template of subcategory
-  const subCategoryName = clnSubCategory.querySelector(".subCategoryName")
-  subCategoryName.textContent = subCategory.post_title.toLowerCase()
-
-  const subcategory = clnSubCategory.querySelector(".subcategory");
-  //subCategory.art_piece_id is and object with objects inside, so i converted it to array
-  const convertedArtArray = Object.keys(subCategory.art_piece_id).map(i => subCategory.art_piece_id[i])
-  appendFolders(subCategory, convertedArtArray) //Function that will create and append open-folder container with art, but will not be displayed
-  openTheRightFolder(subcategory, subCategoryName.textContent) //Function that will display the correct open folder according on the subcategory clicked
-
-  placeToAppend.appendChild(clnSubCategory)
-}
-
-
 
 
 // Function to customise the folder icon
@@ -194,7 +157,52 @@ function addImgaesToFolderIcon(imageURL, containerToAppendTo) {
 }
 
 
-// Appends all the art pieces to the art-pieces container in the open-folder-container;
+function createSubcategories(category, placeToAppend) {
+  const clnsubCategoryTemplate = subCategoryTemplate.cloneNode(true);
+  clnsubCategoryTemplate.querySelector(".subCategoryName").textContent = getThename(category);
+  clnsubCategoryTemplate.querySelector(".subcategory").classList.add(getThename(category));
+  const artSubcategory = clnsubCategoryTemplate.querySelector(".artSubcategory")
+  artSubcategory.classList.add(getThename(category))
+  const artPiecesLists = artSubcategory.querySelector(".artPieces")
+  artPiecesLists.classList.add(getThename(category))
+
+  if (category.subcategory_id) {
+    category.subcategory_id.forEach(sub => {
+      const clnsubCategoryTemplate = subCategoryTemplate.cloneNode(true);
+      clnsubCategoryTemplate.querySelector(".subCategoryName").textContent = getThename(sub);
+      clnsubCategoryTemplate.querySelector(".subcategory").classList.add(getThename(sub));
+      const artSubcategoryInner = clnsubCategoryTemplate.querySelector(".artSubcategory")
+      artSubcategoryInner.classList.add(getThename(sub))
+      const artPiecesListsInner = artSubcategoryInner.querySelector(".artPieces")
+      artPiecesListsInner.classList.add(getThename(sub))
+      getTheArtPieces(sub, artPiecesListsInner)
+      artPiecesLists.appendChild(clnsubCategoryTemplate)
+    })
+  } else if (category.art_category_id) {
+    getTheArtPieces(category, artPiecesLists)
+  }
+
+  placeToAppend.appendChild(clnsubCategoryTemplate);
+}
+
+
+
+function getTheArtPieces(category, placeToAppendTo) {
+  if (category.art_category_id) {
+    category.art_category_id.forEach(artPiece => {
+      showArtPieceList(artPiece, placeToAppendTo)
+
+    })
+  } else if (category.art_piece_id) {
+    const convertedArtArray = Object.keys(category.art_piece_id).map(i => category.art_piece_id[i])
+    convertedArtArray.forEach(artPiece => {
+      showArtPieceList(artPiece, placeToAppendTo)
+    })
+  }
+}
+
+
+
 function showArtPieceList(piece, placeToAppendTo) {
   let artPieceCln = artPieceTemplate.cloneNode(true);
   artPieceCln.querySelector(".art-piece-name").textContent = piece.post_title.toLowerCase()
@@ -202,4 +210,13 @@ function showArtPieceList(piece, placeToAppendTo) {
   placeToAppendTo.appendChild(artPieceCln) // Place to append is element with art-pieces class in the open-folder-container template;
 }
 
-// Navigation in the folder
+
+const getThename = (category) => {
+  let nameOf;
+  if (category.post_title) {
+    nameOf = category.post_title.toLowerCase().split(' ').join('');
+  } else if (category.title.rendered) {
+    nameOf = category.title.rendered.toLowerCase().split(' ').join('');
+  }
+  return nameOf
+}
