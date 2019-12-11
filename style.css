@@ -457,3 +457,7 @@ h1 {
   width: 3rem;
   margin: 0 2rem;
 }
+
+.arrowNextPhoto {
+  transform: rotate(180deg);
+}
