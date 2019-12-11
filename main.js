@@ -12,6 +12,8 @@ const spinner = document.getElementById("spinner"); //preloader temporary
 const body = document.querySelector("BODY");
 const openFolderContainer = document.querySelector(".open-folder-container")
 const folderPath = document.querySelector(".path-to-the-folder");
+const backArrow = document.querySelector(".back-arrow");
+const thisPCBtn = document.querySelector(".thispc")
 
 window.addEventListener("DOMContentLoaded", init)
 
@@ -22,19 +24,14 @@ document.querySelector(".closeBTn").onclick = function () {
   }
 }
 
-// document.querySelector(".this-pc").onclick = function () {
-//   clickedFolder(document.querySelector(".this-pc"))
-//   artPiecesCategories.style.display="block";
-//   path(document.querySelector(".this-pc"))
-
-// }
-
 function init() {
   spinner.removeAttribute('hidden'); //preloader shows up
   fetch("http://indre101.lashboutique.dk/wordpress/wp-json/wp/v2/art_categories?_embed").then(res => {
     return res.json()
   }).then(data => {
     spinner.setAttribute('hidden', '')
+    cloneIconsFromDesktop();
+
     data.forEach(category => {
       getCategories(category, artCategories);
       createSubcategories(category, artPiecesCategories)
@@ -44,7 +41,8 @@ function init() {
     const subCategoryBtns = document.querySelectorAll(".subcategory-icon-and-name")
     subCategoryBtns.forEach(btn => {
       btn.onclick = function () {
-        clickedFolder(btn) //function that will display the correct folder and calls a function to change the path name
+        let canBeAddedTothePath = true;
+        clickedFolder(btn, canBeAddedTothePath) //function that will display the correct folder and calls a function to change the path name
         path() //function that one a path btn is clicked the path will be cleared out untill the clicked button it's called here cause only here you can access all the added btns
       }
     })
@@ -54,26 +52,57 @@ function init() {
       while (folderPath.firstChild) {
         folderPath.removeChild(folderPath.firstChild);
       }
-      clickedFolder(btn)
+      let canBeAddedTothePath = true;
+
+      clickedFolder(btn, canBeAddedTothePath)
       path()
     })
 
-    const thisPCBtn = document.querySelector(".thispc")
     thisPCBtn.onclick = function () {
-      clickedFolder(thisPCBtn)
+      let canBeAddedTothePath = false;
+      clickedFolder(thisPCBtn, canBeAddedTothePath)
       while (folderPath.firstChild) {
         folderPath.removeChild(folderPath.firstChild);
       }
     }
   })
+
+  backArrow.onclick = function () {
+    // console.log(document.querySelectorAll(".artPieces"));
+    const parent = document.querySelector(".art-pieces-categories");
+    const artPieces = document.querySelectorAll(".artPieces");
+    const lastChildOfFolderPath = folderPath.querySelector(".pathNameAndIcon:last-child") //selects the last pathName
+
+    const allFolderPathWords = folderPath.querySelectorAll(".pathNameAndIcon") //selects the last pathName
+    folderPath.removeChild(lastChildOfFolderPath); //removes the last folder name
+
+    let folder;
+    if (allFolderPathWords.length == 1) {
+      folder = thisPCBtn;
+    } else {
+      folder = allFolderPathWords[allFolderPathWords.length - 2];
+    }
+    clickedFolder(folder);
+  }
+
+}
+
+
+function cloneIconsFromDesktop() {
+  const clnContact = document.querySelector(".contact-page").cloneNode(true);
+  clnContact.classList.add("subcategory-file")
+  clnContact.addEventListener("click", openContact);
+  artPiecesCategories.appendChild(clnContact);
+
 }
 
 function path() {
   const pathNameBtns = document.querySelectorAll(".pathNameAndIcon")
   pathNameBtns.forEach(pathName => {
     pathName.onclick = function () {
+      let canBeAddedTothePath = false;
       let siblingNode = pathName.nextSibling;
-      clickedFolder(pathName) ///function that will display the correct folder and calls a function to change the path name
+      clickedFolder(thisPCBtn, canBeAddedTothePath) ///function that will display the correct folder and calls a function to change the path name
       while (siblingNode) {
         siblingNode = pathName.nextSibling;
         folderPath.removeChild(siblingNode);
@@ -84,50 +113,41 @@ function path() {
 
 
 
-function clickedFolder(folder) {
+function clickedFolder(folder, canBeAddedTothePath) {
   const artPiecePlaces = document.querySelectorAll(".artPieces")
-  // const subcategoryIconAndName = document.querySelectorAll(".subcategory-icon-and-name")
   openFolderContainer.classList.remove("d-none");
   const folderName = folder.querySelector(".name").textContent.toLowerCase().split(' ').join('');
-  getCustomPath(folderName) //Changes the file path by addind the name of the clicked folder
+  if (canBeAddedTothePath == true) {
+    getCustomPath(folderName) //Changes the file path by addind the name of the clicked folder
+  }
 
   artPiecePlaces.forEach(artPlace => {
-    if (artPlace.classList.contains(folderName)) {
-
-      artPlace.querySelectorAll(".subcategory-icon-and-name").forEach(p => p.style.display = "flex")
-      if (artPlace.classList.contains("art-pieces-categories")) {
-        artPlace.style.display = "block";
-
-      } else {
-
-        artPlace.style.display = "flex";
-        artPiecesCategories.style.display = "block";
-        while ((artPlace = artPlace.parentElement) && !artPlace.classList.contains("art-pieces-categories"))
-          artPlace.style.display = "flex";
-
+    if (artPlace.classList.contains(folderName)) { //First checks for the arPlace if it has the class name as the clicked button name
+      artPlace.querySelectorAll(".subcategory-icon-and-name").forEach(p => p.style.display = "flex") //returns display to all the subcategory folders
+      if (artPlace.classList.contains("art-pieces-categories")) { //If the art place has the main class/Checks basically if it's the top hierarchy level
+        artPlace.style.display = "block"; //display the container
+        artPlace.querySelectorAll(".subcategory-file").forEach(sub => sub.style.display = "flex"); //Display all the files(notepad, video)
+      } else { //If it is not the top hierarchy folder
+        artPlace.style.display = "flex"; //Change display property to flex from none
+        artPiecesCategories.style.display = "block"; //Make sure that the top folder is displayed
+        while ((artPlace = artPlace.parentElement) && !artPlace.classList.contains("art-pieces-categories")) //While it is not the top layer
+          artPlace.style.display = "flex"; //Make sure that every top layer is being displayed, otherwise if any of artPlace parent element has display none property the elements won't be displayed
       }
-
-    } else {
-      artPlace.style.display = "none";
-      artPlace.querySelectorAll(".subcategory-icon-and-name").forEach(p => p.style.display = "none")
-
+    } else { //if the artPlace does not have the class as the clicked button name 
+      artPlace.style.display = "none"; // do not display it
+      artPlace.querySelectorAll(".subcategory-icon-and-name").forEach(p => p.style.display = "none") //and do not display anything inside the container
+      artPlace.querySelectorAll(".subcategory-file").forEach(b => b.style.display = "none");
 
     }
   })
 }
 
-
-
-
-
-
-function getCustomPath(folder) {
-  const clnpathTemplate = pathTemplate.cloneNode(true);
-  clnpathTemplate.querySelector(".path-name").textContent = folder;
-  folderPath.appendChild(clnpathTemplate)
+function getCustomPath(folder) { //This function will create custom folder paths
+  const clnpathTemplate = pathTemplate.cloneNode(true); //Clones the path template
+  clnpathTemplate.querySelector(".path-name").textContent = folder; //assigns the name of the clicked button/folder
+  folderPath.appendChild(clnpathTemplate) //Appends the cln to the folder path place;
 
 }
-
 
 
 function getCategories(category, placeToAppend) {
