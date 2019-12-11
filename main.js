@@ -14,6 +14,7 @@ const openFolderContainer = document.querySelector(".open-folder-container")
 const folderPath = document.querySelector(".path-to-the-folder");
 const backArrow = document.querySelector(".back-arrow");
 const thisPCBtn = document.querySelector(".thispc")
+const infoPopUp = document.querySelector(".info-pop-up");
 
 window.addEventListener("DOMContentLoaded", init)
 
@@ -23,6 +24,11 @@ document.querySelector(".closeBTn").onclick = function () {
     folderPath.removeChild(folderPath.firstChild);
   }
 }
+
+document.querySelector(".info-pop-up-ok").onclick = function () {
+  infoPopUp.classList.add("d-none");
+}
+
 
 function init() {
   spinner.removeAttribute('hidden'); //preloader shows up
@@ -226,8 +232,18 @@ function getTheArtPieces(category, placeToAppendTo) {
 
 function showArtPieceList(piece, placeToAppendTo) {
   let artPieceCln = artPieceTemplate.cloneNode(true);
+  console.log(piece);
   artPieceCln.querySelector(".art-piece-name").textContent = piece.post_title.toLowerCase()
   artPieceCln.querySelector(".art-piece-large-icon").src = piece.featured_image.guid
+
+  artPieceCln.querySelector(".art-piece").onclick = function () {
+
+    infoPopUp.querySelector(".art-piece-name").textContent = piece.post_title.toLowerCase();
+    infoPopUp.querySelector(".art-piece-info").textContent = piece.post_excerpt;
+    infoPopUp.querySelector(".art-piece-year").textContent = piece.year;
+    infoPopUp.classList.remove("d-none");
+  }
+
   placeToAppendTo.appendChild(artPieceCln) // Place to append is element with art-pieces class in the open-folder-container template;
 }
 
