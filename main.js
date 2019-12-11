@@ -12,7 +12,7 @@ const spinner = document.getElementById("spinner"); //preloader temporary
 const body = document.querySelector("BODY");
 const openFolderContainer = document.querySelector(".open-folder-container")
 const folderPath = document.querySelector(".path-to-the-folder");
-
+const backArrow = document.querySelector(".back-arrow");
 window.addEventListener("DOMContentLoaded", init)
 
 document.querySelector(".closeBTn").onclick = function () {
@@ -61,6 +61,30 @@ function init() {
       }
     }
   })
+
+  backArrow.onclick = function () {
+    // console.log(document.querySelectorAll(".artPieces"));
+    const parent = document.querySelector(".art-pieces-categories");
+    const artPieces = document.querySelectorAll(".artPieces");
+    const allChildren = parent.querySelectorAll("*")
+    const lastChildOfFolderPath = folderPath.querySelector(".pathNameAndIcon:last-child") //selects the last pathName
+    folderPath.removeChild(lastChildOfFolderPath); //removes the last folder name
+
+
+    artPieces.forEach(child => {
+      const elementDisplay = child.style.display
+      if (elementDisplay == "none") {
+        // console.log(child);
+      } else if (elementDisplay != "none" && !child.classList.contains("art-pieces-categories")) {
+        const parentelement = child.parentElement
+        // parent.querySelectorAll(".artPieces").forEach(p => p.style.display = "flex")
+        parent.querySelectorAll(".subcategory-icon-and-name").forEach(p => p.style.display = "flex")
+        parentelement.style.display = "flex";
+        child.style.display = "none";
+      }
+    })
+  }
+
 }
 
 
