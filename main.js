@@ -13,6 +13,8 @@ const body = document.querySelector("BODY");
 const openFolderContainer = document.querySelector(".open-folder-container")
 const folderPath = document.querySelector(".path-to-the-folder");
 const backArrow = document.querySelector(".back-arrow");
+const thisPCBtn = document.querySelector(".thispc")
+
 window.addEventListener("DOMContentLoaded", init)
 
 document.querySelector(".closeBTn").onclick = function () {
@@ -39,7 +41,8 @@ function init() {
     const subCategoryBtns = document.querySelectorAll(".subcategory-icon-and-name")
     subCategoryBtns.forEach(btn => {
       btn.onclick = function () {
-        clickedFolder(btn) //function that will display the correct folder and calls a function to change the path name
+        let canBeAddedTothePath = true;
+        clickedFolder(btn, canBeAddedTothePath) //function that will display the correct folder and calls a function to change the path name
         path() //function that one a path btn is clicked the path will be cleared out untill the clicked button it's called here cause only here you can access all the added btns
       }
     })
@@ -49,13 +52,15 @@ function init() {
       while (folderPath.firstChild) {
         folderPath.removeChild(folderPath.firstChild);
       }
-      clickedFolder(btn)
+      let canBeAddedTothePath = true;
+
+      clickedFolder(btn, canBeAddedTothePath)
       path()
     })
 
-    const thisPCBtn = document.querySelector(".thispc")
     thisPCBtn.onclick = function () {
-      clickedFolder(thisPCBtn)
+      let canBeAddedTothePath = false;
+      clickedFolder(thisPCBtn, canBeAddedTothePath)
       while (folderPath.firstChild) {
         folderPath.removeChild(folderPath.firstChild);
       }
@@ -66,31 +71,22 @@ function init() {
     // console.log(document.querySelectorAll(".artPieces"));
     const parent = document.querySelector(".art-pieces-categories");
     const artPieces = document.querySelectorAll(".artPieces");
-    const allChildren = parent.querySelectorAll("*")
     const lastChildOfFolderPath = folderPath.querySelector(".pathNameAndIcon:last-child") //selects the last pathName
+
+    const allFolderPathWords = folderPath.querySelectorAll(".pathNameAndIcon") //selects the last pathName
+    console.log(allFolderPathWords.length);
+    console.log(allFolderPathWords);
     folderPath.removeChild(lastChildOfFolderPath); //removes the last folder name
 
-    artPieces.forEach(child => {
-      const childDisplayValue = child.style.display
+    let folder;
+    if (allFolderPathWords.length == 1) {
+      folder = thisPCBtn;
+    } else {
+      folder = allFolderPathWords[allFolderPathWords.length - 2];
+    }
 
-      if (childDisplayValue == "none") {
-        // console.log(child);
-      } else if (childDisplayValue != "none" && !child.classList.contains("art-pieces-categories")) {
-        // parent.querySelectorAll(".artPieces").forEach(p => p.style.display = "flex")
-        // parent.querySelectorAll(".subcategory-icon-and-name").forEach(p => p.style.display = "flex")
-        const parentelement = child.parentElement
-        child.style.display = "none";
-        parentelement.style.display = "none";
-
-        const parentOfParent = parentelement.parentElement
-        const parentOfParentChildre = parentelement.children
-        let arr = Array.prototype.slice.call(parentOfParentChildre);
-        console.log(arr);
-        arr.forEach(d => d.style.display = "block")
-
-        // childrens.style.display = "none";
-      }
-    })
+    console.log(allFolderPathWords.length);
+    clickedFolder(folder);
   }
 
 }
@@ -108,8 +104,9 @@ function path() {
   const pathNameBtns = document.querySelectorAll(".pathNameAndIcon")
   pathNameBtns.forEach(pathName => {
     pathName.onclick = function () {
+      let canBeAddedTothePath = false;
       let siblingNode = pathName.nextSibling;
-      clickedFolder(pathName) ///function that will display the correct folder and calls a function to change the path name
+      clickedFolder(thisPCBtn, canBeAddedTothePath) ///function that will display the correct folder and calls a function to change the path name
       while (siblingNode) {
         siblingNode = pathName.nextSibling;
         folderPath.removeChild(siblingNode);
@@ -120,25 +117,20 @@ function path() {
 
 
 
-function clickedFolder(folder) {
+function clickedFolder(folder, canBeAddedTothePath) {
   const artPiecePlaces = document.querySelectorAll(".artPieces")
-  // const subcategoryIconAndName = document.querySelectorAll(".subcategory-icon-and-name")
   openFolderContainer.classList.remove("d-none");
   const folderName = folder.querySelector(".name").textContent.toLowerCase().split(' ').join('');
+  if (canBeAddedTothePath == true) {
+    getCustomPath(folderName) //Changes the file path by addind the name of the clicked folder
+  }
 
-  // if (!folder.querySelector(".name").textContent.toLowerCase().split(' ').join('')) {
-  //   console.log("nothing");
-  // } else{
-
-  // }
-  getCustomPath(folderName) //Changes the file path by addind the name of the clicked folder
   artPiecePlaces.forEach(artPlace => {
     if (artPlace.classList.contains(folderName)) { //First checks for the arPlace if it has the class name as the clicked button name
       artPlace.querySelectorAll(".subcategory-icon-and-name").forEach(p => p.style.display = "flex") //returns display to all the subcategory folders
-
       if (artPlace.classList.contains("art-pieces-categories")) { //If the art place has the main class/Checks basically if it's the top hierarchy level
         artPlace.style.display = "block"; //display the container
-        artPlace.querySelectorAll(".subcategory-file").forEach(sub => b.style.display = "flex"); //Display all the files(notepad, video)
+        artPlace.querySelectorAll(".subcategory-file").forEach(sub => sub.style.display = "flex"); //Display all the files(notepad, video)
       } else { //If it is not the top hierarchy folder
         artPlace.style.display = "flex"; //Change display property to flex from none
         artPiecesCategories.style.display = "block"; //Make sure that the top folder is displayed
@@ -154,10 +146,10 @@ function clickedFolder(folder) {
   })
 }
 
-function getCustomPath(folder) {
-  const clnpathTemplate = pathTemplate.cloneNode(true);
-  clnpathTemplate.querySelector(".path-name").textContent = folder;
-  folderPath.appendChild(clnpathTemplate)
+function getCustomPath(folder) { //This function will create custom folder paths
+  const clnpathTemplate = pathTemplate.cloneNode(true); //Clones the path template
+  clnpathTemplate.querySelector(".path-name").textContent = folder; //assigns the name of the clicked button/folder
+  folderPath.appendChild(clnpathTemplate) //Appends the cln to the folder path place;
 
 }
 
