@@ -2,85 +2,24 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style.css">
-    <title>Portfolio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="style.css">
+  <title>Portfolio</title>
 </head>
 
 <body>
+  <div hidden id="spinner"></div>
 
-    <div hidden id="spinner"></div>
+  <div>
+    <div class="background-landing-page"></div>
+  </div>
 
-    <div>
-        <div class="background-landing-page"></div>
-    </div>
-
-    <article class="logo">
-        <h1>CELINE MARIE</h1>
-        <h1 class="white-logo">CELINE MARIE</h1>
-    </article>
-
-    <div class="categories">
-        <template class="category-folder-template">
-            <div class="category-folder">
-                <div class="category-folder-structure">
-                    <img class="folder-img folder-back" src="./icons/desktop-icons/folder-back.png" alt="">
-                    <!-- <img class="image-sample" src="./images/water.png" alt=""> -->
-                    <div class="images-inside-folder-icon "></div>
-                    <img class="folder-img folder-front" src="./icons/desktop-icons/folder-front.png" alt="">
-                </div>
-                <h2 class="category-name">Paintings</h2>
-            </div>
-        </template>
-    </div>
-
-    <div class="contact-page">
-        <img class="folder-img contact-img" src="./icons/desktop-icons/notepad.png" alt="">
-        <h2 class="category-name">contact.txt</h2>
-    </div>
-
-
-
-    <template class="open-folder-container-template">
-        <div class="open-folder-container d-none">
-            <h2 class="name-of-the-folder d-none"></h2>
-            <div class="open-folder-icons">
-                <img class="back-arrow" src="./icons/109618.svg" alt="">
-                <img class="back-arrow justify-self" src="./icons/minimize.svg" alt="">
-                <img class="back-arrow justify-self" src="./icons/maximize.svg" alt="">
-                <img class="back-arrow closeBTn justify-self" src="./icons/cancel.svg" alt="">
-            </div>
-            <article class="folder-path">
-                <img class="folder-path-icon" src="./icons/desktop-icons/file2.png" alt="">
-                <img class="folder-path-icon" src="./icons/next.svg" alt="">
-                <h3 class="this-pc">This PC</h3>
-                <div class="custom-path">
-
-                </div>
-            </article>
-            <div class="art-pieces">
-            </div>
-        </div>
-    </template>
-
- <!-- contactpage -->
-    <div class="open-contact-page d-none">
-        <div class="open-contact-icons">
-            <img class="back-arrow notepad-icon" src="icons/desktop-icons/notepad.png" alt="">
-            <h2 class="notepad-name">contact - Notepad</h2>
-            <img class="back-arrow justify-self" src="./icons/minimize.svg" alt="">
-            <img class="back-arrow justify-self" src="./icons/maximize.svg" alt="">
-            <img class="back-arrow closeBTn justify-self" src="./icons/cancel.svg" alt="">
-        </div>
-        <div class="open-contact-content">
-            <p> e-mail: celine_marie@gmail.com </p>
-            <p> instagram: https://www.instagram.com/celine____marie/ </p>
-            <p> other stuff for contact i guess: ................... </p>
-        </div>
-
-
+  <article class="logo">
+    <h1>CELINE MARIE</h1>
+    <h1 class="white-logo">CELINE MARIE</h1>
+  </article>
 
   <div class="categories">
     <template class="category-folder-template">
@@ -119,47 +58,19 @@
   </div>
 
 
+  <!-- pop up window template -->
+  <!-- <template class="info-pop-up-template"> -->
+  <div class="info-pop-up">
+    <div class="info-pop-up-icons">
+      <p class="info-pop-up-title">Windows Information</p>
+      <img class="info-pop-up-closeBtn" src="./icons/cancel.svg" alt="">
     </div>
-
-
-    <!-- pop up window template -->
-    <!-- <template class="info-pop-up-template"> -->
-    <div class="info-pop-up d-none">
-        <div class="info-pop-up-icons">
-            <p class="info-pop-up-title">Windows Information</p>
-            <img class="info-pop-up-closeBtn" src="./icons/cancel.svg" alt="">
-        </div>
-        <div class="info-pop-up-content">
-            <h4 class="art-piece-name">Name</h4>
-            <h4 class="art-piece-info">Info</h4>,<h4 class="art-piece-year">Year</h4>
-            <button class="info-pop-up-ok">OK</button>
-        </div>
+    <div class="info-pop-up-content">
+      <h4 class="art-piece-name">Name</h4>
+      <h4 class="art-piece-info">Info</h4>,<h4 class="art-piece-year">Year</h4>
+      <button class="info-pop-up-ok">OK</button>
     </div>
-    <!-- </template> -->
-
-    <template class="sub-category-template">
-        <article class="subcategory">
-            <img class="sub-category-icon" src="./icons/desktop-icons/file2.png" alt="">
-            <h4 class="subCategoryName">Name</h4>
-        </article>
-    </template>
-
-    <template class="art-piece-template">
-        <div class="art-piece">
-            <img class="art-piece-large-icon" src="./images/water.png" alt="">
-            <h4 class="art-piece-name">Name</h4>
-        </div>
-    </template>
-
-    <template class="path-template">
-        <img class="folder-path-icon" src="./icons/next.svg" alt="">
-        <h3 class="path-name">This PC</h3>
-    </template>
-    <script src="main.js"></script>
-    <script src="contact.js"></script>
-</body></html>
-
-
+  </div>
   <!-- </template> -->
 
   <template class="sub-category-template">
@@ -195,4 +106,3 @@
 </body>
 
 </html>
-
