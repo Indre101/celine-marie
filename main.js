@@ -262,19 +262,37 @@ function popUpIwndows(artPiecePhotoandName) {
 
 const previousPhoto = document.querySelector(".arrowPreviousPhoto");
 const nextFoto = document.querySelector(".arrowNextPhoto")
-previousPhoto.onclick = function () {
-  switchBetweenImages(true);
-}
-
-// nextFoto.onclick = function () {
-//   switchBetweenImagesForwards()
+// previousPhoto.onclick = function () {
+//   let indexFunction = indexImg--
+//   switchBetweenImages(true, indexFunction);
 // }
 
-function switchBetweenImages(statusToMoveTheActiveClass) {
+
+const arrowPhotos = document.querySelectorAll(".arrowPhoto");
+
+arrowPhotos.forEach(arrow => {
+  arrow.onclick = function () {
+    switchBetweenImages(true, arrow);
+
+  }
+
+})
+
+function switchBetweenImages(statusToMoveTheActiveClass, btn) {
   const images = document.querySelectorAll(".art-piece") //Selecting all the images
   const activeImg = findActiveImg(images); //Finds an image with a class active, return the img
   const arrayOFtheImgWithinActiveImg = getTheImgArrayWithinActiveImg(activeImg); //Finds all the img withing the active img
   let indexImg = arrayOFtheImgWithinActiveImg.indexOf(activeImg) // Gets the index/ position of the active img within an array of the images;
+
+  if (statusToMoveTheActiveClass && btn.classList.contains("arrowPreviousPhoto")) {
+    indexImg--
+  } else if (statusToMoveTheActiveClass && btn.classList.contains("arrowNextPhoto")) {
+    indexImg++
+
+  } else {
+    console.log(false);
+  }
+
   if (indexImg == 0) {
     previousPhoto.style.display = "none";
   } else if (indexImg == arrayOFtheImgWithinActiveImg.length - 1) {
@@ -284,20 +302,13 @@ function switchBetweenImages(statusToMoveTheActiveClass) {
     previousPhoto.style.display = "block";
 
   }
-
-  if (statusToMoveTheActiveClass) {
-    indexImg--
-  } else {
-    console.log(false);
-  }
-
   arrayOFtheImgWithinActiveImg[indexImg].classList.add("active");
   popUpIwndows(arrayOFtheImgWithinActiveImg[indexImg])
 
 }
 
 
-const previousImg = (index) => index--;
+
 
 
 
