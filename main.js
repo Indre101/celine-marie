@@ -242,6 +242,7 @@ function showArtPieceList(piece, placeToAppendTo) {
   const artPiecePhotoandName = artPieceCln.querySelector(".art-piece")
   artPiecePhotoandName.onclick = function () {
     artPiecePhotoandName.classList.add("active");
+    switchBetweenImages(false);
     infoPopUp.classList.remove("d-none");
     photoContainer.classList.remove("d-none");
     popUpIwndows(artPiecePhotoandName)
@@ -257,74 +258,72 @@ function popUpIwndows(artPiecePhotoandName) {
   infoPopUp.querySelector(".art-piece-year").textContent = artPiecePhotoandName.querySelector(".year").textContent
   photoContainer.querySelector(".photo").src = artPiecePhotoandName.querySelector(".art-piece-large-icon").src
   photoContainer.querySelector(".photoHeader h4").textContent = artPiecePhotoandName.querySelector(".art-piece-name").textContent;
-
 }
 
 const previousPhoto = document.querySelector(".arrowPreviousPhoto");
 const nextFoto = document.querySelector(".arrowNextPhoto")
 previousPhoto.onclick = function () {
-  switchBetweenImages()
+  switchBetweenImages(true);
 }
 
 // nextFoto.onclick = function () {
 //   switchBetweenImagesForwards()
 // }
 
-function switchBetweenImages() {
-  const images = document.querySelectorAll(".art-piece")
-  images.forEach(img => {
-    // img.classList.remove("d-none");
-    if (img.classList.contains("active")) {
-      img.classList.remove("active");
-      const parent = img.parentElement
-      const parentArtPieces = parent.querySelectorAll(".art-piece")
-      const parentArtPiecesAray = Array.from(parentArtPieces)
-      const newImg = parentArtPiecesAray[parentArtPiecesAray.indexOf(img) - 1]
-      newImg.classList.add("active");
-      if (parentArtPiecesAray.indexOf(newImg) == 0) {
-        previousPhoto.style.display = "none";
-      } else if (parentArtPiecesAray.indexOf(newImg) == parentArtPiecesAray.length - 1) {
-        nextFoto.style.display = "none";
-      } else {
-        nextFoto.style.display = "block";
-        previousPhoto.style.display = "block";
+function switchBetweenImages(statusToMoveTheActiveClass) {
+  const images = document.querySelectorAll(".art-piece") //Selecting all the images
+  const activeImg = findActiveImg(images); //Finds an image with a class active, return the img
+  const arrayOFtheImgWithinActiveImg = getTheImgArrayWithinActiveImg(activeImg); //Finds all the img withing the active img
+  let indexImg = arrayOFtheImgWithinActiveImg.indexOf(activeImg) // Gets the index/ position of the active img within an array of the images;
+  if (indexImg == 0) {
+    previousPhoto.style.display = "none";
+  } else if (indexImg == arrayOFtheImgWithinActiveImg.length - 1) {
+    nextFoto.style.display = "none";
+  } else {
+    nextFoto.style.display = "block";
+    previousPhoto.style.display = "block";
 
-      }
-      popUpIwndows(newImg)
+  }
 
-    }
-  })
+  if (statusToMoveTheActiveClass) {
+    indexImg--
+  } else {
+    console.log(false);
+  }
+
+  arrayOFtheImgWithinActiveImg[indexImg].classList.add("active");
+  popUpIwndows(arrayOFtheImgWithinActiveImg[indexImg])
+
 }
 
 
-// function switchBetweenImagesForwards() {
-//   const images = document.querySelectorAll(".art-piece")
-//   images.forEach(img => {
-//     // img.classList.remove("d-none");
-//     if (img.classList.contains("active")) {
-//       console.log(img);
-//       img.classList.remove("active");
-//       const parent = img.parentElement
-//       const parentArtPieces = parent.querySelectorAll(".art-piece")
-//       const parentArtPiecesAray = Array.from(parentArtPieces)
-//       const newImg = parentArtPiecesAray[parentArtPiecesAray.indexOf(img) + 1]
-//       newImg.classList.add("active");
-//       console.log(parentArtPiecesAray.indexOf(newImg));
-//       if (parentArtPiecesAray.indexOf(newImg) == 0) {
-//         previousPhoto.style.display = "none";
-//       } else if (parentArtPiecesAray.indexOf(newImg) == parentArtPiecesAray.length - 1) {
-//         nextFoto.style.display = "none";
-//       } else {
-//         nextFoto.style.display = "block";
-//         previousPhoto.style.display = "block";
+const previousImg = (index) => index--;
 
-//       }
-//       popUpIwndows(newImg)
 
-//     }
-//   })
-// }
 
+function nextImg(index) {
+  index++
+}
+
+
+const findActiveImg = (images) => {
+  let activeImg;
+  images.forEach(img => {
+    if (img.classList.contains("active")) { //check for image with a class Active
+      img.classList.remove("active"); //Remove the class active
+      activeImg = img;
+    }
+  })
+  return activeImg
+}
+
+
+const getTheImgArrayWithinActiveImg = (image) => {
+  const parent = image.parentElement //Find the parent element of the img with a class active
+  const parentArtPieces = parent.querySelectorAll(".art-piece") //Select all the art-piece eleements within the parent element
+  const parentArtPiecesAray = Array.from(parentArtPieces) //Convert the node list of parentArtPieces to array, to be able to use array method indexOf
+  return parentArtPiecesAray
+}
 
 
 
