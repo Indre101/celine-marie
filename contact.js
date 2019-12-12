@@ -54,3 +54,22 @@ maximizeNotepad.onclick = function () {
 minimizeNotepad.onclick = function () {
     resetheightandWidth(contactPage)
 }
+
+//Image galery display
+const photo = photoContainer.querySelector(".photo");
+const enlarge = document.querySelector(".enlarge");
+let clicks = 0;
+enlarge.onclick = function () {
+    clicks++
+    changeWindowheightAndWith(photoContainer, 100, 100)
+    changeWindowheightAndWith(photo, "", 85)
+    enlarge.src = "./icons/minimize.svg";
+
+    if (clicks == 2) {
+
+        resetheightandWidth(photoContainer)
+        resetheightandWidth(photo)
+        enlarge.src = "./icons/maximize.svg";
+        clicks = 0;
+    }
+}
