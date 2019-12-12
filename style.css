@@ -440,17 +440,32 @@ h1 {
 
 }
 
-.photo-bg,
-.arrows-container {
+.photo-bg {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+.arrows-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
 .photo {
   height: 65vh;
-  padding: 2rem;
   object-fit: contain;
+}
+
+div .enlarge {
+  justify-self: center;
+}
+
+div .arrowNextPhoto {
+  justify-self: flex-start;
+}
+
+div .arrowPreviousPhoto {
+  justify-self: flex-end;
 }
 
 .iconPhoto {

@@ -62,7 +62,7 @@ let clicks = 0;
 enlarge.onclick = function () {
     clicks++
     changeWindowheightAndWith(photoContainer, 100, 100)
-    changeWindowheightAndWith(photo, "", 85)
+    changeWindowheightAndWith(photo, "", 90)
     enlarge.src = "./icons/minimize.svg";
 
     if (clicks == 2) {
