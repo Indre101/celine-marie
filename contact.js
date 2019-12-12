@@ -11,6 +11,7 @@ function openContact() {
 }
 
 function closeContact() {
+    resetheightandWidth(contactPage)
     contactPage.classList.add("d-none")
     contactPage.style.zIndex = 1;
 

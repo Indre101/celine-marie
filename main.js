@@ -22,6 +22,8 @@ const closeImg = document.getElementById("closeImg");
 window.addEventListener("DOMContentLoaded", init)
 
 document.querySelector(".closeBTn").onclick = function () {
+  resetheightandWidth(openFolderContainer)
+  resetheightandWidth(artPiecesCategories)
   openFolderContainer.classList.add("d-none");
   while (folderPath.firstChild) {
     folderPath.removeChild(folderPath.firstChild);
@@ -41,6 +43,8 @@ closeImg.onclick = function () {
   images.forEach(img => {
     img.classList.remove("active"); //Remove the class active
   })
+  resetheightandWidth(photoContainer)
+  resetheightandWidth(photo)
   nextFoto.style.display = "block";
   previousPhoto.style.display = "block";
 }
