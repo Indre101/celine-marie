@@ -456,17 +456,28 @@ h1 {
   object-fit: contain;
 }
 
-div .enlarge {
-  justify-self: center;
+.arrows-container>div {
+  display: flex;
 }
 
-div .arrowNextPhoto {
-  justify-self: flex-start;
+.arrows-container-1 {
+  display: flex;
+  justify-content: flex-end;
+
 }
 
-div .arrowPreviousPhoto {
-  justify-self: flex-end;
+.arrows-container-2 {
+  display: flex;
+  justify-content: center;
+
 }
+
+.arrows-container-3 {
+  display: flex;
+  justify-content: flex-start;
+
+}
+
 
 .iconPhoto {
   width: 3rem;

@@ -127,10 +127,10 @@
         <img class="info-pop-up-closeBtn" src="./icons/cancel.svg" alt="" />
       </div>
       <div class="info-pop-up-content">
-        <h4 class="art-piece-name">Name</h4>
-        <h4 class="art-piece-info">Info</h4>
+        <h4 id="art-piece-name" class="art-piece-name">Name</h4>
+        <h4 id="art-piece-info" class="art-piece-info">Info</h4>
         ,
-        <h4 class="art-piece-year">Year</h4>
+        <h4 id="art-piece-year" class="art-piece-year">Year</h4>
         <button class="info-pop-up-ok">OK</button>
       </div>
     </div>
@@ -173,22 +173,27 @@
     </template>
 
     <div class="photo-container d-none">
-      <article class="photoHeader"><h4>Name</h4></article>
+      <article id="photoHeader" class="photoHeader"><h4>Name</h4></article>
       <div class="photo-bg">
-        <img class="photo" src="./images/water.png" alt="photo of art piece" />
+        <img
+          id="photo"
+          class="photo"
+          src="./images/water.png"
+          alt="photo of art piece"
+        />
       </div>
       <div class="arrows-container">
-        <div>
+        <div class="arrows-container-1">
           <img
             class="iconPhoto arrowPhoto arrowPreviousPhoto"
             src="./icons/109618.svg"
             alt=""
           />
         </div>
-        <div>
+        <div class="arrows-container-2">
           <img class="iconPhoto enlarge" src="./icons/maximize.svg" alt="" />
         </div>
-        <div>
+        <div class="arrows-container-3">
           <img
             class="iconPhoto arrowPhoto arrowNextPhoto"
             src="./icons/109618.svg"

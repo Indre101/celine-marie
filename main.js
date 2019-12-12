@@ -241,6 +241,10 @@ function showArtPieceList(piece, placeToAppendTo) {
 
   const artPiecePhotoandName = artPieceCln.querySelector(".art-piece")
   artPiecePhotoandName.onclick = function () {
+    const images = document.querySelectorAll(".art-piece")
+    images.forEach(img => {
+      img.classList.remove("active"); //Remove the class active
+    })
     artPiecePhotoandName.classList.add("active");
     switchBetweenImages(false);
     infoPopUp.classList.remove("d-none");
@@ -252,30 +256,31 @@ function showArtPieceList(piece, placeToAppendTo) {
   placeToAppendTo.appendChild(artPieceCln) // Place to append is element with art-pieces class in the open-folder-container template;
 }
 
+
+const infoPopUpName = infoPopUp.querySelector(".art-piece-name")
+const infoPopUpArtPieceInfo = infoPopUp.querySelector(".art-piece-info")
+const infoPopupArtPieceYear = infoPopUp.querySelector(".art-piece-year")
+const photoContainerPhotosrc = photoContainer.querySelector(".photo")
+const photoHeader = photoContainer.querySelector(".photoHeader h4");
+
 function popUpIwndows(artPiecePhotoandName) {
-  infoPopUp.querySelector(".art-piece-name").textContent = artPiecePhotoandName.querySelector(".art-piece-name").textContent
-  infoPopUp.querySelector(".art-piece-info").textContent = artPiecePhotoandName.querySelector(".descirption").textContent
-  infoPopUp.querySelector(".art-piece-year").textContent = artPiecePhotoandName.querySelector(".year").textContent
-  photoContainer.querySelector(".photo").src = artPiecePhotoandName.querySelector(".art-piece-large-icon").src
-  photoContainer.querySelector(".photoHeader h4").textContent = artPiecePhotoandName.querySelector(".art-piece-name").textContent;
+  infoPopUpName.textContent = artPiecePhotoandName.querySelector(".art-piece-name").textContent
+  infoPopUpArtPieceInfo.textContent = artPiecePhotoandName.querySelector(".descirption").textContent
+  infoPopupArtPieceYear.textContent = artPiecePhotoandName.querySelector(".year").textContent
+  photoContainerPhotosrc.src = artPiecePhotoandName.querySelector(".art-piece-large-icon").src
+  photoHeader.textContent = artPiecePhotoandName.querySelector(".art-piece-name").textContent;
 }
+
 
 const previousPhoto = document.querySelector(".arrowPreviousPhoto");
 const nextFoto = document.querySelector(".arrowNextPhoto")
-// previousPhoto.onclick = function () {
-//   let indexFunction = indexImg--
-//   switchBetweenImages(true, indexFunction);
-// }
-
 
 const arrowPhotos = document.querySelectorAll(".arrowPhoto");
 
 arrowPhotos.forEach(arrow => {
   arrow.onclick = function () {
     switchBetweenImages(true, arrow);
-
   }
-
 })
 
 function switchBetweenImages(statusToMoveTheActiveClass, btn) {
