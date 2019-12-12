@@ -16,6 +16,7 @@ const backArrow = document.querySelector(".back-arrow");
 const thisPCBtn = document.querySelector(".thispc")
 const infoPopUp = document.querySelector(".info-pop-up");
 const photoContainer = document.querySelector(".photo-container")
+const closeImg = document.getElementById("closeImg");
 
 
 window.addEventListener("DOMContentLoaded", init)
@@ -27,18 +28,22 @@ document.querySelector(".closeBTn").onclick = function () {
   }
 }
 
-document.querySelector(".info-pop-up-ok").onclick = function () {
+const popupWindowOk = document.querySelector(".info-pop-up-ok")
+popupWindowOk.onclick = function () {
   infoPopUp.classList.add("d-none");
-  photoContainer.classList.add("d-none");
-  nextFoto.style.display = "block";
-  previousPhoto.style.display = "block";
+}
+
+
+closeImg.onclick = function () {
   const images = document.querySelectorAll(".art-piece")
-  console.log(images);
+  photoContainer.classList.add("d-none");
+  infoPopUp.classList.add("d-none");
   images.forEach(img => {
     img.classList.remove("active"); //Remove the class active
   })
+  nextFoto.style.display = "block";
+  previousPhoto.style.display = "block";
 }
-
 
 function init() {
   spinner.removeAttribute('hidden'); //preloader shows up
@@ -267,6 +272,7 @@ const photoContainerPhotosrc = photoContainer.querySelector(".photo")
 const photoHeader = photoContainer.querySelector(".photoHeader h4");
 
 function popUpIwndows(artPiecePhotoandName) {
+  infoPopUp.classList.remove("d-none");
   infoPopUpName.textContent = artPiecePhotoandName.querySelector(".art-piece-name").textContent
   infoPopUpArtPieceInfo.textContent = artPiecePhotoandName.querySelector(".descirption").textContent
   infoPopupArtPieceYear.textContent = artPiecePhotoandName.querySelector(".year").textContent
@@ -291,7 +297,6 @@ function switchBetweenImages(statusToMoveTheActiveClass, btn) {
   const activeImg = findActiveImg(images); //Finds an image with a class active, return the img
   const arrayOFtheImgWithinActiveImg = getTheImgArrayWithinActiveImg(activeImg); //Finds all the img withing the active img
   let indexImg = arrayOFtheImgWithinActiveImg.indexOf(activeImg) // Gets the index/ position of the active img within an array of the images;
-
   if (statusToMoveTheActiveClass && btn.classList.contains("arrowPreviousPhoto")) {
     indexImg--
   } else if (statusToMoveTheActiveClass && btn.classList.contains("arrowNextPhoto")) {
@@ -313,15 +318,6 @@ function switchBetweenImages(statusToMoveTheActiveClass, btn) {
   arrayOFtheImgWithinActiveImg[indexImg].classList.add("active");
   popUpIwndows(arrayOFtheImgWithinActiveImg[indexImg])
 
-}
-
-
-
-
-
-
-function nextImg(index) {
-  index++
 }
 
 
