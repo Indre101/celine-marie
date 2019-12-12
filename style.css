@@ -4,6 +4,7 @@
   font-family: Helvetica, Arial, sans-serif;
   overflow: hidden;
   box-sizing: border-box;
+  font-weight: normal;
 }
 
 #spinner {
@@ -178,6 +179,7 @@ h1 {
 
 .folder-menu-btn.back-arrow {
   width: 35px;
+  transform: rotate(-90deg);
 }
 
 .justify-self {
@@ -210,8 +212,22 @@ h1 {
 
 }
 
+.minimizeNotepad,
+.minimize {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
 
 
+.minimize {
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.minimize .folder-menu-btn {
+  width: 26px;
+}
 
 .folder-path h3 {
   font-size: 1.2rem;
@@ -252,7 +268,18 @@ h1 {
 
 .art-piece-name {
   margin: 20px 0;
+  font-weight: normal;
 
+}
+
+#art-piece-name {
+  font-weight: bold;
+}
+
+#art-piece-info,
+#art-piece-year {
+
+  font-weight: normal;
 }
 
 .d-none {
@@ -320,7 +347,7 @@ h1 {
   height: 25%;
   background-color: #000080;
   color: white;
-  padding: 0.2em;
+  padding: 0.4em;
 }
 
 .info-pop-up-content {
@@ -395,6 +422,8 @@ h1 {
   padding: 1em;
 }
 
+
+
 .open-contact-content p {
   padding: 0.1em;
   font-size: 20px;
@@ -468,9 +497,16 @@ h1 {
 
 .arrows-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 40% 20% 40%;
   margin-top: auto;
+  border-top: 1px solid grey;
+  background-color: #ede9e9;
   padding: 1.2rem 0;
+}
+
+
+.arrowPreviousPhoto {
+  transform: rotate(-90deg);
 }
 
 .photo {
@@ -508,7 +544,7 @@ h1 {
 }
 
 .arrowNextPhoto {
-  transform: rotate(180deg);
+  transform: rotate(90deg);
 }
 
 .closeImg {
