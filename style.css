@@ -156,7 +156,8 @@ h1 {
 .open-folder-container {
   z-index: 1;
   width: 80%;
-  height: 80vh;
+  /* height: 80vh; */
+  height: 800px;
   background-color: white;
   position: absolute;
   margin-right: auto;
@@ -222,7 +223,8 @@ h1 {
   margin: 30px 30px;
   /* grid-template-columns: repeat(auto-fill, minmax(220px, auto)); */
   border: 0.3px solid grey;
-  height: 61vh;
+  /* height: 61vh; */
+  height: 620px;
   grid-gap: 30px;
   overflow-Y: scroll;
 }
@@ -357,7 +359,8 @@ h1 {
 /* contact page */
 .open-contact-page {
   width: 80%;
-  height: 80vh;
+  /* height: 80vh; */
+  height: 800px;
   background-color: white;
   position: absolute;
   margin-right: auto;
@@ -371,6 +374,7 @@ h1 {
 
 .open-contact-icons {
   display: grid;
+  align-items: center;
   height: 6%;
   border-bottom: 0.2px solid grey;
   padding-top: 0.4em;
@@ -431,7 +435,8 @@ h1 {
   position: absolute;
   flex-direction: column;
   width: 80%;
-  height: 80%;
+  /* height: 80%; */
+  height: 800px;
   background-color: white;
   transform: translate(-50%, -50%);
   top: 50%;
@@ -449,8 +454,10 @@ h1 {
 .photoHeader {
   display: grid;
   grid-template-columns: 80% 20%;
-  background-color: #cccc;
+  background-color: #e8e2e2c7;
   padding: 0.5rem;
+  align-items: center;
+  border-bottom: 1px solid grey;
 }
 
 .photo-bg {

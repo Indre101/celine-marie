@@ -47,7 +47,7 @@ closeImg.onclick = function () {
 
 function init() {
   spinner.removeAttribute('hidden'); //preloader shows up
-  fetch("http://indre101.lashboutique.dk/wordpress/wp-json/wp/v2/art_categories?_embed").then(res => {
+  fetch("https://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json/wp/v2/art_categories").then(res => {
     return res.json()
   }).then(data => {
     spinner.setAttribute('hidden', '')
