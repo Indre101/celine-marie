@@ -30,6 +30,8 @@ document.querySelector(".closeBTn").onclick = function () {
 document.querySelector(".info-pop-up-ok").onclick = function () {
   infoPopUp.classList.add("d-none");
   photoContainer.classList.add("d-none");
+  nextFoto.style.display = "block";
+  previousPhoto.style.display = "block";
   const images = document.querySelectorAll(".art-piece")
   console.log(images);
   images.forEach(img => {
@@ -263,7 +265,6 @@ const infoPopUpArtPieceInfo = infoPopUp.querySelector(".art-piece-info")
 const infoPopupArtPieceYear = infoPopUp.querySelector(".art-piece-year")
 const photoContainerPhotosrc = photoContainer.querySelector(".photo")
 const photoHeader = photoContainer.querySelector(".photoHeader h4");
-const photoMoreInfo = photoContainer.querySelector(".more-info");
 
 function popUpIwndows(artPiecePhotoandName) {
   infoPopUpName.textContent = artPiecePhotoandName.querySelector(".art-piece-name").textContent
@@ -271,7 +272,6 @@ function popUpIwndows(artPiecePhotoandName) {
   infoPopupArtPieceYear.textContent = artPiecePhotoandName.querySelector(".year").textContent
   photoContainerPhotosrc.src = artPiecePhotoandName.querySelector(".art-piece-large-icon").src
   photoHeader.textContent = artPiecePhotoandName.querySelector(".art-piece-name").textContent
-  photoMoreInfo.textContent = `${artPiecePhotoandName.querySelector(".descirption").textContent}. ${artPiecePhotoandName.querySelector(".year").textContent}`
 }
 
 
