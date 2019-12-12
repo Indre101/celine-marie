@@ -30,6 +30,11 @@ document.querySelector(".closeBTn").onclick = function () {
 document.querySelector(".info-pop-up-ok").onclick = function () {
   infoPopUp.classList.add("d-none");
   photoContainer.classList.add("d-none");
+  const images = document.querySelectorAll(".art-piece")
+  console.log(images);
+  images.forEach(img => {
+    img.classList.remove("active"); //Remove the class active
+  })
 }
 
 
@@ -241,10 +246,6 @@ function showArtPieceList(piece, placeToAppendTo) {
 
   const artPiecePhotoandName = artPieceCln.querySelector(".art-piece")
   artPiecePhotoandName.onclick = function () {
-    const images = document.querySelectorAll(".art-piece")
-    images.forEach(img => {
-      img.classList.remove("active"); //Remove the class active
-    })
     artPiecePhotoandName.classList.add("active");
     switchBetweenImages(false);
     infoPopUp.classList.remove("d-none");
@@ -262,13 +263,15 @@ const infoPopUpArtPieceInfo = infoPopUp.querySelector(".art-piece-info")
 const infoPopupArtPieceYear = infoPopUp.querySelector(".art-piece-year")
 const photoContainerPhotosrc = photoContainer.querySelector(".photo")
 const photoHeader = photoContainer.querySelector(".photoHeader h4");
+const photoMoreInfo = photoContainer.querySelector(".more-info");
 
 function popUpIwndows(artPiecePhotoandName) {
   infoPopUpName.textContent = artPiecePhotoandName.querySelector(".art-piece-name").textContent
   infoPopUpArtPieceInfo.textContent = artPiecePhotoandName.querySelector(".descirption").textContent
   infoPopupArtPieceYear.textContent = artPiecePhotoandName.querySelector(".year").textContent
   photoContainerPhotosrc.src = artPiecePhotoandName.querySelector(".art-piece-large-icon").src
-  photoHeader.textContent = artPiecePhotoandName.querySelector(".art-piece-name").textContent;
+  photoHeader.textContent = artPiecePhotoandName.querySelector(".art-piece-name").textContent
+  photoMoreInfo.textContent = `${artPiecePhotoandName.querySelector(".descirption").textContent}. ${artPiecePhotoandName.querySelector(".year").textContent}`
 }
 
 

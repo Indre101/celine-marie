@@ -429,15 +429,13 @@ h1 {
 }
 
 .photo-container h4 {
-
   text-align: center;
-  padding: 1rem;
   font-weight: normal;
 }
 
 .photoHeader {
   background-color: #cccc;
-
+  padding: 0.5rem;
 }
 
 .photo-bg {
