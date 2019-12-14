@@ -1,6 +1,9 @@
 const contactPage = document.querySelector(".open-contact-page");
 const contactIcon = document.querySelector(".contact-page");
 const close = document.querySelector(".closeBTnContact");
+const aboutPagebtn = document.querySelector(".about-page-btn");
+
+
 
 contactIcon.addEventListener("click", openContact);
 close.addEventListener("click", closeContact)
@@ -76,27 +79,32 @@ enlarge.onclick = function () {
 }
 
 
-const aboutPagebtn = document.querySelector(".about-page-btn");
-const openAboutPage = document.querySelector(".open-about-page")
+// ABOUT page
+const aboutPage = document.querySelector(".open-about-page");
 const closeBtnAbout = document.querySelector(".closeBTnAbout");
 const maximizeNotepadAbout = document.querySelector(".maximizeNotepadAbout");
-const minimizeBtnAbout = document.querySelector(".minimizeBtnAbout");
+const minimizeBtnAbout = document.querySelector(".minimizeNotepadAbout");
 
 aboutPagebtn.onclick = function () {
-    openAboutPage.classList.remove("d-none");
+    openAboutPage()
+}
+
+const openAboutPage = () => {
+    aboutPage.classList.remove("d-none");
+    console.log("clicked");
 }
 
 closeBtnAbout.onclick = function () {
-    openAboutPage.classList.add("d-none");
+    console.log("object about");
+    aboutPage.classList.add("d-none");
 }
 
-minimizeBtnAbout.onclick = function (params) {
-    resetheightandWidth(openAboutPage);
+minimizeBtnAbout.onclick = function () {
+    resetheightandWidth(aboutPage);
 
 }
 
-maximizeNotepadAbout.onclick = function (params) {
-    changeWindowheightAndWith(openAboutPage, 100, 100)
-
+maximizeNotepadAbout.onclick = function () {
+    changeWindowheightAndWith(aboutPage, 100, 100)
 
 }

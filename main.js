@@ -36,6 +36,18 @@ popupWindowOk.onclick = function () {
 }
 
 
+const popupWindowClose = document.querySelector(".info-pop-up-closeBtn")
+popupWindowClose.onclick = function () {
+  infoPopUp.classList.add("d-none");
+}
+
+// const closeBTnAbout = document.querySelector(".closeBTnAbout");
+
+// closeBTnAbout.onclick = function () {
+
+
+// }
+
 closeImg.onclick = function () {
   const images = document.querySelectorAll(".art-piece")
   photoContainer.style.display = "none";
@@ -56,7 +68,7 @@ function init() {
   }).then(data => {
     spinner.setAttribute('hidden', '')
     cloneNotepad(); //Function that will copy notepadIcon and assign functionality for contact
-
+    cloneNotepadAbout() //Function to append abuut page icon
     data.forEach(category => {
       getCategories(category, artCategories);
       createSubcategories(category, artPiecesCategories)
@@ -118,6 +130,15 @@ function cloneNotepad() {
   clnContact.addEventListener("click", openContact);
   artPiecesCategories.appendChild(clnContact);
 }
+
+function cloneNotepadAbout() {
+  const clnAboutbtn = aboutPagebtn.cloneNode(true);
+  clnAboutbtn.classList.add("subcategory-file")
+  clnAboutbtn.addEventListener("click", openAboutPage);
+  artPiecesCategories.appendChild(clnAboutbtn);
+}
+
+
 
 function path() {
   const pathNameBtns = document.querySelectorAll(".pathNameAndIcon")
