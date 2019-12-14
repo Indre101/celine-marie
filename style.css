@@ -149,7 +149,7 @@ h1 {
 
 .category-name {
   font-size: 2rem;
-  margin-top: 15vh;
+  margin-top: 12vh;
   color: white;
 }
 
@@ -309,7 +309,9 @@ h1 {
 }
 
 
-.contact-page.subcategory-file {
+
+.contact-page.subcategory-file,
+.about-page-btn.subcategory-file {
   margin: 20px;
   flex-direction: column;
   justify-content: center;
@@ -317,10 +319,18 @@ h1 {
   width: fit-content;
 }
 
-.contact-page.subcategory-file h2.category-name {
+.contact-page.subcategory-file h2.category-name,
+.about-page-btn.subcategory-file h2.category-name {
   color: black;
   font-size: 1rem;
+  margin: 0;
 }
+
+.contact-page.subcategory-file .contact-img,
+.about-page-btn.subcategory-file .contact-img {
+  position: relative;
+}
+
 
 .contact-page.subcategory-file .contact-img {
   height: 130px;
@@ -386,7 +396,7 @@ h1 {
 
 /* contact page */
 .open-contact-page,
-.oopen-about-page {
+.open-about-page {
   width: 80%;
   /* height: 80vh; */
   height: 800px;
@@ -398,7 +408,7 @@ h1 {
   transform: translate(-50%, -50%);
   border: 0.2px solid grey;
   box-shadow: 15px 15px 15px -6px #777;
-
+  z-index: 3;
 }
 
 .open-contact-icons,
@@ -443,7 +453,7 @@ h1 {
 .about-page-btn {
   align-items: flex-end;
   margin: 0 100px;
-
+  width: fit-content;
 }
 
 
@@ -564,19 +574,7 @@ h1 {
 }
 
 /* About page */
-.open-about-page {
-  width: 80%;
-  height: 80vh;
-  background-color: white;
-  position: absolute;
-  margin-right: auto;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 0.2px solid grey;
-  box-shadow: 15px 15px 15px -6px #777;
 
-}
 
 /* 
 .open-about-icons {
