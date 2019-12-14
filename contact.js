@@ -74,3 +74,29 @@ enlarge.onclick = function () {
         clicks = 0;
     }
 }
+
+
+const aboutPagebtn = document.querySelector(".about-page-btn");
+const openAboutPage = document.querySelector(".open-about-page")
+const closeBtnAbout = document.querySelector(".closeBTnAbout");
+const maximizeNotepadAbout = document.querySelector(".maximizeNotepadAbout");
+const minimizeBtnAbout = document.querySelector(".minimizeBtnAbout");
+
+aboutPagebtn.onclick = function () {
+    openAboutPage.classList.remove("d-none");
+}
+
+closeBtnAbout.onclick = function () {
+    openAboutPage.classList.add("d-none");
+}
+
+minimizeBtnAbout.onclick = function (params) {
+    resetheightandWidth(openAboutPage);
+
+}
+
+maximizeNotepadAbout.onclick = function (params) {
+    changeWindowheightAndWith(openAboutPage, 100, 100)
+
+
+}
