@@ -327,6 +327,31 @@ h1 {
   object-fit: contain;
 }
 
+
+
+
+
+
+/*.about-page.subcategory-file {
+  margin: 20px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+}
+
+.about-page.subcategory-file h2.category-name {
+  color: black;
+  font-size: 1rem;
+}
+
+.about-page.subcategory-file .contact-img {
+  height: 130px;
+  width: 120px;
+  object-fit: contain;
+}
+*/
+
 /* art info pop-up window */
 
 .info-pop-up {
@@ -435,6 +460,51 @@ h1 {
   align-items: center;
   flex-direction: column;
 }
+
+
+
+
+/* about page */
+.open-about-page {
+  width: 80%;
+  height: 80vh;
+  background-color: white;
+  position: absolute;
+  margin-right: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 0.2px solid grey;
+  box-shadow: 15px 15px 15px -6px #777;
+
+}
+
+.open-about-icons {
+  display: grid;
+  height: 6%;
+  border-bottom: 0.2px solid grey;
+  padding-top: 0.4em;
+  width: 100%;
+  grid-template-columns: 1fr 80% 1fr 1fr 1fr;
+}
+
+
+.open-about-content {
+  padding: 1em;
+}
+
+.open-about-content p {
+  padding: 0.2em;
+  font-size: 20px;
+}
+
+.about-page {
+  display: flex;
+  margin: 15px 30px;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+
 
 
 .pathNameAndIcon {
