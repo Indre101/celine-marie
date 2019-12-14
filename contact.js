@@ -11,6 +11,7 @@ function openContact() {
 }
 
 function closeContact() {
+    resetheightandWidth(contactPage)
     contactPage.classList.add("d-none")
     contactPage.style.zIndex = 1;
 
@@ -62,14 +63,14 @@ let clicks = 0;
 enlarge.onclick = function () {
     clicks++
     changeWindowheightAndWith(photoContainer, 100, 100)
-    changeWindowheightAndWith(photo, "", 90)
-    enlarge.src = "./icons/minimize.svg";
+    changeWindowheightAndWith(photo, "", 85)
+    enlarge.src = "./icons/minimize_arrows.svg";
 
     if (clicks == 2) {
 
         resetheightandWidth(photoContainer)
         resetheightandWidth(photo)
-        enlarge.src = "./icons/maximize.svg";
+        enlarge.src = "./icons/full-screen-selector.svg";
         clicks = 0;
     }
 }

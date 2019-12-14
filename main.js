@@ -22,6 +22,8 @@ const closeImg = document.getElementById("closeImg");
 window.addEventListener("DOMContentLoaded", init)
 
 document.querySelector(".closeBTn").onclick = function () {
+  resetheightandWidth(openFolderContainer)
+  resetheightandWidth(artPiecesCategories)
   openFolderContainer.classList.add("d-none");
   while (folderPath.firstChild) {
     folderPath.removeChild(folderPath.firstChild);
@@ -36,18 +38,20 @@ popupWindowOk.onclick = function () {
 
 closeImg.onclick = function () {
   const images = document.querySelectorAll(".art-piece")
-  photoContainer.classList.add("d-none");
+  photoContainer.style.display = "none";
   infoPopUp.classList.add("d-none");
   images.forEach(img => {
     img.classList.remove("active"); //Remove the class active
   })
+  resetheightandWidth(photoContainer)
+  resetheightandWidth(photo)
   nextFoto.style.display = "block";
   previousPhoto.style.display = "block";
 }
 
 function init() {
   spinner.removeAttribute('hidden'); //preloader shows up
-  fetch("http://indre101.lashboutique.dk/wordpress/wp-json/wp/v2/art_categories?_embed").then(res => {
+  fetch("https://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json/wp/v2/art_categories").then(res => {
     return res.json()
   }).then(data => {
     spinner.setAttribute('hidden', '')
@@ -257,6 +261,8 @@ function showArtPieceList(piece, placeToAppendTo) {
     switchBetweenImages(false);
     infoPopUp.classList.remove("d-none");
     photoContainer.classList.remove("d-none");
+    photoContainer.style.display = "flex";
+
     popUpIwndows(artPiecePhotoandName)
 
   }

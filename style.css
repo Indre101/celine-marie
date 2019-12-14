@@ -2,8 +2,9 @@
   margin: 0;
   padding: 0;
   font-family: Helvetica, Arial, sans-serif;
-  /* overflow: hidden; */
+  overflow: hidden;
   box-sizing: border-box;
+  font-weight: normal;
 }
 
 #spinner {
@@ -93,6 +94,12 @@ h1 {
 
 }
 
+.minimize {
+  align-self: center;
+  height: 0.1rem;
+  width: 2.2rem;
+}
+
 .category-folder {
   display: flex;
   /* justify-content: center; */
@@ -150,7 +157,8 @@ h1 {
 .open-folder-container {
   z-index: 1;
   width: 80%;
-  height: 80vh;
+  /* height: 80vh; */
+  height: 800px;
   background-color: white;
   position: absolute;
   margin-right: auto;
@@ -164,8 +172,14 @@ h1 {
 
 .open-folder-icons {
   display: grid;
-  margin: 30px 30px;
-  grid-template-columns: 65% 1fr 1fr 1fr;
+  margin: 20px 30px;
+  grid-template-columns: 75% 1fr 1fr 1fr;
+  align-items: center;
+}
+
+.folder-menu-btn.back-arrow {
+  width: 35px;
+  transform: rotate(-90deg);
 }
 
 .justify-self {
@@ -198,8 +212,22 @@ h1 {
 
 }
 
+.minimizeNotepad,
+.minimize {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
 
 
+.minimize {
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.minimize .folder-menu-btn {
+  width: 26px;
+}
 
 .folder-path h3 {
   font-size: 1.2rem;
@@ -211,7 +239,8 @@ h1 {
   margin: 30px 30px;
   /* grid-template-columns: repeat(auto-fill, minmax(220px, auto)); */
   border: 0.3px solid grey;
-  height: 61vh;
+  /* height: 61vh; */
+  height: 620px;
   grid-gap: 30px;
   overflow-Y: scroll;
 }
@@ -239,7 +268,18 @@ h1 {
 
 .art-piece-name {
   margin: 20px 0;
+  font-weight: normal;
 
+}
+
+#art-piece-name {
+  font-weight: bold;
+}
+
+#art-piece-info,
+#art-piece-year {
+
+  font-weight: normal;
 }
 
 .d-none {
@@ -332,7 +372,7 @@ h1 {
   height: 25%;
   background-color: #000080;
   color: white;
-  padding: 0.2em;
+  padding: 0.4em;
 }
 
 .info-pop-up-content {
@@ -371,7 +411,8 @@ h1 {
 /* contact page */
 .open-contact-page {
   width: 80%;
-  height: 80vh;
+  /* height: 80vh; */
+  height: 800px;
   background-color: white;
   position: absolute;
   margin-right: auto;
@@ -385,7 +426,8 @@ h1 {
 
 .open-contact-icons {
   display: grid;
-  height: 6%;
+  align-items: center;
+  height: 60px;
   border-bottom: 0.2px solid grey;
   padding-top: 0.4em;
   width: 100%;
@@ -404,6 +446,8 @@ h1 {
 .open-contact-content {
   padding: 1em;
 }
+
+
 
 .open-contact-content p {
   padding: 0.1em;
@@ -488,8 +532,10 @@ h1 {
 /* Photo */
 .photo-container {
   position: absolute;
+  flex-direction: column;
   width: 80%;
-  height: 80%;
+  /* height: 80%; */
+  height: 800px;
   background-color: white;
   transform: translate(-50%, -50%);
   top: 50%;
@@ -507,8 +553,10 @@ h1 {
 .photoHeader {
   display: grid;
   grid-template-columns: 80% 20%;
-  background-color: #cccc;
+  background-color: #e8e2e2c7;
   padding: 0.5rem;
+  align-items: center;
+  border-bottom: 1px solid grey;
 }
 
 .photo-bg {
@@ -519,12 +567,22 @@ h1 {
 
 .arrows-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 40% 20% 40%;
+  margin-top: auto;
+  border-top: 1px solid grey;
+  background-color: #ede9e9;
+  padding: 1.2rem 0;
+}
+
+
+.arrowPreviousPhoto {
+  transform: rotate(-90deg);
 }
 
 .photo {
   height: 65vh;
   object-fit: contain;
+  padding: 1rem;
 }
 
 .arrows-container>div {
@@ -556,7 +614,7 @@ h1 {
 }
 
 .arrowNextPhoto {
-  transform: rotate(180deg);
+  transform: rotate(90deg);
 }
 
 .closeImg {
