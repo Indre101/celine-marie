@@ -576,7 +576,7 @@ h1 {
 }
 
 .closeImg {
-  height: 2rem;
+  height: 3vh;
   justify-self: flex-end;
   grid-area: 1/2;
 }
