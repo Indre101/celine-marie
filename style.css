@@ -540,7 +540,7 @@ h1 {
 }
 
 .photo {
-  height: 65%;
+  height: 85%;
   object-fit: contain;
   padding: 1rem;
 }
@@ -650,6 +650,10 @@ h1 {
 
   .info-pop-up {
     width: 50%;
+  }
+
+  .photo {
+    height: 65%;
   }
 
   .open-contact-icons,
