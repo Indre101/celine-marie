@@ -450,10 +450,10 @@ h1 {
   display: flex;
   align-items: center;
   flex-direction: column;
+
 }
 
 .about-page-btn {
-  align-items: flex-end;
   margin: 0 100px;
   width: fit-content;
 }
