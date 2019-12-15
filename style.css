@@ -90,7 +90,7 @@ h1 {
   position: absolute;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 90vh;
 
 }
 
@@ -103,7 +103,6 @@ h1 {
 .category-folder {
   display: flex;
   /* justify-content: center; */
-  margin: 15px 0;
   align-items: center;
   flex-direction: column;
 }
@@ -149,7 +148,7 @@ h1 {
 
 .category-name {
   font-size: 2rem;
-  margin-top: 11vh;
+  margin-top: 10vh;
   color: white;
 }
 
@@ -449,7 +448,6 @@ h1 {
 .contact-page,
 .about-page-btn {
   display: flex;
-  margin: 15px 0;
   align-items: center;
   flex-direction: column;
 }
@@ -727,10 +725,6 @@ h1 {
 
 @media only screen and (max-width: 414px) {
 
-  .folder-img {
-    height: 80px;
-  }
-
   .about-page-btn {
     align-items: center;
   }
@@ -779,10 +773,6 @@ h1 {
     grid-template-columns: 1fr 1fr 50%;
   }
 
-
-  /* .art-pieces-categories {
-    height: 75%;
-  } */
 }
 
 
@@ -792,9 +782,6 @@ h1 {
     font-size: 1.2rem;
   }
 
-  .category-name {
-    margin-top: 13vh;
-  }
 
 }
 
@@ -802,12 +789,8 @@ h1 {
 
 @media only screen and (max-width: 320px) {
 
-  .folder-img {
-    height: 70px;
-  }
 
   .art-pieces-categories {
-    /* height: 68%; */
     margin: 30px 10px;
   }
 
