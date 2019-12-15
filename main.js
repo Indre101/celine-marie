@@ -170,7 +170,7 @@ function clickedFolder(folder, canBeAddedTothePath) {
     if (artPlace.classList.contains(folderName)) { //First checks for the arPlace if it has the class name as the clicked button name
       artPlace.querySelectorAll(".subcategory-icon-and-name").forEach(p => p.style.display = "flex") //returns display to all the subcategory folders
       if (artPlace.classList.contains("art-pieces-categories")) { //If the art place has the main class/Checks basically if it's the top hierarchy level
-        artPlace.style.display = "block"; //display the container
+        artPlace.style.display = "flex"; //display the container
         artPlace.querySelectorAll(".subcategory-file").forEach(sub => sub.style.display = "flex"); //Display all the files(notepad, video)
       } else { //If it is not the top hierarchy folder
         artPlace.style.display = "flex"; //Change display property to flex from none
