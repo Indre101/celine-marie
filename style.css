@@ -405,8 +405,8 @@ h1 {
 .open-contact-page,
 .open-about-page {
   width: 80%;
-  /* height: 80vh; */
-  height: 800px;
+  height: 80vh;
+  /* height: 800px; */
   background-color: white;
   position: absolute;
   margin-right: auto;
@@ -492,8 +492,8 @@ h1 {
   position: absolute;
   flex-direction: column;
   width: 80%;
-  /* height: 80%; */
-  height: 800px;
+  height: 80vh;
+  /* height: 800px; */
   background-color: white;
   transform: translate(-50%, -50%);
   top: 50%;
