@@ -538,7 +538,7 @@ h1 {
 }
 
 .photo {
-  height: 65vh;
+  height: 50vh;
   object-fit: contain;
   padding: 1rem;
 }
