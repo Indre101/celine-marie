@@ -763,6 +763,40 @@ h1 {
 
   .art-pieces-categories {
     height: 68%;
+    margin: 30px 10px;
+  }
+
+  .folder-path {
+    margin: 30px 10px;
+  }
+
+  .folder-path h3 {
+    font-size: 0.9rem;
+  }
+
+  .artPieces.uniClass.paintings {
+    align-items: center;
+  }
+
+  .contact-page.subcategory-file .contact-img,
+  .about-page-btn.subcategory-file .contact-img,
+  .sub-category-icon {
+    width: 80px;
+  }
+
+
+  .contact-page.subcategory-file,
+  .about-page-btn.subcategory-file,
+  .subcategory-icon-and-name {
+    margin: 10px;
+  }
+
+  .info-pop-up-ok {
+    height: 1rem;
+  }
+
+  .art-piece-name {
+    margin: 2px 0;
   }
 }
 
