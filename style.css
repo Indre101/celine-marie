@@ -172,7 +172,7 @@ h1 {
 
 .open-folder-icons {
   display: grid;
-  margin: 20px 30px;
+  margin: 2.5vh 3vh;
   grid-template-columns: 75% 1fr 1fr 1fr;
   align-items: center;
 }
@@ -190,7 +190,8 @@ h1 {
 .folder-path {
   display: flex;
   border: 0.2px solid grey;
-  margin: 30px 30px;
+  margin: 2.5vh 3vh;
+
   align-items: center;
 
 }
@@ -237,7 +238,8 @@ h1 {
 
 .art-pieces-categories {
   display: flex;
-  margin: 30px 30px;
+  margin: 2.5vh 3vh;
+
   /* grid-template-columns: repeat(auto-fill, minmax(220px, auto)); */
   border: 0.3px solid grey;
   /* height: 61vh; */
