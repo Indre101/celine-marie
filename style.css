@@ -596,6 +596,19 @@ h1 {
 }
 
 
+@media only screen and (max-width: 950px) {
+
+  .open-contact-icons,
+  .open-about-icons {
+
+    grid-template-columns: 1fr 70% 1fr 1fr 1fr;
+  }
+
+}
+
+
+
+
 @media only screen and (max-width: 900px) {
   .info-pop-up {
     width: 35%;
@@ -603,11 +616,22 @@ h1 {
     left: 10%;
     bottom: 18%;
   }
+
+
+
 }
 
 
 
+@media only screen and (max-width: 700px) {
 
+  .open-contact-icons,
+  .open-about-icons {
+
+    grid-template-columns: 1fr 60% 1fr 1fr 1fr;
+  }
+
+}
 
 
 /* Extra small devices (phones, 600px and down) */
@@ -615,6 +639,11 @@ h1 {
 
   .info-pop-up {
     width: 50%;
+  }
+
+  .open-contact-icons,
+  .open-about-icons {
+    grid-template-columns: 1fr 50% 1fr 1fr 1fr;
   }
 }
 
