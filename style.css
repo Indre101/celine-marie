@@ -246,6 +246,10 @@ h1 {
   overflow-Y: scroll;
 }
 
+.art-pieces-categories.artPieces.thispc.uniClass {
+  justify-content: flex-start;
+}
+
 .art-piece-large-icon {
   height: 200px;
   object-fit: contain;
@@ -265,6 +269,7 @@ h1 {
   align-items: center;
   flex-direction: column;
   margin: 20px;
+  width: 200px;
 }
 
 .art-piece-name {
@@ -672,6 +677,8 @@ h1 {
   .folder-path-icon {
     width: 35px;
   }
+
+
 
   .uniClass {
     flex-direction: column;
