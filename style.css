@@ -299,8 +299,7 @@ h1 {
 
 
 .sub-category-icon {
-  height: 130px;
-  width: 120px;
+  height: 13vh;
   object-fit: contain;
 }
 
@@ -335,15 +334,13 @@ h1 {
 
 .contact-page.subcategory-file .contact-img,
 .about-page-btn.subcategory-file .contact-img {
+  height: 13vh;
   position: relative;
-}
-
-
-.contact-page.subcategory-file .contact-img {
-  height: 130px;
-  width: 120px;
   object-fit: contain;
 }
+
+
+
 
 /* art info pop-up window */
 
@@ -698,17 +695,17 @@ h1 {
   .contact-page.subcategory-file,
   .about-page-btn.subcategory-file,
   .subcategory-icon-and-name {
-    width: 110px;
-    margin: 20px;
+    width: 100px;
+    margin: 15px;
   }
 
 
-  .contact-page.subcategory-file .contact-img,
+  /* .contact-page.subcategory-file .contact-img,
   .about-page-btn.subcategory-file .contact-img,
   .sub-category-icon {
     height: unset;
-    width: 100px;
-  }
+    width: 80px;
+  } */
 
   .subcategory {
     justify-content: center;
@@ -729,7 +726,7 @@ h1 {
 @media only screen and (max-width: 414px) {
 
   .folder-img {
-    height: 90px;
+    height: 80px;
   }
 
   .about-page-btn {
@@ -756,11 +753,11 @@ h1 {
     width: 100%;
     top: unset;
     left: unset;
-    bottom: 11%;
+    bottom: 11.5%;
   }
 
   .info-pop-up-ok {
-    height: 2rem;
+    height: 1.5rem;
   }
 
 
@@ -794,7 +791,7 @@ h1 {
   }
 
   .category-name {
-    margin-top: 14vh;
+    margin-top: 13vh;
   }
 
 }
@@ -804,7 +801,7 @@ h1 {
 @media only screen and (max-width: 320px) {
 
   .folder-img {
-    height: 85px;
+    height: 70px;
   }
 
   .art-pieces-categories {
@@ -824,11 +821,11 @@ h1 {
     align-items: center;
   }
 
-  .contact-page.subcategory-file .contact-img,
+  /* .contact-page.subcategory-file .contact-img,
   .about-page-btn.subcategory-file .contact-img,
   .sub-category-icon {
     width: 80px;
-  }
+  } */
 
 
   .contact-page.subcategory-file,
