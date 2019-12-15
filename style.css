@@ -610,6 +610,9 @@ h1 {
     grid-template-columns: 1fr 70% 1fr 1fr 1fr;
   }
 
+  .open-about-page {
+    overflow: scroll;
+  }
 }
 
 
