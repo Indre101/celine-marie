@@ -157,8 +157,8 @@ h1 {
 .open-folder-container {
   z-index: 1;
   width: 80%;
-  /* height: 80vh; */
-  height: 800px;
+  height: 80vh;
+  /* height: 800px; */
   background-color: white;
   position: absolute;
   margin-right: auto;
@@ -242,8 +242,7 @@ h1 {
 
   /* grid-template-columns: repeat(auto-fill, minmax(220px, auto)); */
   border: 0.3px solid grey;
-  /* height: 61vh; */
-  height: 620px;
+  height: 75%;
   grid-gap: 30px;
   overflow-Y: scroll;
 }
@@ -521,7 +520,8 @@ h1 {
 .photo-bg {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: baseline;
+  height: inherit;
 }
 
 .arrows-container {
@@ -540,7 +540,7 @@ h1 {
 }
 
 .photo {
-  height: 50vh;
+  height: 65%;
   object-fit: contain;
   padding: 1rem;
 }
@@ -777,9 +777,9 @@ h1 {
   }
 
 
-  .art-pieces-categories {
+  /* .art-pieces-categories {
     height: 75%;
-  }
+  } */
 }
 
 
@@ -804,7 +804,7 @@ h1 {
   }
 
   .art-pieces-categories {
-    height: 68%;
+    /* height: 68%; */
     margin: 30px 10px;
   }
 
