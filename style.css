@@ -118,7 +118,7 @@ h1 {
 
 /* Menu item */
 .folder-img {
-  height: 120px;
+  height: 10vh;
   position: absolute;
 }
 
@@ -149,7 +149,7 @@ h1 {
 
 .category-name {
   font-size: 2rem;
-  margin-top: 12vh;
+  margin-top: 11vh;
   color: white;
 }
 
