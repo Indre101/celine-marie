@@ -508,6 +508,7 @@ h1 {
   grid-template-columns: 80% 20%;
   background-color: #e8e2e2c7;
   padding: 0.5rem;
+  height: 10vh;
   align-items: center;
   border-bottom: 1px solid grey;
 }
@@ -522,7 +523,7 @@ h1 {
 .arrows-container {
   display: grid;
   grid-template-columns: 40% 20% 40%;
-  height: 10vh;
+  height: 15vh;
   align-items: center;
   margin-top: auto;
   border-top: 1px solid grey;
@@ -637,6 +638,11 @@ h1 {
   .open-about-icons {
 
     grid-template-columns: 1fr 60% 1fr 1fr 1fr;
+  }
+
+  .iconPhoto {
+    height: 7vh;
+    margin: 0 1rem;
   }
 
 }
