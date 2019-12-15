@@ -710,6 +710,9 @@ h1 {
     margin: 15px;
   }
 
+  .art-pieces-categories {
+    height: 75vh;
+  }
 
   /* .contact-page.subcategory-file .contact-img,
   .about-page-btn.subcategory-file .contact-img,
