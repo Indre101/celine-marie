@@ -178,7 +178,7 @@ h1 {
 }
 
 .folder-menu-btn.back-arrow {
-  width: 35px;
+  width: 3vh;
   transform: rotate(-90deg);
 }
 
@@ -207,7 +207,7 @@ h1 {
 }
 
 .folder-menu-btn {
-  width: 25px;
+  width: 3vh;
   margin: 0 10px;
 
 }
