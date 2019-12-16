@@ -69,6 +69,7 @@ function init() {
     spinner.setAttribute('hidden', '')
     cloneNotepad(); //Function that will copy notepadIcon and assign functionality for contact
     cloneNotepadAbout() //Function to append abuut page icon
+    // addVideobtn() // add video bnt
     data.forEach(category => {
       getCategories(category, artCategories);
       createSubcategories(category, artPiecesCategories)
@@ -138,6 +139,15 @@ function cloneNotepadAbout() {
   artPiecesCategories.appendChild(clnAboutbtn);
 }
 
+
+const videoPageBtn = document.querySelector(".video-page-btn")
+
+function addVideobtn() {
+  const videoPageBtncln = videoPageBtn.cloneNode(true);
+  videoPageBtncln.classList.add("subcategory-file")
+  videoPageBtncln.addEventListener("click", openAboutPage);
+  artPiecesCategories.appendChild(videoPageBtncln);
+}
 
 
 function path() {

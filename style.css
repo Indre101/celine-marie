@@ -344,7 +344,8 @@ h1 {
 }
 
 .contact-page.subcategory-file h2.category-name,
-.about-page-btn.subcategory-file h2.category-name {
+.about-page-btn.subcategory-file h2.category-name,
+.video-page-btn.subcategory-file h2.category-name {
   color: black;
   font-size: 1rem;
   margin: 0;
