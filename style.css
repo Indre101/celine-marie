@@ -486,10 +486,11 @@ h1 {
 }
 
 .contact-page,
-.about-page-btn {
+.about-page-btn, .video-btn {
   display: flex;
   align-items: center;
   flex-direction: column;
+
 
 }
 
