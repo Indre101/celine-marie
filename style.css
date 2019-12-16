@@ -32,10 +32,10 @@
   width: 80px;
   height: 80px;
   border: 6px solid #f3f3f3;
-  border-top: 6px solid #369AD9;
+  border-top: 6px solid #369ad9;
   border-radius: 100%;
   will-change: transform;
-  animation: spin 1s infinite linear
+  animation: spin 1s infinite linear;
 }
 
 @keyframes spin {
@@ -50,7 +50,7 @@
 
 /* Landing page banckground image */
 body {
-  background-color: #47A5BE;
+  background-color: #47a5be;
   background-size: cover;
   height: 100vh;
   width: 100%;
@@ -71,19 +71,15 @@ body {
   left: 50%;
   z-index: -1;
   width: 80%;
-
 }
-
 
 @keyframes float {
   0% {
     transform: translateY(0px);
   }
-
   50% {
     transform: translateY(-20px);
   }
-
   100% {
     transform: translateY(0px);
   }
@@ -126,7 +122,6 @@ h1 {
   justify-content: center;
   align-items: center;
   height: 90vh;
-
 }
 
 .minimize {
@@ -171,8 +166,6 @@ h1 {
   -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
   transform-style: preserve-3d;
-
-
 }
 
 /* Menu item folder image */
@@ -201,7 +194,6 @@ h1 {
   transform: translate(-50%, -50%);
   border: 0.2px solid grey;
   box-shadow: 15px 15px 15px -6px #777;
-
 }
 
 .open-folder-icons {
@@ -227,7 +219,6 @@ h1 {
   margin: 2.5vh 3vh;
 
   align-items: center;
-
 }
 
 .custom-path {
@@ -244,7 +235,6 @@ h1 {
 .folder-menu-btn {
   width: 3vh;
   margin: 0 10px;
-
 }
 
 .minimizeNotepad,
@@ -254,7 +244,6 @@ h1 {
   align-items: center;
   height: 100%;
 }
-
 
 .minimize {
   width: 100%;
@@ -278,7 +267,7 @@ h1 {
   border: 0.3px solid grey;
   height: 60vh;
   grid-gap: 30px;
-  overflow-Y: scroll;
+  overflow-y: scroll;
 }
 
 .art-pieces-categories.artPieces.thispc.uniClass {
@@ -289,8 +278,6 @@ h1 {
   height: 200px;
   object-fit: contain;
 }
-
-
 
 .art-pieces h4 {
   font-weight: normal;
@@ -310,7 +297,6 @@ h1 {
 .art-piece-name {
   margin: 20px 0;
   font-weight: normal;
-
 }
 
 #art-piece-name {
@@ -319,7 +305,6 @@ h1 {
 
 #art-piece-info,
 #art-piece-year {
-
   font-weight: normal;
 }
 
@@ -331,12 +316,10 @@ h1 {
   display: block;
 }
 
-
 .sub-category-icon {
   height: 13vh;
   object-fit: contain;
 }
-
 
 .subcategory-icon-and-name {
   width: 150px;
@@ -346,10 +329,7 @@ h1 {
   width: -moz-fit-content;
   width: -webkit-fit-content;
   width: fit-content;
-
 }
-
-
 
 .contact-page.subcategory-file,
 .about-page-btn.subcategory-file {
@@ -377,14 +357,11 @@ h1 {
   object-fit: contain;
 }
 
-
-
-
 /* art info pop-up window */
 
 .info-pop-up {
   width: 25%;
-  background-color: #D4D0C8;
+  background-color: #d4d0c8;
   position: absolute;
   margin-right: auto;
   top: 40%;
@@ -409,21 +386,18 @@ h1 {
 
 .art-piece-info,
 .art-piece-year {
-
   display: inline;
-
 }
 
 .info-pop-up-closeBtn {
   width: 1em;
-  background-color: #D4D0C8;
+  background-color: #d4d0c8;
   padding: 0.2em;
   margin-top: 0.2em;
 }
 
 .info-pop-up-ok {
-
-  background-color: #D4D0C8;
+  background-color: #d4d0c8;
   border: 1px solid black;
   width: 20%;
   box-shadow: 5px 5px 5px -3px #777;
@@ -455,6 +429,7 @@ h1 {
 
 .open-contact-icons,
 .open-about-icons {
+  padding: 0 3vh;
   display: grid;
   align-items: center;
   height: 60px;
@@ -462,7 +437,6 @@ h1 {
   padding-top: 0.4em;
   width: 100%;
   grid-template-columns: 1fr 80% 1fr 1fr 1fr;
-  padding: 0 3vh;
 }
 
 .notepad-icon {
@@ -478,20 +452,16 @@ h1 {
   padding: 1em;
 }
 
-
-
 .open-contact-content p {
   padding: 0.1em;
   font-size: 20px;
 }
 
 .contact-page,
-.about-page-btn, .video-btn {
+.about-page-btn {
   display: flex;
   align-items: center;
   flex-direction: column;
-
-
 }
 
 .about-page-btn {
@@ -500,7 +470,6 @@ h1 {
   width: -webkit-fit-content;
   width: fit-content;
 }
-
 
 .pathNameAndIcon {
   display: flex;
@@ -512,13 +481,11 @@ h1 {
   display: flex;
 }
 
-
 .uniClass {
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
   align-items: baseline;
-
 }
 
 .subcategory {
@@ -543,7 +510,7 @@ h1 {
 .photo-container h4 {
   text-align: center;
   font-weight: normal;
-  grid-area: 1/1/ span 1/ span 2;
+  grid-area: 1/1 / span 1 / span 2;
 }
 
 .photoHeader {
@@ -573,7 +540,6 @@ h1 {
   background-color: #ede9e9;
 }
 
-
 .arrowPreviousPhoto {
   transform: rotate(-90deg);
 }
@@ -584,28 +550,24 @@ h1 {
   padding: 1rem;
 }
 
-.arrows-container>div {
+.arrows-container > div {
   display: flex;
 }
 
 .arrows-container-1 {
   display: flex;
   justify-content: flex-end;
-
 }
 
 .arrows-container-2 {
   display: flex;
   justify-content: center;
-
 }
 
 .arrows-container-3 {
   display: flex;
   justify-content: flex-start;
-
 }
-
 
 .iconPhoto {
   height: 5vh;
@@ -624,8 +586,6 @@ h1 {
 
 /* About page */
 
-
-
 .open-about-content {
   padding: 1em;
 }
@@ -642,12 +602,15 @@ h1 {
   flex-direction: row-reverse;
 }
 
+.about_image {
+  width: 40%;
+  height: 40%;
+  float: right;
+}
 
 @media only screen and (max-width: 950px) {
-
   .open-contact-icons,
   .open-about-icons {
-
     grid-template-columns: 1fr 70% 1fr 1fr 1fr;
   }
 
@@ -657,9 +620,6 @@ h1 {
   }
 }
 
-
-
-
 @media only screen and (max-width: 900px) {
   .info-pop-up {
     width: 35%;
@@ -667,19 +627,11 @@ h1 {
     left: 10%;
     bottom: 18%;
   }
-
-
-
 }
 
-
-
 @media only screen and (max-width: 700px) {
-
-
   .open-contact-icons,
   .open-about-icons {
-
     grid-template-columns: 1fr 60% 1fr 1fr 1fr;
   }
 
@@ -687,13 +639,10 @@ h1 {
     height: 7vh;
     margin: 0 1rem;
   }
-
 }
-
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 605px) {
-
   .info-pop-up {
     width: 50%;
   }
@@ -710,16 +659,13 @@ h1 {
   .photo-bg {
     height: 50vh;
   }
-
 }
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 440px) {
-
   .info-pop-up {
     width: 80%;
   }
-
 
   .minimizeNotepad,
   .maximizeNotepad,
@@ -730,7 +676,6 @@ h1 {
     display: none;
   }
 
-
   .folder-path h3 {
     font-size: 0.9rem;
   }
@@ -738,8 +683,6 @@ h1 {
   .folder-path-icon {
     width: 35px;
   }
-
-
 
   .uniClass {
     flex-direction: column;
@@ -758,11 +701,11 @@ h1 {
   }
 
   /* .contact-page.subcategory-file .contact-img,
-  .about-page-btn.subcategory-file .contact-img,
-  .sub-category-icon {
-    height: unset;
-    width: 80px;
-  } */
+.about-page-btn.subcategory-file .contact-img,
+.sub-category-icon {
+  height: unset;
+  width: 80px;
+} */
 
   .subcategory {
     justify-content: center;
@@ -772,16 +715,13 @@ h1 {
     margin: 5px 0;
   }
 
-
   .open-contact-icons,
   .open-about-icons {
     grid-template-columns: 15% 1fr 1fr;
   }
 }
 
-
 @media only screen and (max-width: 414px) {
-
   .about-page-btn {
     align-items: center;
   }
@@ -801,7 +741,6 @@ h1 {
     transform: unset;
   }
 
-
   .info-pop-up {
     width: 100%;
     top: unset;
@@ -813,7 +752,6 @@ h1 {
     height: 1.5rem;
   }
 
-
   .arrows-container,
   .open-folder-icons {
     grid-template-columns: 50% 50%;
@@ -823,30 +761,19 @@ h1 {
     display: none;
   }
 
-
-
   .open-contact-icons,
   .open-about-icons {
     grid-template-columns: 1fr 1fr 50%;
   }
-
 }
 
-
 @media only screen and (max-width: 376px) {
-
   .open-about-content p {
     font-size: 1.2rem;
   }
-
-
 }
 
-
-
 @media only screen and (max-width: 320px) {
-
-
   .art-pieces-categories {
     margin: 30px 10px;
   }
@@ -864,11 +791,10 @@ h1 {
   }
 
   /* .contact-page.subcategory-file .contact-img,
-  .about-page-btn.subcategory-file .contact-img,
-  .sub-category-icon {
-    width: 80px;
-  } */
-
+.about-page-btn.subcategory-file .contact-img,
+.sub-category-icon {
+  width: 80px;
+} */
 
   .contact-page.subcategory-file,
   .about-page-btn.subcategory-file,
@@ -885,25 +811,18 @@ h1 {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {}
+@media only screen and (min-width: 600px) {
+}
 
 /* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {}
+@media only screen and (min-width: 768px) {
+}
 
 /* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {}
+@media only screen and (min-width: 992px) {
+}
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {}
+@media only screen and (min-width: 1200px) {
+}
