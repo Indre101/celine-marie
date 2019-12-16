@@ -69,7 +69,7 @@ function init() {
     spinner.setAttribute('hidden', '')
     cloneNotepad(); //Function that will copy notepadIcon and assign functionality for contact
     cloneNotepadAbout() //Function to append abuut page icon
-    // addVideobtn() // add video bnt
+    addVideobtn() // add video bnt
     data.forEach(category => {
       getCategories(category, artCategories);
       createSubcategories(category, artPiecesCategories)

@@ -352,7 +352,8 @@ h1 {
 }
 
 .contact-page.subcategory-file .contact-img,
-.about-page-btn.subcategory-file .contact-img {
+.about-page-btn.subcategory-file .contact-img,
+.video-page-btn.subcategory-file .contact-img {
   height: 13vh;
   position: relative;
   object-fit: contain;
