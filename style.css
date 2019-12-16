@@ -181,7 +181,8 @@ h1 {
 }
 
 /* open folder */
-.open-folder-container {
+.open-folder-container,
+.open-video-container {
   z-index: 1;
   width: 80%;
   height: 80vh;
@@ -201,6 +202,18 @@ h1 {
   margin: 2.5vh 3vh;
   grid-template-columns: 75% 1fr 1fr 1fr;
   align-items: center;
+}
+
+.open-video-icons {
+  display: grid;
+  margin: 2.5vh 3vh;
+  grid-template-columns: 1fr 65% 20%;
+  align-items: center;
+}
+
+iframe {
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
 }
 
 .folder-menu-btn.back-arrow {

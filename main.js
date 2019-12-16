@@ -41,12 +41,7 @@ popupWindowClose.onclick = function () {
   infoPopUp.classList.add("d-none");
 }
 
-// const closeBTnAbout = document.querySelector(".closeBTnAbout");
 
-// closeBTnAbout.onclick = function () {
-
-
-// }
 
 closeImg.onclick = function () {
   const images = document.querySelectorAll(".art-piece")
@@ -149,6 +144,21 @@ function addVideobtn() {
   artPiecesCategories.appendChild(videoPageBtncln);
 }
 
+const closeBTnvideo = document.querySelector(".closeBTnvideo");
+const videoContainer = document.querySelector(".video-container");
+videoPageBtn.onclick = function () {
+  videoContainer.classList.remove("d-none");
+}
+
+
+function showVideo() {
+  videoContainer.classList.remove("d-none");
+}
+
+closeBTnvideo.onclick = function () {
+  videoContainer.classList.add("d-none");
+
+}
 
 function path() {
   const pathNameBtns = document.querySelectorAll(".pathNameAndIcon")
