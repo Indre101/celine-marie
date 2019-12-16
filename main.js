@@ -201,9 +201,6 @@ function getCategories(category, placeToAppend) {
   categoryName.textContent = category.title.rendered.toLowerCase()
   let imagesInsideFolderIcon = clnMenuFolder.querySelector(".images-inside-folder-icon");
   let categoryFolder = clnMenuFolder.querySelector(".category-folder");
-  // if (category.art_category_id.length > 0) { //If the category does NOT have subcategories
-  //   addImgaesToFolderIcon(category, imagesInsideFolderIcon) //Add image to the folder icon
-  // }
   categoryFolder.onclick = function () {
     openFolderContainer.classList.remove("d-none");
   }
