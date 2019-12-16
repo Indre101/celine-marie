@@ -108,6 +108,8 @@ h1 {
 }
 
 .category-folder-structure {
+  width: -moz-fit-content;
+  width: -webkit-fit-content;
   width: fit-content;
   display: flex;
   justify-content: center;
@@ -308,6 +310,8 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: -moz-fit-content;
+  width: -webkit-fit-content;
   width: fit-content;
 
 }
@@ -321,6 +325,8 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: -moz-fit-content;
+  width: -webkit-fit-content;
   width: fit-content;
 }
 
@@ -455,6 +461,8 @@ h1 {
 
 .about-page-btn {
   margin: 0 100px;
+  width: -moz-fit-content;
+  width: -webkit-fit-content;
   width: fit-content;
 }
 
