@@ -344,7 +344,8 @@ h1 {
 }
 
 .contact-page.subcategory-file h2.category-name,
-.about-page-btn.subcategory-file h2.category-name {
+.about-page-btn.subcategory-file h2.category-name,
+.video-page-btn.subcategory-file h2.category-name {
   color: black;
   font-size: 1rem;
   margin: 0;
@@ -631,6 +632,14 @@ h1 {
 }
 
 @media only screen and (max-width: 700px) {
+  .about_image {
+    display: block;
+    width: 97%;
+    object-fit: contain;
+    float: none;
+    margin: 5% 0;
+  }
+
   .open-contact-icons,
   .open-about-icons {
     grid-template-columns: 1fr 60% 1fr 1fr 1fr;
@@ -639,6 +648,19 @@ h1 {
   .iconPhoto {
     height: 7vh;
     margin: 0 1rem;
+  }
+
+  .categories {
+    width: fit-content;
+    width: -webkit-fit-content;
+    width: fit-content;
+  }
+
+  .contact-page,
+  .about-page-btn,
+  .video-page-btn {
+    margin: 0 3.5vh;
+    flex-direction: column;
   }
 }
 
