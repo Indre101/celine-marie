@@ -447,7 +447,7 @@ iframe {
 }
 
 .cursor {
-  cursor: pointer;
+  cursor: url('images/cursor.png'), auto;
 }
 
 /* contact page */
