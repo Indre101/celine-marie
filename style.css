@@ -664,7 +664,7 @@ iframe {
     width: 35%;
     top: unset;
     left: 10%;
-    bottom: 18%;
+    bottom: 25%;
   }
 }
 
@@ -793,15 +793,18 @@ iframe {
     grid-template-columns: 15% 1fr 1fr;
   }
 
-  .arrows-container,
-  .open-folder-icons {
-    grid-template-columns: 50% 50%;
+  div.arrows-container-2 {
+    display: none;
   }
 
   .contact-page.subcategory-file .contact-img,
   .about-page-btn.subcategory-file .contact-img,
   .video-page-btn.subcategory-file .contact-img {
     height: 10vh;
+  }
+  .arrows-container,
+  .open-folder-icons {
+    grid-template-columns: 50% 50%;
   }
 }
 

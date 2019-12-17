@@ -353,12 +353,12 @@ function switchBetweenImages(statusToMoveTheActiveClass, btn) {
   }
 
   if (indexImg == 0) {
-    previousPhoto.style.display = "none";
+    previousPhoto.style.visibility = "hidden";
   } else if (indexImg == arrayOFtheImgWithinActiveImg.length - 1) {
-    nextFoto.style.display = "none";
+    nextFoto.style.visibility = "hidden";
   } else {
-    nextFoto.style.display = "block";
-    previousPhoto.style.display = "block";
+    nextFoto.style.visibility = "visible";
+    previousPhoto.style.visibility = "visible";
 
   }
   arrayOFtheImgWithinActiveImg[indexImg].classList.add("active");
