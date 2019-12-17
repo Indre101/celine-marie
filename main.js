@@ -52,8 +52,8 @@ closeImg.onclick = function () {
   })
   resetheightandWidth(photoContainer)
   resetheightandWidth(photo)
-  nextFoto.style.display = "block";
-  previousPhoto.style.display = "block";
+  nextFoto.style.visibility = "visible";
+  previousPhoto.style.visibility = "visible";
 }
 
 function init() {
