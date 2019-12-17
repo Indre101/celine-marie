@@ -291,6 +291,8 @@ function showArtPieceList(piece, placeToAppendTo) {
   let artPieceCln = artPieceTemplate.cloneNode(true);
   artPieceCln.querySelector(".art-piece-name").textContent = piece.post_title.toLowerCase()
   artPieceCln.querySelector(".art-piece-large-icon").src = piece.featured_image.guid
+
+  artPieceCln.querySelector(".art-piece-large-icon").setAttribute("alt", `${piece.post_title.toLowerCase()}`);
   artPieceCln.querySelector(".descirption").textContent = piece.post_excerpt;
   artPieceCln.querySelector(".year").textContent = piece.year;
 
