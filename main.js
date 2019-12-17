@@ -136,18 +136,11 @@ function cloneNotepadAbout() {
 
 
 const videoPageBtn = document.querySelector(".video-page-btn")
-
-function addVideobtn() {
-  const videoPageBtncln = videoPageBtn.cloneNode(true);
-  videoPageBtncln.classList.add("subcategory-file")
-  videoPageBtncln.addEventListener("click", openAboutPage);
-  artPiecesCategories.appendChild(videoPageBtncln);
-}
-
 const closeBTnvideo = document.querySelector(".closeBTnvideo");
-const videoContainer = document.querySelector(".video-container");
+const videoContainer = document.querySelector(".open-video-container");
+
 videoPageBtn.onclick = function () {
-  videoContainer.classList.remove("d-none");
+  showVideo()
 }
 
 
@@ -159,6 +152,15 @@ closeBTnvideo.onclick = function () {
   videoContainer.classList.add("d-none");
 
 }
+
+
+function addVideobtn() {
+  const videoPageBtncln = videoPageBtn.cloneNode(true);
+  videoPageBtncln.classList.add("subcategory-file")
+  videoPageBtncln.addEventListener("click", showVideo);
+  artPiecesCategories.appendChild(videoPageBtncln);
+}
+
 
 function path() {
   const pathNameBtns = document.querySelectorAll(".pathNameAndIcon")
