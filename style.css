@@ -219,7 +219,7 @@ h1 {
 .open-video-icons {
   display: grid;
   margin: 2.5vh 3vh;
-  grid-template-columns: 1fr 65% 20%;
+  grid-template-columns: 1fr 75% 20%;
   align-items: center;
 }
 
@@ -654,14 +654,13 @@ iframe {
     grid-template-columns: 1fr 70% 1fr 1fr 1fr;
   }
 
-  .open-contact-icons,
-  .open-about-icons {
-    grid-template-columns: 1fr 70% 1fr 1fr 1fr;
-  }
-
   .open-about-content {
     overflow: scroll;
     height: 85vh;
+  }
+
+  .open-video-icons {
+    grid-template-columns: 1fr 70% 20%;
   }
 }
 
@@ -721,6 +720,11 @@ iframe {
   .open-about-icons {
     grid-template-columns: 1fr 50% 1fr 1fr 1fr;
   }
+
+  .open-video-icons {
+    grid-template-columns: 1fr 66% 20%;
+  }
+
   .open-folder-icons {
     grid-template-columns: 40% 1fr 1fr 1fr;
   }
@@ -831,6 +835,10 @@ iframe {
 
   .info-pop-up-ok {
     height: 1.5rem;
+  }
+
+  .open-video-icons {
+    grid-template-columns: 1fr 60% 20%;
   }
 }
 
