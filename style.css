@@ -447,7 +447,7 @@ iframe {
 }
 
 .cursor {
-  cursor: url('images/cursor.png'), auto;
+  cursor: url("images/cursor.png"), auto;
 }
 
 /* contact page */
@@ -474,7 +474,7 @@ iframe {
   align-items: center;
   border-bottom: 0.2px solid grey;
   width: 100%;
-  grid-template-columns: 1fr 70% 1fr 1fr 1fr;
+  grid-template-columns: 1fr 80% 1fr 1fr 1fr;
 }
 
 .notepad-icon {
@@ -648,6 +648,11 @@ iframe {
 }
 
 @media only screen and (max-width: 950px) {
+  .open-contact-icons,
+  .open-about-icons {
+    grid-template-columns: 1fr 70% 1fr 1fr 1fr;
+  }
+
   .open-contact-icons,
   .open-about-icons {
     grid-template-columns: 1fr 70% 1fr 1fr 1fr;
