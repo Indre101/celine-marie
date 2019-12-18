@@ -774,11 +774,6 @@ iframe {
     overflow: scroll;
   }
 
-  .open-contact-icons,
-  .open-about-icons {
-    grid-template-columns: 1fr 1fr 50%;
-  }
-
   .subcategory {
     justify-content: center;
     margin: 0;
