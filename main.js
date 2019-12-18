@@ -325,6 +325,8 @@ function popUpIwndows(artPiecePhotoandName) {
   infoPopUpArtPieceInfo.textContent = artPiecePhotoandName.querySelector(".descirption").textContent
   infoPopupArtPieceYear.textContent = artPiecePhotoandName.querySelector(".year").textContent
   photoContainerPhotosrc.src = artPiecePhotoandName.querySelector(".art-piece-large-icon").src
+  photoContainerPhotosrc.setAttribute("alt", `${artPiecePhotoandName.querySelector(".art-piece-name").textContent}`);
+
   photoHeader.textContent = artPiecePhotoandName.querySelector(".art-piece-name").textContent
 }
 
