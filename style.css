@@ -226,6 +226,7 @@ h1 {
 iframe {
   width: -webkit-fill-available;
   height: -webkit-fill-available;
+  border: 0;
 }
 
 .folder-menu-btn.back-arrow {
