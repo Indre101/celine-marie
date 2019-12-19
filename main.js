@@ -313,6 +313,7 @@ function showArtPieceList(piece, placeToAppendTo) {
 }
 
 
+//The fields in that will be changed in the popup information and the larger version of the art piece modal
 const infoPopUpName = infoPopUp.querySelector(".art-piece-name")
 const infoPopUpArtPieceInfo = infoPopUp.querySelector(".art-piece-info")
 const infoPopupArtPieceYear = infoPopUp.querySelector(".art-piece-year")
