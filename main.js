@@ -66,7 +66,7 @@ function init() { //The function that is called on window event
     cloneNotepad(); //Function that will copy notepadIcon and assign functionality for it to show contact information
     cloneNotepadAbout() //Function to append abuut page icon and assign functionality to show about page once it's clicked
     addVideobtn() // adds video btn clone and assigns functionality to show video once it's clicked
-    data.forEach(category => { //hadle the data from json
+    data.forEach(category => { //handle the data from json
       getCategories(category, artCategories); //this function created the main categories that you see on the landing page
       createSubcategories(category, artPiecesCategories) //This function creates the html markup for categories with subcategories and art pieces inside and appends it to the  open folder container place-artPiecesCategories
     })
@@ -227,66 +227,61 @@ function getCategories(category, placeToAppend) { //Function that is called to c
   let clnMenuFolder = categoryFolderTemplate.cloneNode(true); //Clones the template
   let categoryName = clnMenuFolder.querySelector(".category-name") //Adds a class 
   categoryName.textContent = category.title.rendered.toLowerCase() //Adds and formats the text to be lower case
-  let imagesInsideFolderIcon = clnMenuFolder.querySelector(".images-inside-folder-icon");
-  let categoryFolder = clnMenuFolder.querySelector(".category-folder");
-  categoryFolder.onclick = function () {
-    openFolderContainer.classList.remove("d-none");
+  let imagesInsideFolderIcon = clnMenuFolder.querySelector(".images-inside-folder-icon"); //TheFolder icon
+  let categoryFolder = clnMenuFolder.querySelector(".category-folder"); //The category folder container/folder icon and name of the category
+  categoryFolder.onclick = function () { //Once the folder of category is clicked the openfolder container will be shown
+    openFolderContainer.classList.remove("d-none"); //The open folder container is showed by removing display none class
   }
-  placeToAppend.appendChild(clnMenuFolder);
+  placeToAppend.appendChild(clnMenuFolder); //The categories are appended to the art categories place in the landing page menu
 }
 
 
-// Function to customise the folder icon
-function addImgaesToFolderIcon(imageURL, containerToAppendTo) {
-  for (let index = 0; index < 1; index++) {
-    let imageOfArt = document.createElement("img");
-    imageOfArt.classList.add("image-sample");
-    imageOfArt.src = imageURL.art_category_id[index].featured_image.guid
-    containerToAppendTo.appendChild(imageOfArt);
-  }
-}
+//This function creates the categories with subcategories that then have a subcategory folder displayed and another folder with art pieces;
+//This function creates a hierarchy with main categories as parent folders and subcategory and art piece list as well as a subcategory of the main category;
+function createSubcategories(category, placeToAppend) { //This function is called in the init function with json data
+  const clnsubCategoryTemplate = subCategoryTemplate.cloneNode(true); //Selects the subcategory template, because this template is appended in the open folder container
+  //To assign the name, the function getTheName is called because sometime the name was either category.post_title or category.renedered, 
+  //this function checks the path to the title in the json and returns the correct name for the category, that is also formated to be lowercase
+  clnsubCategoryTemplate.querySelector(".subCategoryName").textContent = getThename(category); //Assign the name of the category/subcategory
+  clnsubCategoryTemplate.querySelector(".subcategory").classList.add(getThename(category)); //Add the class with the same name as the category name
+  const artSubcategory = clnsubCategoryTemplate.querySelector(".artSubcategory") //Select the place where subcategories will be appeneded
+  artSubcategory.classList.add(getThename(category)) //Adds a class name as the category
+  const artPiecesLists = artSubcategory.querySelector(".artPieces") //Selects the place where art pieces or subcategories will be appended
+  artPiecesLists.classList.add(getThename(category)) //Adds the class name as the category
 
-
-function createSubcategories(category, placeToAppend) {
-  const clnsubCategoryTemplate = subCategoryTemplate.cloneNode(true);
-  clnsubCategoryTemplate.querySelector(".subCategoryName").textContent = getThename(category);
-  clnsubCategoryTemplate.querySelector(".subcategory").classList.add(getThename(category));
-  const artSubcategory = clnsubCategoryTemplate.querySelector(".artSubcategory")
-  artSubcategory.classList.add(getThename(category))
-  const artPiecesLists = artSubcategory.querySelector(".artPieces")
-  artPiecesLists.classList.add(getThename(category))
-
-  if (category.subcategory_id) {
-    category.subcategory_id.forEach(sub => {
-      const clnsubCategoryTemplate = subCategoryTemplate.cloneNode(true);
-      clnsubCategoryTemplate.querySelector(".subCategoryName").textContent = getThename(sub);
-      clnsubCategoryTemplate.querySelector(".subcategory").classList.add(getThename(sub));
-      const artSubcategoryInner = clnsubCategoryTemplate.querySelector(".artSubcategory")
+  if (category.subcategory_id) { //Checks if in the json the category/subcategory has subcategories
+    category.subcategory_id.forEach(sub => { //For each subcategory
+      const clnsubCategoryTemplate = subCategoryTemplate.cloneNode(true); //It will basicaly once again create another subcategory
+      clnsubCategoryTemplate.querySelector(".subCategoryName").textContent = getThename(sub); //Gets the subcategory name
+      clnsubCategoryTemplate.querySelector(".subcategory").classList.add(getThename(sub)); //Assigns the name of the subcategory
+      const artSubcategoryInner = clnsubCategoryTemplate.querySelector(".artSubcategory"); //Selects a place where the subcategory folder will be appended
       artSubcategoryInner.classList.add(getThename(sub))
-      const artPiecesListsInner = artSubcategoryInner.querySelector(".artPieces")
-      artPiecesListsInner.classList.add(getThename(sub))
-      getTheArtPieces(sub, artPiecesListsInner)
-      artPiecesLists.appendChild(clnsubCategoryTemplate)
+      const artPiecesListsInner = artSubcategoryInner.querySelector(".artPieces") //Select a place where the ar pieces will be appended
+      artPiecesListsInner.classList.add(getThename(sub)) //Assign a class name of the subcateogry name
+      getTheArtPieces(sub, artPiecesListsInner) //Appends all the art pieces that belong to the subcategory in the subcategory art piece place
+      artPiecesLists.appendChild(clnsubCategoryTemplate) //Appends the subcategory 
     })
-  } else if (category.art_category_id) {
-    getTheArtPieces(category, artPiecesLists)
+  } else if (category.art_category_id) { //If the category has ar piece list
+    getTheArtPieces(category, artPiecesLists) //It will call a function that will append all the art pieces artPiecesLists
   }
 
-  placeToAppend.appendChild(clnsubCategoryTemplate);
+  placeToAppend.appendChild(clnsubCategoryTemplate); //Appends category to the place it was assigned to
 }
 
 
-
-function getTheArtPieces(category, placeToAppendTo) {
-  if (category.art_category_id) {
-    category.art_category_id.forEach(artPiece => {
-      showArtPieceList(artPiece, placeToAppendTo)
+//This function is called when wanting to apped the art pieces, to either category artplace or subcategory art place
+//Because main category Illustration has art pieces in the different path and type that the subcategories this function selects the correct path and 
+//Calls a function that will generate and append art pieces to the correct place
+function getTheArtPieces(category, placeToAppendTo) { // This function checks if the art pieces are array on an object with other objects and then need to convert it to array
+  if (category.art_category_id) { //The main category Illustrations has the art pieces in json witha path to an array
+    category.art_category_id.forEach(artPiece => { //Eahc of the art piece json data is then used
+      showArtPieceList(artPiece, placeToAppendTo) //The function will clone and append the art pieces to the selected place for the art pieces
 
     })
-  } else if (category.art_piece_id) {
-    const convertedArtArray = Object.keys(category.art_piece_id).map(i => category.art_piece_id[i])
-    convertedArtArray.forEach(artPiece => {
-      showArtPieceList(artPiece, placeToAppendTo)
+  } else if (category.art_piece_id) { //The subcategories withtin art category had the art pieces in an object with other objects inside 
+    const convertedArtArray = Object.keys(category.art_piece_id).map(i => category.art_piece_id[i]) //Object with art pieces that were objects as well was converted to array
+    convertedArtArray.forEach(artPiece => { //The converted array then was used with for each loop and 
+      showArtPieceList(artPiece, placeToAppendTo) //The art pieces were created and appended to the correct place
     })
   }
 }
@@ -294,28 +289,27 @@ function getTheArtPieces(category, placeToAppendTo) {
 
 
 function showArtPieceList(piece, placeToAppendTo) {
-  let artPieceCln = artPieceTemplate.cloneNode(true);
-  artPieceCln.querySelector(".art-piece-name").textContent = piece.post_title.toLowerCase()
-  artPieceCln.querySelector(".art-piece-large-icon").src = piece.featured_image.guid
+  let artPieceCln = artPieceTemplate.cloneNode(true); //Clones a template of the art piece that includes(image, name, year, short description)
+  artPieceCln.querySelector(".art-piece-name").textContent = piece.post_title.toLowerCase() //Name of the art piece
+  artPieceCln.querySelector(".art-piece-large-icon").src = piece.featured_image.guid //Sets image sourse
 
-  artPieceCln.querySelector(".art-piece-large-icon").setAttribute("alt", `${piece.post_title.toLowerCase()}`);
-  artPieceCln.querySelector(".descirption").textContent = piece.post_excerpt;
-  artPieceCln.querySelector(".year").textContent = piece.year;
+  artPieceCln.querySelector(".art-piece-large-icon").setAttribute("alt", `${piece.post_title.toLowerCase()}`); //Sets the alt attribute to the image
+  artPieceCln.querySelector(".descirption").textContent = piece.post_excerpt; //Set the description that is shown once the image is clicked
+  artPieceCln.querySelector(".year").textContent = piece.year; //Sets the year that is displayed once image is clicked
 
+  //This is a part that is ment to show the popup window when the art piece is clicked
+  const artPiecePhotoandName = artPieceCln.querySelector(".art-piece") //Selects the art piece (image/name markup)
+  artPiecePhotoandName.onclick = function () { //Once an image is clicked
+    artPiecePhotoandName.classList.add("active"); //That clicked image gets a class of active
+    switchBetweenImages(false); //The false passed as a parameter means that the art piece won't be pushed to the next one once an art piece is clicked
+    infoPopUp.classList.remove("d-none"); //Shows the art piece information window
+    photoContainer.classList.remove("d-none"); //Shows the modal with art piece in the larger version
+    photoContainer.style.display = "flex"; //Set the display value the modal with art piece in the larger version
 
-  const artPiecePhotoandName = artPieceCln.querySelector(".art-piece")
-  artPiecePhotoandName.onclick = function () {
-    artPiecePhotoandName.classList.add("active");
-    switchBetweenImages(false);
-    infoPopUp.classList.remove("d-none");
-    photoContainer.classList.remove("d-none");
-    photoContainer.style.display = "flex";
-
-    popUpIwndows(artPiecePhotoandName)
+    popUpIwndows(artPiecePhotoandName) //This function reasigns values of the current ar tpiece that is displayed when switching between the art pieces
 
   }
-
-  placeToAppendTo.appendChild(artPieceCln) // Place to append is element with art-pieces class in the open-folder-container template;
+  placeToAppendTo.appendChild(artPieceCln) // Place to append is div with artPieces inthe category or subcategory
 }
 
 
@@ -362,16 +356,17 @@ function switchBetweenImages(statusToMoveTheActiveClass, btn) {
     console.log(false);
   }
 
-  if (indexImg == 0) {
-    previousPhoto.style.visibility = "hidden";
-  } else if (indexImg == arrayOFtheImgWithinActiveImg.length - 1) {
-    nextFoto.style.visibility = "hidden";
-  } else {
+  if (indexImg == 0) { //Checks the clicked image index if it is 0
+    previousPhoto.style.visibility = "hidden"; //If the clicked image is first in it's collection, the arrow to switch to previous image will not be displayed
+  } else if (indexImg == arrayOFtheImgWithinActiveImg.length - 1) { //ckecks if the index of the clicked image is last
+    nextFoto.style.visibility = "hidden"; ////If the clicked image is last in it's collection, the arrow to switch to next image will not be displayed
+  } else { //If the image nor last or first in the collection 
+    //make the next arrow and previous arrow to be shown;
     nextFoto.style.visibility = "visible";
     previousPhoto.style.visibility = "visible";
 
   }
-  arrayOFtheImgWithinActiveImg[indexImg].classList.add("active");
+  arrayOFtheImgWithinActiveImg[indexImg].classList.add("active"); //Add the class of active to the image that is displayed in the popup photo window 
   popUpIwndows(arrayOFtheImgWithinActiveImg[indexImg])
 
 }
