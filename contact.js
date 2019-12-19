@@ -1,10 +1,11 @@
+// This whole js file is basically for minimise and maximise buttons functionality and close
 const contactPage = document.querySelector(".open-contact-page");
 const contactIcon = document.querySelector(".contact-page");
 const close = document.querySelector(".closeBTnContact");
 const aboutPagebtn = document.querySelector(".about-page-btn");
 
 
-
+// Contact page button that will display the contact page and close button that will close the window
 contactIcon.addEventListener("click", openContact);
 close.addEventListener("click", closeContact)
 
@@ -23,35 +24,38 @@ function closeContact() {
 // Maximize button
 const maximizeBtn = document.querySelector(".maximize");
 const minimizeBtn = document.querySelector(".minimize");
-const maximizeNotepad = document.querySelector(".maximizeNotepad");
-const minimizeNotepad = document.querySelector(".minimizeNotepad");
 
 
 
+// Function that will change to width and height to chosen values, this function will be called once a maximise button will be called
 function changeWindowheightAndWith(targetwindow, width, height) {
     targetwindow.style.width = `${width}%`;
     targetwindow.style.height = `${height}vh`;
 }
 
+
+// Reseting the window to it's original size, this function will be called once a minimise button is clicked
 function resetheightandWidth(targetwindow) {
     targetwindow.style.width = "";
     targetwindow.style.height = "";
 }
 
 
-// Folder btns
+// Open Folder maximise button
 maximizeBtn.onclick = function () {
-    changeWindowheightAndWith(openFolderContainer, 100, 100)
-    changeWindowheightAndWith(artPiecesCategories, "", 80)
+    changeWindowheightAndWith(openFolderContainer, 100, 100) //make the main container openfolder expand to full width and height
+    changeWindowheightAndWith(artPiecesCategories, "", 80) //Make the inner container inside the open folder container to enlarge to a 80vh, the container that has categories and art piecces displayed
 }
 
+// Open Folder minimise button resets the width and height
 minimizeBtn.onclick = function () {
-    console.log("object");
-    resetheightandWidth(openFolderContainer)
-    resetheightandWidth(artPiecesCategories)
+    resetheightandWidth(openFolderContainer) /
+        resetheightandWidth(artPiecesCategories)
 }
 
-// Notepad btns
+// Buttons of the contact page
+const maximizeNotepad = document.querySelector(".maximizeNotepad");
+const minimizeNotepad = document.querySelector(".minimizeNotepad");
 maximizeNotepad.onclick = function () {
     changeWindowheightAndWith(contactPage, 100, 100)
 }
@@ -59,7 +63,7 @@ minimizeNotepad.onclick = function () {
     resetheightandWidth(contactPage)
 }
 
-//Image galery display
+//Pop up window of the art piece clicked
 const photo = photoContainer.querySelector(".photo");
 const enlarge = document.querySelector(".enlarge");
 let clicks = 0;
@@ -91,11 +95,9 @@ aboutPagebtn.onclick = function () {
 
 const openAboutPage = () => {
     aboutPage.classList.remove("d-none");
-    console.log("clicked");
 }
 
 closeBtnAbout.onclick = function () {
-    console.log("object about");
     aboutPage.classList.add("d-none");
 }
 
