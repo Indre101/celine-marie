@@ -22,6 +22,7 @@ window.addEventListener("DOMContentLoaded", init) //Once the  HTML has loaded, i
 
 //A close button of the container that shows up once a category is clicked
 document.querySelector(".closeBTn").onclick = function () {
+  zIndexNew = 1;
   resetheightandWidth(openFolderContainer) //This function is is being called to reset the size of the open folder container
   resetheightandWidth(artPiecesCategories) //this function is is being called to reset the size of the container inside the open folder container where all the categeories/images displayed
   openFolderContainer.classList.add("d-none"); //It will close the open folder container
@@ -134,6 +135,7 @@ function cloneNotepad() { //This function is call in the init function to clone 
   clnContact.classList.add("subcategory-file") //adds a class that helps to style the button to fit into open folder container
   clnContact.addEventListener("click", openContact); //Assign the same function as the one on the landing screen has
   artPiecesCategories.appendChild(clnContact); //Appends the clone to the openfolder container where the main categories are appended
+  zIndexNew = 1;
 }
 
 function cloneNotepadAbout() { //This function is call in the init function to clone append the about button to the open folder container, you can see this icon when you click on this pc or back arrow
@@ -141,6 +143,7 @@ function cloneNotepadAbout() { //This function is call in the init function to c
   clnAboutbtn.classList.add("subcategory-file") //adds a class that helps to style the button to fit into open folder container
   clnAboutbtn.addEventListener("click", openAboutPage); //Assign the same function as the one on the landing screen has
   artPiecesCategories.appendChild(clnAboutbtn); //Appends the clone to the openfolder container where the main categories are appended
+  zIndexNew = 1;
 }
 
 
