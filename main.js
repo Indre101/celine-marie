@@ -150,21 +150,21 @@ videoPageBtn.onclick = function () { //once the video button on the landing page
 }
 
 
-function showVideo() {
+function showVideo() { //function that will remove display none class from video window
   videoContainer.classList.remove("d-none");
 }
 
-closeBTnvideo.onclick = function () {
-  videoContainer.classList.add("d-none");
+closeBTnvideo.onclick = function () { //The video window close button on click function
+  videoContainer.classList.add("d-none"); //Adds a display none class to the video window
 
 }
 
 
-function addVideobtn() {
-  const videoPageBtncln = videoPageBtn.cloneNode(true);
-  videoPageBtncln.classList.add("subcategory-file")
-  videoPageBtncln.addEventListener("click", showVideo);
-  artPiecesCategories.appendChild(videoPageBtncln);
+function addVideobtn() { //This function is call in the init function to clone append the video button to the open folder container, you can see this icon when you click on this pc or back arrow
+  const videoPageBtncln = videoPageBtn.cloneNode(true); //clones the video btn from the landing page categories
+  videoPageBtncln.classList.add("subcategory-file") //adds a class that helps to style the button to fit into open folder container
+  videoPageBtncln.addEventListener("click", showVideo); //Assign the same function as the one on the landing screen has/show the video
+  artPiecesCategories.appendChild(videoPageBtncln); //Appends the clone to the openfolder container where the main categories are appended
 }
 
 
@@ -223,10 +223,10 @@ function getCustomPath(folder) { //This function will create custom folder paths
 }
 
 
-function getCategories(category, placeToAppend) {
-  let clnMenuFolder = categoryFolderTemplate.cloneNode(true);
-  let categoryName = clnMenuFolder.querySelector(".category-name")
-  categoryName.textContent = category.title.rendered.toLowerCase()
+function getCategories(category, placeToAppend) { //Function that is called to create the main categories on the landing page (art/illustrations)
+  let clnMenuFolder = categoryFolderTemplate.cloneNode(true); //Clones the template
+  let categoryName = clnMenuFolder.querySelector(".category-name") //Adds a class 
+  categoryName.textContent = category.title.rendered.toLowerCase() //Adds and formats the text to be lower case
   let imagesInsideFolderIcon = clnMenuFolder.querySelector(".images-inside-folder-icon");
   let categoryFolder = clnMenuFolder.querySelector(".category-folder");
   categoryFolder.onclick = function () {
