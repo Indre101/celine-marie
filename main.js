@@ -1,73 +1,74 @@
 // When the window is loaded all the dynamic content is created and appended to the right places
-//When the folders are clicked the class of d-none is being removed and when an close icon in the folder is 
-//clicked the d-none class is being added
+// The pop up window when an image is clicked is not a template, it changes it's values simpy by rewriting it's values with a function
 
-const categoryFolderTemplate = document.querySelector(".category-folder-template").content;
-const artCategories = document.querySelector(".categories"); //Place to append the main menu categories/folders
-const artPieceTemplate = document.querySelector(".art-piece-template").content;
-const pathTemplate = document.querySelector(".path-template").content;
-const subCategoryTemplate = document.querySelector(".sub-category-template").content;
-const artPiecesCategories = document.querySelector(".art-pieces-categories");
-const spinner = document.getElementById("spinner"); //preloader temporary
-const body = document.querySelector("BODY");
-const openFolderContainer = document.querySelector(".open-folder-container")
-const folderPath = document.querySelector(".path-to-the-folder");
-const backArrow = document.querySelector(".back-arrow");
-const thisPCBtn = document.querySelector(".thispc")
-const infoPopUp = document.querySelector(".info-pop-up");
-const photoContainer = document.querySelector(".photo-container")
-const closeImg = document.getElementById("closeImg");
+const categoryFolderTemplate = document.querySelector(".category-folder-template").content; //Template Mark up of the category folder (Folder icon and category name)
+const artCategories = document.querySelector(".categories"); //Place to append the main menu categories/folders(the categories you see on the landing page)
+const artPieceTemplate = document.querySelector(".art-piece-template").content; //Template for the art piece which has image of art and name 
+const pathTemplate = document.querySelector(".path-template").content; //The template for the folder path to append, that is  an arrow and name of the clicked category/subcategory
+const subCategoryTemplate = document.querySelector(".sub-category-template").content; //This is a template that is for subcategories, the main difference between categories and subcategories template is that subcategory template has a place to append the art pieces
+const artPiecesCategories = document.querySelector(".art-pieces-categories"); //The container where it s displayed categories subcategories when a folder is open
+const spinner = document.getElementById("spinner"); //preloader selected
+const body = document.querySelector("BODY"); // The body element
+const openFolderContainer = document.querySelector(".open-folder-container") //It is the container that shows up once a main category is open and basically containes all the content
+const folderPath = document.querySelector(".path-to-the-folder"); //The folder path container
+const backArrow = document.querySelector(".back-arrow"); //Arrow that allows to go back between the folders
+const thisPCBtn = document.querySelector(".thispc") //It's the this pc option to click in the folder path
+const infoPopUp = document.querySelector(".info-pop-up"); // the pop up window that shows up once an art piece is clicked
+const photoContainer = document.querySelector(".photo-container") // The pop up window that shows up once a art piece is clicked
+const closeImg = document.getElementById("closeImg"); //An X/close icon of the popup window window that shows up once a art piece 
 
 
-window.addEventListener("DOMContentLoaded", init)
+window.addEventListener("DOMContentLoaded", init) //Once the  HTML has loaded, it will call the init function
 
+//A close button of the container that shows up once a category is clicked
 document.querySelector(".closeBTn").onclick = function () {
-  resetheightandWidth(openFolderContainer)
-  resetheightandWidth(artPiecesCategories)
-  openFolderContainer.classList.add("d-none");
-  while (folderPath.firstChild) {
-    folderPath.removeChild(folderPath.firstChild);
+  resetheightandWidth(openFolderContainer) //This function is is being called to reset the size of the open folder container
+  resetheightandWidth(artPiecesCategories) //this function is is being called to reset the size of the container inside the open folder container where all the categeories/images displayed
+  openFolderContainer.classList.add("d-none"); //It will close the open folder container
+  while (folderPath.firstChild) { // this is checking if the folder path has any appended elements/children
+    folderPath.removeChild(folderPath.firstChild); //If it does not have any more elements left inside the folderpath container the while loop will end and clear the folder path.
   }
 }
 
-const popupWindowOk = document.querySelector(".info-pop-up-ok")
+
+const popupWindowOk = document.querySelector(".info-pop-up-ok") //OK Button inside the pop up Information window
 popupWindowOk.onclick = function () {
-  infoPopUp.classList.add("d-none");
+  infoPopUp.classList.add("d-none"); // Once the OK button is clicked the modal/infoPopUp will be closed
 }
 
 
-const popupWindowClose = document.querySelector(".info-pop-up-closeBtn")
+const popupWindowClose = document.querySelector(".info-pop-up-closeBtn") //It's a close button of the Information popup window 
 popupWindowClose.onclick = function () {
-  infoPopUp.classList.add("d-none");
+  infoPopUp.classList.add("d-none"); // Once the close button is clicked the modal/infoPopUp will be closed
 }
 
 
 
-closeImg.onclick = function () {
-  const images = document.querySelectorAll(".art-piece")
-  photoContainer.style.display = "none";
-  infoPopUp.classList.add("d-none");
-  images.forEach(img => {
-    img.classList.remove("active"); //Remove the class active
+closeImg.onclick = function () { //Close button of the modal that shows up once an art piece is clikced, that shows the larger version of the image
+  const images = document.querySelectorAll(".art-piece") //selects all the art pieces that are already appended 
+  photoContainer.style.display = "none"; //The pop up window that showed up as the image was clicked is closed
+  infoPopUp.classList.add("d-none"); //If the popup window with image Information was not closed, it will be closed now
+  images.forEach(img => { //For each method to go through all the art pieces
+    img.classList.remove("active"); //Remove the class active from any art piece that has a class active, which was added once the image was clicked
   })
-  resetheightandWidth(photoContainer)
-  resetheightandWidth(photo)
-  nextFoto.style.visibility = "visible";
-  previousPhoto.style.visibility = "visible";
+  resetheightandWidth(photoContainer) //resets the photoContainer width and height, back to normal, in case it was maximised to full screen
+  resetheightandWidth(photo) // resets the heigh and with of the photo in case it was maximised to full screen
+  nextFoto.style.visibility = "visible"; //The arrow that lets you see the next art piece visisbility is set back to being visisble
+  previousPhoto.style.visibility = "visible"; // The arrow that lets you see the previous art piece visisbility is set back to being visisble
 }
 
-function init() {
+function init() { //The function that is called on window event
   spinner.removeAttribute('hidden'); //preloader shows up
-  fetch("https://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json/wp/v2/art_categories").then(res => {
-    return res.json()
-  }).then(data => {
-    spinner.setAttribute('hidden', '')
-    cloneNotepad(); //Function that will copy notepadIcon and assign functionality for contact
-    cloneNotepadAbout() //Function to append abuut page icon
-    addVideobtn() // add video bnt
-    data.forEach(category => {
-      getCategories(category, artCategories);
-      createSubcategories(category, artPiecesCategories)
+  fetch("https://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json/wp/v2/art_categories").then(res => { //fetching 
+    return res.json() //Getting the response
+  }).then(data => { //Takes json response 
+    spinner.setAttribute('hidden', '') //Hides the spinnner/preloader
+    cloneNotepad(); //Function that will copy notepadIcon and assign functionality for it to show contact information
+    cloneNotepadAbout() //Function to append abuut page icon and assign functionality to show about page once it's clicked
+    addVideobtn() // adds video btn clone and assigns functionality to show video once it's clicked
+    data.forEach(category => { //hadle the data from json
+      getCategories(category, artCategories); //this function created the main categories that you see on the landing page
+      createSubcategories(category, artPiecesCategories) //This function creates the html markup for categories with subcategories and art pieces inside and appends it to the  open folder container place-artPiecesCategories
     })
 
   }).then(() => {
@@ -81,40 +82,44 @@ function init() {
     })
 
 
-    document.querySelectorAll(".category-folder").forEach(btn => btn.onclick = function () {
-      while (folderPath.firstChild) {
-        folderPath.removeChild(folderPath.firstChild);
+    document.querySelectorAll(".category-folder").forEach(btn => btn.onclick = function () { //This is selecting already appeneded main categories on the landing page and adds onclick function
+      while (folderPath.firstChild) { // this is checking if the folder path has any appended elements/children
+        folderPath.removeChild(folderPath.firstChild); //If it does not have any more elements left inside the folderpath container the while loop will end and clear the folder path.
       }
-      let canBeAddedTothePath = true;
 
-      clickedFolder(btn, canBeAddedTothePath)
-      path()
+      let canBeAddedTothePath = true; //A variable whose state is used to check if the name of the clicked item should be appended to the folder path or not
+      clickedFolder(btn, canBeAddedTothePath) //Once a category is clicked it's name is being appended to the folder path and this function displays correct content according the clicked folder
+      path() //This function is called to clear out the folder path until the clicked name on the folder path and it makes sure that the same name was not added again in the folder path
     })
 
-    thisPCBtn.onclick = function () {
-      let canBeAddedTothePath = false;
-      clickedFolder(thisPCBtn, canBeAddedTothePath)
-      while (folderPath.firstChild) {
-        folderPath.removeChild(folderPath.firstChild);
+
+
+
+    //This Pc button is added in html mark up, so once it's clicked the folder path place where the folder path is changed, when the clicked folder names are appended it will be cleared out, leaving just this pc displayed
+    thisPCBtn.onclick = function () { //The button in the folder path that is for displaying in the open folder the elements that are on the landing page
+      let canBeAddedTothePath = false; //The variable that is set to false that makes sure that the name of This pc would not be added to the folder path again
+      clickedFolder(thisPCBtn, canBeAddedTothePath) //This function will display the correct content in the open folder container
+      while (folderPath.firstChild) { //this is checking if the folder path has any appended elements/children
+        folderPath.removeChild(folderPath.firstChild); //It will remove all the elements from the forlder path util this PC
       }
     }
   })
 
-  backArrow.onclick = function () {
-    const parent = document.querySelector(".art-pieces-categories");
-    const artPieces = document.querySelectorAll(".artPieces");
-    const lastChildOfFolderPath = folderPath.querySelector(".pathNameAndIcon:last-child") //selects the last pathName
+  backArrow.onclick = function () { //The button that let's you go back in the open folder
+    const parent = document.querySelector(".art-pieces-categories"); //Selects the parent container where the categories/subactegories/art pieces are appended
+    const artPieces = document.querySelectorAll(".artPieces"); //Selects all the art pieces
+    const lastChildOfFolderPath = folderPath.querySelector(".pathNameAndIcon:last-child") //selects the last pathName on the folder path
 
-    const allFolderPathWords = folderPath.querySelectorAll(".pathNameAndIcon") //selects the last pathName
-    folderPath.removeChild(lastChildOfFolderPath); //removes the last folder name
+    const allFolderPathWords = folderPath.querySelectorAll(".pathNameAndIcon") //selects all the appended folder path names, that where appended by clicking through folders
+    folderPath.removeChild(lastChildOfFolderPath); //removes the last name in the folder path
 
-    let folder;
-    if (allFolderPathWords.length == 1) {
-      folder = thisPCBtn;
+    let folder; //variable that will contain the value of the name that is second to last in the folder path before removing the last name in the foler path
+    if (allFolderPathWords.length == 1) { //Checks how many elements the folder path contains if it is 1 
+      folder = thisPCBtn; //The folder will be equeal to this pc value, that is in the folder path
     } else {
-      folder = allFolderPathWords[allFolderPathWords.length - 2];
+      folder = allFolderPathWords[allFolderPathWords.length - 2]; //If there are more values in the array of the folder path, the folder will be equal to the second to last value in the folder path
     }
-    clickedFolder(folder);
+    clickedFolder(folder); //The fucntion that will show the correct content in the open folder container is called with either This pc button or second to last value in the folder path
   }
 }
 
@@ -163,16 +168,16 @@ function addVideobtn() {
 
 
 function path() {
-  const pathNameBtns = document.querySelectorAll(".pathNameAndIcon")
-  pathNameBtns.forEach(pathName => {
-    pathName.onclick = function () {
-      let canBeAddedTothePath = false;
-      let siblingNode = pathName.nextSibling;
+  const pathNameBtns = document.querySelectorAll(".pathNameAndIcon") //Selects all the appened names to the folder path
+  pathNameBtns.forEach(pathName => { //Goes through each folder path name
+    pathName.onclick = function () { //Once a name in the folder path is clicked
+      let canBeAddedTothePath = false; //This variable will set the the clicked name would not be added again
+      let siblingNode = pathName.nextSibling; //Selects the sibling og the clicked name in the folder path
 
-      clickedFolder(pathName, canBeAddedTothePath) ///function that will display the correct folder and calls a function to change the path name
-      while (siblingNode) {
-        siblingNode = pathName.nextSibling;
-        folderPath.removeChild(siblingNode);
+      clickedFolder(pathName, canBeAddedTothePath) ///function that will display the correct folder and folder path will not be changed since canBeAddedTothePath = false
+      while (siblingNode) { //it will check if the clicked name in the path still has a sibling
+        siblingNode = pathName.nextSibling; //Keeps selecting the next sibling
+        folderPath.removeChild(siblingNode); //Deletes the sibling, that the folder path would only be until the clicked name in the folder bath
       }
     }
   })
@@ -181,15 +186,15 @@ function path() {
 
 
 function clickedFolder(folder, canBeAddedTothePath) {
-  const artPiecePlaces = document.querySelectorAll(".artPieces")
-  openFolderContainer.classList.remove("d-none");
-  const folderName = folder.querySelector(".name").textContent.toLowerCase().split(' ').join('');
-  if (canBeAddedTothePath == true) {
+  const artPiecePlaces = document.querySelectorAll(".artPieces") //Selects all the appended art pieces
+  openFolderContainer.classList.remove("d-none"); //removes the display none class from the open folder container
+  const folderName = folder.querySelector(".name").textContent.toLowerCase().split(' ').join(''); //makes sure that the name would be lower case and without gaps 
+  if (canBeAddedTothePath == true) { //It is checking if the clicked button's name should be appended to the folder path
     getCustomPath(folderName) //Changes the file path by addind the name of the clicked folder
   }
 
-  artPiecePlaces.forEach(artPlace => {
-    if (artPlace.classList.contains(folderName)) { //First checks for the arPlace if it has the class name as the clicked button name
+  artPiecePlaces.forEach(artPlace => { //Iterates through all ar pieces 
+    if (artPlace.classList.contains(folderName)) { //First checks for the artPlace if it has the class name as the clicked button name
       artPlace.querySelectorAll(".subcategory-icon-and-name").forEach(p => p.style.display = "flex") //returns display to all the subcategory folders
       if (artPlace.classList.contains("art-pieces-categories")) { //If the art place has the main class/Checks basically if it's the top hierarchy level
         artPlace.style.display = "flex"; //display the container
