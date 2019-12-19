@@ -34,7 +34,6 @@ document.querySelector(".closeBTn").onclick = function () {
 
 const popupWindowOk = document.querySelector(".info-pop-up-ok") //OK Button inside the pop up Information window
 popupWindowOk.onclick = function () {
-  zIndexNew = 1;
   infoPopUp.classList.add("d-none"); // Once the OK button is clicked the modal/infoPopUp will be closed
 }
 
@@ -47,7 +46,6 @@ popupWindowClose.onclick = function () {
 
 
 closeImg.onclick = function () { //Close button of the modal that shows up once an art piece is clikced, that shows the larger version of the image
-  zIndexNew = 1;
   const images = document.querySelectorAll(".art-piece") //selects all the art pieces that are already appended 
   photoContainer.style.display = "none"; //The pop up window that showed up as the image was clicked is closed
   infoPopUp.classList.add("d-none"); //If the popup window with image Information was not closed, it will be closed now
@@ -317,6 +315,7 @@ function showArtPieceList(piece, placeToAppendTo) {
     photoContainer.classList.remove("d-none"); //Shows the modal with art piece in the larger version
     photoContainer.style.display = "flex"; //Set the display value the modal with art piece in the larger version
     photoContainer.style.zIndex = zIndexNew;
+    infoPopUp.style.zIndex = zIndexNew + 2;
     popUpIwndows(artPiecePhotoandName) //This function reasigns values of the current ar tpiece that is displayed when switching between the art pieces
 
   }
