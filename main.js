@@ -319,8 +319,11 @@ const infoPopupArtPieceYear = infoPopUp.querySelector(".art-piece-year")
 const photoContainerPhotosrc = photoContainer.querySelector(".photo")
 const photoHeader = photoContainer.querySelector(".photoHeader h4");
 
+
+//this function will reasign values for the image.sr etc in the art piece modal once the art piece is clicked and the information popup window
 function popUpIwndows(artPiecePhotoandName) {
-  infoPopUp.classList.remove("d-none");
+  infoPopUp.classList.remove("d-none"); //Shows The infomation popup window
+
   infoPopUpName.textContent = artPiecePhotoandName.querySelector(".art-piece-name").textContent
   infoPopUpArtPieceInfo.textContent = artPiecePhotoandName.querySelector(".descirption").textContent
   infoPopupArtPieceYear.textContent = artPiecePhotoandName.querySelector(".year").textContent
@@ -336,24 +339,26 @@ const nextFoto = document.querySelector(".arrowNextPhoto")
 
 const arrowPhotos = document.querySelectorAll(".arrowPhoto");
 
-arrowPhotos.forEach(arrow => {
+arrowPhotos.forEach(arrow => { //Arrows that help to switch between the art pieces 
   arrow.onclick = function () {
-    switchBetweenImages(true, arrow);
+    switchBetweenImages(true, arrow); //The true means that once the arrow is clicked the active class will be moved to the next art piece and the next or previous ar piece is displayed
   }
 })
 
+
+//This function is the "galery" where you can switch between the art pieces and according information is inserted to the information popup window and photo container
 function switchBetweenImages(statusToMoveTheActiveClass, btn) {
-  const images = document.querySelectorAll(".art-piece") //Selecting all the images
-  const activeImg = findActiveImg(images); //Finds an image with a class active, return the img
-  const arrayOFtheImgWithinActiveImg = getTheImgArrayWithinActiveImg(activeImg); //Finds all the img withing the active img
+  const images = document.querySelectorAll(".art-piece") //Selecting all the art pieces that were appeded
+  const activeImg = findActiveImg(images); //Finds the art piece with the active class 
+  const arrayOFtheImgWithinActiveImg = getTheImgArrayWithinActiveImg(activeImg); //Finds all the art pieces within the same category/subcategory
   let indexImg = arrayOFtheImgWithinActiveImg.indexOf(activeImg) // Gets the index/ position of the active img within an array of the images;
-  if (statusToMoveTheActiveClass && btn.classList.contains("arrowPreviousPhoto")) {
-    indexImg--
-  } else if (statusToMoveTheActiveClass && btn.classList.contains("arrowNextPhoto")) {
-    indexImg++
+  if (statusToMoveTheActiveClass && btn.classList.contains("arrowPreviousPhoto")) { //If the status is true and the clicked button has class list or arrowPreviousPhoto 
+    indexImg-- //The index will be minused
+  } else if (statusToMoveTheActiveClass && btn.classList.contains("arrowNextPhoto")) { //If the status is true and the clicked button has class list or arrowNextPhoto 
+    indexImg++ //The index will be incemented
 
   } else {
-    console.log(false);
+    console.log(false); //Else just return false
   }
 
   if (indexImg == 0) { //Checks the clicked image index if it is 0
@@ -366,33 +371,35 @@ function switchBetweenImages(statusToMoveTheActiveClass, btn) {
     previousPhoto.style.visibility = "visible";
 
   }
-  arrayOFtheImgWithinActiveImg[indexImg].classList.add("active"); //Add the class of active to the image that is displayed in the popup photo window 
-  popUpIwndows(arrayOFtheImgWithinActiveImg[indexImg])
+
+  //This part of the code takes the value of the indexImg depending wheather the previous photo or next photo arrow was clicked and changed the indexImg value
+  arrayOFtheImgWithinActiveImg[indexImg].classList.add("active"); //Select the element that has the index of indexImg, which was either changed or not and add the class active
+  popUpIwndows(arrayOFtheImgWithinActiveImg[indexImg]) //Call a function that will then change the values in the modal of displaying the larger version of art piece and information popup 
 
 }
 
-
+//This will find an art piece with the class active, that was assign to the art piece that was clicked on
 const findActiveImg = (images) => {
   let activeImg;
-  images.forEach(img => {
-    if (img.classList.contains("active")) { //check for image with a class Active
-      img.classList.remove("active"); //Remove the class active
-      activeImg = img;
+  images.forEach(img => { //Goes through all the art pieces
+    if (img.classList.contains("active")) { //check for art pieces with a class Active
+      img.classList.remove("active"); //Find the image and remove the class active
+      activeImg = img; //The declared variable is now assigned to be to the art piece
     }
   })
-  return activeImg
+  return activeImg //returns the art piece will the active class
 }
 
-
+//This will return the array by selecting the parent of the art piece with the active class, and then select all the direct children with art-piece class 
 const getTheImgArrayWithinActiveImg = (image) => {
   const parent = image.parentElement //Find the parent element of the img with a class active
   const parentArtPieces = parent.querySelectorAll(".art-piece") //Select all the art-piece eleements within the parent element
   const parentArtPiecesAray = Array.from(parentArtPieces) //Convert the node list of parentArtPieces to array, to be able to use array method indexOf
-  return parentArtPiecesAray
+  return parentArtPiecesAray //Returns array of art pieces
 }
 
 
-
+//The function that will get the name/ post tytle according to the path in json
 const getThename = (category) => {
   let nameOf;
   if (category.post_title) {
