@@ -119,33 +119,34 @@ function init() { //The function that is called on window event
     } else {
       folder = allFolderPathWords[allFolderPathWords.length - 2]; //If there are more values in the array of the folder path, the folder will be equal to the second to last value in the folder path
     }
-    clickedFolder(folder); //The fucntion that will show the correct content in the open folder container is called with either This pc button or second to last value in the folder path
+    let canBeAddedTothePath = false; //Since it is false the value will not be added to the folder path
+    clickedFolder(folder, canBeAddedTothePath); //The fucntion that will show the correct content in the open folder container is called with either This pc button or second to last value in the folder path
   }
 }
 
 
 
-function cloneNotepad() {
-  const clnContact = document.querySelector(".contact-page").cloneNode(true);
-  clnContact.classList.add("subcategory-file")
-  clnContact.addEventListener("click", openContact);
-  artPiecesCategories.appendChild(clnContact);
+function cloneNotepad() { //This function is call in the init function to clone append the contact button to the open folder container, you can see this icon when you click on this pc or back arrow
+  const clnContact = document.querySelector(".contact-page").cloneNode(true); //clones the contact btn from the landing page categories
+  clnContact.classList.add("subcategory-file") //adds a class that helps to style the button to fit into open folder container
+  clnContact.addEventListener("click", openContact); //Assign the same function as the one on the landing screen has
+  artPiecesCategories.appendChild(clnContact); //Appends the clone to the openfolder container where the main categories are appended
 }
 
-function cloneNotepadAbout() {
-  const clnAboutbtn = aboutPagebtn.cloneNode(true);
-  clnAboutbtn.classList.add("subcategory-file")
-  clnAboutbtn.addEventListener("click", openAboutPage);
-  artPiecesCategories.appendChild(clnAboutbtn);
+function cloneNotepadAbout() { //This function is call in the init function to clone append the about button to the open folder container, you can see this icon when you click on this pc or back arrow
+  const clnAboutbtn = aboutPagebtn.cloneNode(true); //clones the about btn from the landing page categories
+  clnAboutbtn.classList.add("subcategory-file") //adds a class that helps to style the button to fit into open folder container
+  clnAboutbtn.addEventListener("click", openAboutPage); //Assign the same function as the one on the landing screen has
+  artPiecesCategories.appendChild(clnAboutbtn); //Appends the clone to the openfolder container where the main categories are appended
 }
 
 
-const videoPageBtn = document.querySelector(".video-page-btn")
-const closeBTnvideo = document.querySelector(".closeBTnvideo");
-const videoContainer = document.querySelector(".open-video-container");
+const videoPageBtn = document.querySelector(".video-page-btn") //Button on the landing screen that once clicked shows video vidow
+const closeBTnvideo = document.querySelector(".closeBTnvideo"); //The close button of the video window
+const videoContainer = document.querySelector(".open-video-container"); //the video window
 
-videoPageBtn.onclick = function () {
-  showVideo()
+videoPageBtn.onclick = function () { //once the video button on the landing page is clicked
+  showVideo() //calls a function that will display the video widow by removing d-none class;
 }
 
 
