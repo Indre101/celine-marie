@@ -16,7 +16,7 @@ const thisPCBtn = document.querySelector(".thispc") //It's the this pc option to
 const infoPopUp = document.querySelector(".info-pop-up"); // the pop up window that shows up once an art piece is clicked
 const photoContainer = document.querySelector(".photo-container") // The pop up window that shows up once a art piece is clicked
 const closeImg = document.getElementById("closeImg"); //An X/close icon of the popup window window that shows up once a art piece 
-
+let zIndexNew = 1; //The zindex is incremented on the elements that the windows that are clicked to be always on top
 
 window.addEventListener("DOMContentLoaded", init) //Once the  HTML has loaded, it will call the init function
 
@@ -33,6 +33,7 @@ document.querySelector(".closeBTn").onclick = function () {
 
 const popupWindowOk = document.querySelector(".info-pop-up-ok") //OK Button inside the pop up Information window
 popupWindowOk.onclick = function () {
+  zIndexNew = 1;
   infoPopUp.classList.add("d-none"); // Once the OK button is clicked the modal/infoPopUp will be closed
 }
 
@@ -45,6 +46,7 @@ popupWindowClose.onclick = function () {
 
 
 closeImg.onclick = function () { //Close button of the modal that shows up once an art piece is clikced, that shows the larger version of the image
+  zIndexNew = 1;
   const images = document.querySelectorAll(".art-piece") //selects all the art pieces that are already appended 
   photoContainer.style.display = "none"; //The pop up window that showed up as the image was clicked is closed
   infoPopUp.classList.add("d-none"); //If the popup window with image Information was not closed, it will be closed now
@@ -75,6 +77,7 @@ function init() { //The function that is called on window event
     const subCategoryBtns = document.querySelectorAll(".subcategory-icon-and-name")
     subCategoryBtns.forEach(btn => {
       btn.onclick = function () {
+        zIndexNew++;
         let canBeAddedTothePath = true;
         clickedFolder(btn, canBeAddedTothePath) //function that will display the correct folder and calls a function to change the path name
         path() //function that one a path btn is clicked the path will be cleared out untill the clicked button it's called here cause only here you can access all the added btns
@@ -86,7 +89,7 @@ function init() { //The function that is called on window event
       while (folderPath.firstChild) { // this is checking if the folder path has any appended elements/children
         folderPath.removeChild(folderPath.firstChild); //If it does not have any more elements left inside the folderpath container the while loop will end and clear the folder path.
       }
-
+      zIndexNew++;
       let canBeAddedTothePath = true; //A variable whose state is used to check if the name of the clicked item should be appended to the folder path or not
       clickedFolder(btn, canBeAddedTothePath) //Once a category is clicked it's name is being appended to the folder path and this function displays correct content according the clicked folder
       path() //This function is called to clear out the folder path until the clicked name on the folder path and it makes sure that the same name was not added again in the folder path
@@ -146,15 +149,18 @@ const closeBTnvideo = document.querySelector(".closeBTnvideo"); //The close butt
 const videoContainer = document.querySelector(".open-video-container"); //the video window
 
 videoPageBtn.onclick = function () { //once the video button on the landing page is clicked
+  zIndexNew++;
   showVideo() //calls a function that will display the video widow by removing d-none class;
 }
 
 
 function showVideo() { //function that will remove display none class from video window
   videoContainer.classList.remove("d-none");
+  videoContainer.style.zIndex = zIndexNew;
 }
 
 closeBTnvideo.onclick = function () { //The video window close button on click function
+  zIndexNew = 1;
   videoContainer.classList.add("d-none"); //Adds a display none class to the video window
 
 }
@@ -189,6 +195,7 @@ function path() {
 function clickedFolder(folder, canBeAddedTothePath) {
   const artPiecePlaces = document.querySelectorAll(".artPieces") //Selects all the appended art pieces
   openFolderContainer.classList.remove("d-none"); //removes the display none class from the open folder container
+  openFolderContainer.style.zIndex = zIndexNew;
   const folderName = folder.querySelector(".name").textContent.toLowerCase().split(' ').join(''); //makes sure that the name would be lower case and without gaps 
   if (canBeAddedTothePath == true) { //It is checking if the clicked button's name should be appended to the folder path
     getCustomPath(folderName) //Changes the file path by addind the name of the clicked folder
@@ -221,6 +228,7 @@ function getCustomPath(folder) { //This function will create custom folder paths
   folderPath.appendChild(clnpathTemplate) //Appends the cln to the folder path place;
 
 }
+
 
 
 function getCategories(category, placeToAppend) { //Function that is called to create the main categories on the landing page (art/illustrations)
@@ -305,7 +313,7 @@ function showArtPieceList(piece, placeToAppendTo) {
     infoPopUp.classList.remove("d-none"); //Shows the art piece information window
     photoContainer.classList.remove("d-none"); //Shows the modal with art piece in the larger version
     photoContainer.style.display = "flex"; //Set the display value the modal with art piece in the larger version
-
+    photoContainer.style.zIndex = zIndexNew;
     popUpIwndows(artPiecePhotoandName) //This function reasigns values of the current ar tpiece that is displayed when switching between the art pieces
 
   }
@@ -324,13 +332,13 @@ const photoHeader = photoContainer.querySelector(".photoHeader h4");
 //this function will reasign values for the image.sr etc in the art piece modal once the art piece is clicked and the information popup window
 function popUpIwndows(artPiecePhotoandName) {
   infoPopUp.classList.remove("d-none"); //Shows The infomation popup window
-
+  photoContainer.zIndex = zIndexNew;
+  infoPopUp.style.zIndex = zIndexNew + 2;
   infoPopUpName.textContent = artPiecePhotoandName.querySelector(".art-piece-name").textContent
   infoPopUpArtPieceInfo.textContent = artPiecePhotoandName.querySelector(".descirption").textContent
   infoPopupArtPieceYear.textContent = artPiecePhotoandName.querySelector(".year").textContent
   photoContainerPhotosrc.src = artPiecePhotoandName.querySelector(".art-piece-large-icon").src
   photoContainerPhotosrc.setAttribute("alt", `${artPiecePhotoandName.querySelector(".art-piece-name").textContent}`);
-
   photoHeader.textContent = artPiecePhotoandName.querySelector(".art-piece-name").textContent
 }
 

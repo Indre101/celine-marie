@@ -10,14 +10,15 @@ contactIcon.addEventListener("click", openContact);
 close.addEventListener("click", closeContact)
 
 function openContact() {
+    zIndexNew++;
     contactPage.classList.remove("d-none")
-    contactPage.style.zIndex = 3;
+    contactPage.style.zIndex = zIndexNew;
 }
 
 function closeContact() {
     resetheightandWidth(contactPage)
     contactPage.classList.add("d-none")
-    contactPage.style.zIndex = 1;
+    zIndexNew = 1;
 
 }
 
@@ -90,15 +91,18 @@ const maximizeNotepadAbout = document.querySelector(".maximizeNotepadAbout");
 const minimizeBtnAbout = document.querySelector(".minimizeNotepadAbout");
 
 aboutPagebtn.onclick = function () {
+    zIndexNew++;
     openAboutPage()
 }
 
 const openAboutPage = () => {
     aboutPage.classList.remove("d-none");
+    aboutPage.style.zIndex = zIndexNew
 }
 
 closeBtnAbout.onclick = function () {
     aboutPage.classList.add("d-none");
+    zIndexNew = 1;
 }
 
 minimizeBtnAbout.onclick = function () {
